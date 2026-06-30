@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador.tools — Senha, QR Code e CPF/CNPJ de teste</title>
+<meta name="description" content="Ferramentas gratuitas e instantâneas: gerador de senha segura, gerador de QR Code e gerador de CPF/CNPJ válido para testes de sistema.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --bg: #15181b;
+    --panel: #1d2125;
+    --panel-2: #23282d;
+    --line: #32383e;
+    --text: #ece9e2;
+    --muted: #8b9097;
+    --orange: #ff6a35;
+    --teal: #3fbac2;
+    --green: #7cc576;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ===== layout shell ===== */
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  header.top{
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+    position:sticky;top:0;
+    background:rgba(21,24,27,0.92);
+    backdrop-filter:blur(6px);
+    z-index:50;
+  }
+  .top-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .brand .dot{width:10px;height:10px;background:var(--orange);border-radius:2px;transform:rotate(45deg);}
+  nav.tools-nav{display:flex;gap:6px;}
+  nav.tools-nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:13px;
+    padding:7px 12px;
+    border-radius:6px;
+    border:1px solid transparent;
+  }
+  nav.tools-nav a:hover{color:var(--text);border-color:var(--line);}
+
+  /* ===== hero ===== */
+  .hero{padding:64px 0 40px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--orange);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    margin:0 0 18px;
+    max-width:760px;
+  }
+  .hero p{
+    color:var(--muted);
+    font-size:17px;
+    max-width:560px;
+    line-height:1.6;
+    margin:0 0 30px;
+  }
+  .hero-tags{display:flex;gap:10px;flex-wrap:wrap;}
+  .hero-tags span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+    border:1px dashed var(--line);
+    padding:6px 10px;
+    border-radius:6px;
+  }
+
+  /* ===== tool index rail ===== */
+  .index-rail{
+    display:flex;
+    gap:12px;
+    margin:48px 0 0;
+    border-top:1px solid var(--line);
+    padding-top:0;
+  }
+  .index-card{
+    flex:1;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    cursor:pointer;
+    transition:border-color .15s ease, transform .15s ease;
+    text-decoration:none;
+    color:var(--text);
+    display:block;
+  }
+  .index-card:hover{border-color:var(--orange);transform:translateY(-2px);}
+  .index-card .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--orange);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .index-card h3{margin:8px 0 6px;font-size:18px;}
+  .index-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;}
+
+  /* ===== tool sections ===== */
+  section.tool{
+    padding:70px 0 30px;
+    border-top:1px solid var(--line);
+    scroll-margin-top:80px;
+  }
+  .tool-head{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;}
+  .tool-head .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    padding:4px 9px;
+    border-radius:5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  #senha .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
+  #qrcode .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
+  #cpf .badge{background:rgba(124,197,118,0.12);color:var(--green);}
+  .tool-head h2{margin:0;font-size:26px;}
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px;
+  }
+  .grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;}
+  @media (max-width:760px){.grid-2{grid-template-columns:1fr;} .index-rail{flex-direction:column;}}
+
+  /* controls */
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;}
+  .row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .row:last-child{margin-bottom:0;}
+  input[type="range"]{accent-color:var(--orange);width:60%;}
+  input[type="text"], input[type="number"]{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:8px;
+    font-family:'JetBrains Mono',monospace;
+    width:100%;
+  }
+  .switch-row{display:flex;align-items:center;gap:10px;padding:9px 0;}
+  .switch{
+    width:38px;height:22px;border-radius:11px;background:var(--panel-2);
+    border:1px solid var(--line);position:relative;cursor:pointer;flex-shrink:0;
+  }
+  .switch .knob{
+    position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+    background:var(--muted);transition:all .15s ease;
+  }
+  .switch.on{background:rgba(255,106,53,0.18);border-color:var(--orange);}
+  .switch.on .knob{left:18px;background:var(--orange);}
+  .switch-row span{font-size:14px;color:var(--text);}
+
+  button.action{
+    background:var(--orange);
+    color:#1a1300;
+    border:none;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    width:100%;
+    margin-top:18px;
+    transition:filter .1s ease;
+  }
+  button.action:hover{filter:brightness(1.08);}
+  #qrcode button.action{background:var(--teal);}
+  #cpf button.action{background:var(--green);}
+
+  /* output ticket */
+  .ticket{
+    background:var(--panel-2);
+    border:1px dashed var(--line);
+    border-radius:10px;
+    padding:18px;
+    position:relative;
+  }
+  .ticket .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin-bottom:10px;
+  }
+  .ticket .value{
+    font-family:'JetBrains Mono',monospace;
+    font-size:19px;
+    font-weight:700;
+    color:var(--text);
+    word-break:break-all;
+    line-height:1.5;
+  }
+  .copy-btn{
+    margin-top:14px;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--muted);
+    font-size:12px;
+    padding:7px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .copy-btn:hover{color:var(--text);border-color:var(--text);}
+  .strength-bar{height:6px;border-radius:3px;background:var(--panel);margin-top:14px;overflow:hidden;border:1px solid var(--line);}
+  .strength-fill{height:100%;width:0%;background:var(--orange);transition:width .2s ease, background .2s ease;}
+  .strength-label{font-size:12px;color:var(--muted);margin-top:6px;}
+
+  #qrcode-render{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:10px;padding:16px;min-height:216px;}
+
+  /* ad slot placeholders — replace with real AdSense <ins> tags after approval */
+  .ad-slot{
+    border:1px dashed var(--line);
+    border-radius:10px;
+    color:var(--muted);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-align:center;
+    padding:18px;
+    margin:50px 0;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 50px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer a{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-row">
+    <div class="brand"><span class="dot"></span>gerador.tools</div>
+    <nav class="tools-nav">
+      <a href="#senha">Senha</a>
+      <a href="#qrcode">QR Code</a>
+      <a href="#cpf">CPF/CNPJ teste</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">caixa de ferramentas — sem cadastro, sem instalação</div>
+    <h1>Três geradores que resolvem na hora.</h1>
+    <p>Senha forte, QR Code para qualquer link e CPF/CNPJ válido para testar formulários. Tudo roda no seu navegador — nada é enviado para nenhum servidor.</p>
+    <div class="hero-tags">
+      <span>100% gratuito</span>
+      <span>processado localmente</span>
+      <span>zero cadastro</span>
+    </div>
+  </section>
+
+  <div class="index-rail">
+    <a class="index-card" href="#senha">
+      <div class="tag">Segurança</div>
+      <h3>Gerador de senha</h3>
+      <p>Crie senhas aleatórias e fortes com controle de tamanho e tipos de caractere.</p>
+    </a>
+    <a class="index-card" href="#qrcode">
+      <div class="tag">Compartilhamento</div>
+      <h3>Gerador de QR Code</h3>
+      <p>Transforme qualquer link ou texto em um QR Code para baixar em PNG.</p>
+    </a>
+    <a class="index-card" href="#cpf">
+      <div class="tag">Desenvolvimento</div>
+      <h3>CPF/CNPJ para teste</h3>
+      <p>Números com dígito verificador válido, prontos para testar sistemas — não pertencem a pessoas reais.</p>
+    </a>
+  </div>
+
+  <!-- ================= SENHA ================= -->
+  <section class="tool" id="senha">
+    <div class="tool-head"><span class="badge">01 — senha</span><h2>Gerador de senha segura</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <div class="row">
+          <label style="margin:0;">Tamanho: <strong id="lenOut" class="mono" style="color:var(--text)">16</strong></label>
+        </div>
+        <input type="range" id="lenRange" min="6" max="48" value="16" style="width:100%;margin-bottom:20px;">
+
+        <div class="switch-row"><div class="switch on" id="sw-upper" data-target="upper"><div class="knob"></div></div><span>Letras maiúsculas (A–Z)</span></div>
+        <div class="switch-row"><div class="switch on" id="sw-lower" data-target="lower"><div class="knob"></div></div><span>Letras minúsculas (a–z)</span></div>
+        <div class="switch-row"><div class="switch on" id="sw-num" data-target="num"><div class="knob"></div></div><span>Números (0–9)</span></div>
+        <div class="switch-row"><div class="switch on" id="sw-sym" data-target="sym"><div class="knob"></div></div><span>Símbolos (!@#$%)</span></div>
+        <div class="switch-row"><div class="switch" id="sw-amb" data-target="amb"><div class="knob"></div></div><span>Excluir caracteres ambíguos (l, 1, O, 0)</span></div>
+
+        <button class="action" id="genSenhaBtn">Gerar nova senha</button>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">senha gerada</div>
+          <div class="value mono" id="senhaOut">••••••••••••••••</div>
+          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+          <div class="strength-label" id="strengthLabel">força: —</div>
+          <button class="copy-btn" id="copySenhaBtn">Copiar senha</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= QR CODE ================= -->
+  <section class="tool" id="qrcode">
+    <div class="tool-head"><span class="badge">02 — qr code</span><h2>Gerador de QR Code</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label for="qrInput">Link ou texto</label>
+        <input type="text" id="qrInput" placeholder="https://exemplo.com.br" value="https://gerador.tools">
+        <div class="row" style="margin-top:20px;">
+          <label style="margin:0;">Tamanho: <strong id="qrSizeOut" class="mono" style="color:var(--text)">240px</strong></label>
+        </div>
+        <input type="range" id="qrSizeRange" min="120" max="400" value="240" style="width:100%;">
+        <button class="action" id="genQrBtn">Gerar QR Code</button>
+      </div>
+      <div>
+        <div id="qrcode-render"></div>
+        <button class="copy-btn" id="downloadQrBtn" style="width:100%;margin-top:14px;">Baixar como PNG</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= CPF/CNPJ ================= -->
+  <section class="tool" id="cpf">
+    <div class="tool-head"><span class="badge">03 — teste</span><h2>Gerador de CPF/CNPJ para teste</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label>Tipo de documento</label>
+        <div style="display:flex;gap:10px;margin-bottom:20px;">
+          <button class="copy-btn" id="btnTipoCpf" style="flex:1;border-color:var(--green);color:var(--text);">CPF</button>
+          <button class="copy-btn" id="btnTipoCnpj" style="flex:1;">CNPJ</button>
+        </div>
+        <div class="switch-row"><div class="switch on" id="sw-mask"><div class="knob"></div></div><span>Formatar com pontuação</span></div>
+        <button class="action" id="genCpfBtn">Gerar número</button>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:18px;">
+          Números gerados matematicamente com dígito verificador válido para fins de teste de software. Não correspondem a pessoas ou empresas reais e não devem ser usados para fraude ou cadastro em serviços de terceiros.
+        </p>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label" id="cpfLabel">documento gerado · cpf</div>
+          <div class="value mono" id="cpfOut">000.000.000-00</div>
+          <button class="copy-btn" id="copyCpfBtn">Copiar número</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> gerador.tools — ferramentas gratuitas, sem coleta de dados.</span>
+    <span>Senha, QR Code e CPF/CNPJ de teste em um só lugar.</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ===================== SWITCH TOGGLES ===================== */
+document.querySelectorAll('.switch').forEach(sw=>{
+  sw.addEventListener('click', ()=> sw.classList.toggle('on'));
+});
+
+/* ===================== GERADOR DE SENHA ===================== */
+const lenRange = document.getElementById('lenRange');
+const lenOut = document.getElementById('lenOut');
+lenRange.addEventListener('input', ()=> lenOut.textContent = lenRange.value);
+
+function generatePassword(){
+  const len = parseInt(lenRange.value,10);
+  const useUpper = document.getElementById('sw-upper').classList.contains('on');
+  const useLower = document.getElementById('sw-lower').classList.contains('on');
+  const useNum = document.getElementById('sw-num').classList.contains('on');
+  const useSym = document.getElementById('sw-sym').classList.contains('on');
+  const noAmbiguous = document.getElementById('sw-amb').classList.contains('on');
+
+  let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let lower = "abcdefghijklmnopqrstuvwxyz";
+  let nums = "0123456789";
+  let syms = "!@#$%^&*()-_=+[]{}";
+
+  if(noAmbiguous){
+    upper = upper.replace(/[O]/g,'');
+    lower = lower.replace(/[l]/g,'');
+    nums = nums.replace(/[01]/g,'');
+  }
+
+  let pool = "";
+  if(useUpper) pool += upper;
+  if(useLower) pool += lower;
+  if(useNum) pool += nums;
+  if(useSym) pool += syms;
+
+  if(pool === ""){
+    document.getElementById('senhaOut').textContent = "Selecione ao menos um tipo de caractere";
+    return;
+  }
+
+  const array = new Uint32Array(len);
+  crypto.getRandomValues(array);
+  let result = "";
+  for(let i=0;i<len;i++){
+    result += pool[array[i] % pool.length];
+  }
+  document.getElementById('senhaOut').textContent = result;
+  updateStrength(result, {useUpper,useLower,useNum,useSym,len});
+}
+
+function updateStrength(pw, opts){
+  let score = 0;
+  if(opts.len >= 12) score++;
+  if(opts.len >= 18) score++;
+  if(opts.useUpper) score++;
+  if(opts.useNum) score++;
+  if(opts.useSym) score++;
+
+  const fill = document.getElementById('strengthFill');
+  const label = document.getElementById('strengthLabel');
+  const pct = Math.min(100, (score/5)*100);
+  fill.style.width = pct + "%";
+
+  if(score <= 1){ fill.style.background = "#e2574c"; label.textContent = "força: fraca"; }
+  else if(score <= 3){ fill.style.background = "#ff6a35"; label.textContent = "força: média"; }
+  else { fill.style.background = "#7cc576"; label.textContent = "força: forte"; }
+}
+
+document.getElementById('genSenhaBtn').addEventListener('click', generatePassword);
+document.getElementById('copySenhaBtn').addEventListener('click', ()=>{
+  const txt = document.getElementById('senhaOut').textContent;
+  navigator.clipboard.writeText(txt);
+  flashCopied('copySenhaBtn');
+});
+generatePassword();
+
+function flashCopied(id){
+  const btn = document.getElementById(id);
+  const original = btn.textContent;
+  btn.textContent = "Copiado ✓";
+  setTimeout(()=> btn.textContent = original, 1400);
+}
+
+/* ===================== GERADOR DE QR CODE ===================== */
+const qrSizeRange = document.getElementById('qrSizeRange');
+const qrSizeOut = document.getElementById('qrSizeOut');
+qrSizeRange.addEventListener('input', ()=> qrSizeOut.textContent = qrSizeRange.value + "px");
+
+let qrInstance = null;
+function generateQr(){
+  const text = document.getElementById('qrInput').value || "https://gerador.tools";
+  const size = parseInt(qrSizeRange.value,10);
+  const target = document.getElementById('qrcode-render');
+  target.innerHTML = "";
+  qrInstance = new QRCode(target, {
+    text: text,
+    width: size,
+    height: size,
+    colorDark: "#15181b",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
+document.getElementById('genQrBtn').addEventListener('click', generateQr);
+generateQr();
+
+document.getElementById('downloadQrBtn').addEventListener('click', ()=>{
+  const img = document.querySelector('#qrcode-render img');
+  const canvas = document.querySelector('#qrcode-render canvas');
+  const src = img ? img.src : (canvas ? canvas.toDataURL("image/png") : null);
+  if(!src) return;
+  const a = document.createElement('a');
+  a.href = src;
+  a.download = "qrcode-gerador-tools.png";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
+
+/* ===================== GERADOR DE CPF/CNPJ (teste) ===================== */
+let tipoDoc = 'cpf';
+document.getElementById('btnTipoCpf').addEventListener('click', ()=>{
+  tipoDoc = 'cpf';
+  document.getElementById('btnTipoCpf').style.borderColor = 'var(--green)';
+  document.getElementById('btnTipoCpf').style.color = 'var(--text)';
+  document.getElementById('btnTipoCnpj').style.borderColor = 'var(--line)';
+  document.getElementById('btnTipoCnpj').style.color = 'var(--muted)';
+});
+document.getElementById('btnTipoCnpj').addEventListener('click', ()=>{
+  tipoDoc = 'cnpj';
+  document.getElementById('btnTipoCnpj').style.borderColor = 'var(--green)';
+  document.getElementById('btnTipoCnpj').style.color = 'var(--text)';
+  document.getElementById('btnTipoCpf').style.borderColor = 'var(--line)';
+  document.getElementById('btnTipoCpf').style.color = 'var(--muted)';
+});
+
+function randDigit(){ return Math.floor(Math.random()*10); }
+
+function generateCpf(){
+  let n = Array.from({length:9}, randDigit);
+  let d1 = calcCpfDigit(n);
+  n.push(d1);
+  let d2 = calcCpfDigit(n);
+  n.push(d2);
+  return n.join('');
+}
+function calcCpfDigit(nums){
+  let sum = 0, weight = nums.length + 1;
+  for(let i=0;i<nums.length;i++){ sum += nums[i]*weight; weight--; }
+  let r = sum % 11;
+  return r < 2 ? 0 : 11 - r;
+}
+function maskCpf(s){ return s.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"); }
+
+function generateCnpj(){
+  let n = Array.from({length:8}, randDigit);
+  n.push(0,0,0,1); // filial 0001
+  let d1 = calcCnpjDigit(n);
+  n.push(d1);
+  let d2 = calcCnpjDigit(n);
+  n.push(d2);
+  return n.join('');
+}
+function calcCnpjDigit(nums){
+  const weights1 = [5,4,3,2,9,8,7,6,5,4,3,2];
+  const w = weights1.slice(weights1.length - nums.length);
+  let sum = 0;
+  for(let i=0;i<nums.length;i++){ sum += nums[i]*w[i]; }
+  let r = sum % 11;
+  return r < 2 ? 0 : 11 - r;
+}
+function maskCnpj(s){ return s.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5"); }
+
+function generateDoc(){
+  const useMask = document.getElementById('sw-mask').classList.contains('on');
+  let raw, masked, label;
+  if(tipoDoc === 'cpf'){
+    raw = generateCpf();
+    masked = maskCpf(raw);
+    label = "documento gerado · cpf";
+  } else {
+    raw = generateCnpj();
+    masked = maskCnpj(raw);
+    label = "documento gerado · cnpj";
+  }
+  document.getElementById('cpfLabel').textContent = label;
+  document.getElementById('cpfOut').textContent = useMask ? masked : raw;
+}
+document.getElementById('genCpfBtn').addEventListener('click', generateDoc);
+document.getElementById('copyCpfBtn').addEventListener('click', ()=>{
+  navigator.clipboard.writeText(document.getElementById('cpfOut').textContent);
+  flashCopied('copyCpfBtn');
+});
+generateDoc();
+</script>
+
+</body>
+</html>
