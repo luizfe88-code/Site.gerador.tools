@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Utilix — Senha, QR Code, CPF/CNPJ e consulta de IP grátis</title>
-<meta name="description" content="Ferramentas gratuitas e instantâneas de segurança e produtividade: gerador de senha segura, gerador de QR Code, gerador de CPF/CNPJ para teste e consulta de IP público.">
+<title>Utilix — Senha, QR Code, IP e ferramentas de segurança grátis</title>
+<meta name="description" content="Ferramentas gratuitas e instantâneas de segurança digital: gerador de senha, verificador de força e vazamento, QR Code, consulta de IP e verificador de links suspeitos.">
 <link rel="canonical" href="https://utilix.seg.br/">
 <meta property="og:title" content="Utilix — ferramentas gratuitas de segurança e produtividade">
-<meta property="og:description" content="Gerador de senha, QR Code, CPF/CNPJ de teste e consulta de IP — tudo grátis, sem cadastro, direto no navegador.">
+<meta property="og:description" content="Gerador de senha, QR Code, consulta de IP e verificador de links suspeitos — tudo grátis, sem cadastro, direto no navegador.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://utilix.seg.br/">
 <meta property="og:locale" content="pt_BR">
@@ -147,10 +147,10 @@
   }
   #senha .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
   #qrcode .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
-  #cpf .badge{background:rgba(124,197,118,0.12);color:var(--green);}
   #ip .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
   #forca .badge{background:rgba(226,87,76,0.12);color:#e2574c;}
   #link .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
+  #exemplos .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
   .tool-head h2{margin:0;font-size:26px;}
 
   .panel{
@@ -204,7 +204,6 @@
   }
   button.action:hover{filter:brightness(1.08);}
   #qrcode button.action{background:var(--teal);}
-  #cpf button.action{background:var(--green);}
 
   /* output ticket */
   .ticket{
@@ -352,6 +351,25 @@
   .risk-badge.low{background:rgba(124,197,118,0.14);color:var(--green);}
   .risk-badge.medium{background:rgba(255,106,53,0.14);color:var(--orange);}
   .risk-badge.high{background:rgba(226,87,76,0.14);color:#e2574c;}
+
+  /* ===== exemplos de golpe ===== */
+  .phish-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px;}
+  @media (max-width:760px){.phish-grid{grid-template-columns:1fr;}}
+  .phish-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;}
+  .phish-card .phish-tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);
+    text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;
+  }
+  .msg-bubble{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;font-size:14px;line-height:1.6;color:var(--text);
+    margin-bottom:14px;
+  }
+  .msg-bubble mark{
+    background:rgba(226,87,76,0.22);color:#ff9a90;
+    border-radius:3px;padding:0 3px;font-weight:600;
+  }
+  .phish-card .why-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
 </style>
 </head>
 <body>
@@ -363,9 +381,9 @@
       <a href="#senha">Senha</a>
       <a href="#forca">Força de senha</a>
       <a href="#qrcode">QR Code</a>
-      <a href="#cpf">CPF/CNPJ teste</a>
       <a href="#ip">Meu IP</a>
       <a href="#link">Link suspeito</a>
+      <a href="#exemplos">Exemplos de golpe</a>
     </nav>
   </div>
 </header>
@@ -375,7 +393,7 @@
   <section class="hero">
     <div class="eyebrow">caixa de ferramentas — sem cadastro, sem instalação</div>
     <h1>Três geradores que resolvem na hora.</h1>
-    <p>Senha forte, QR Code para qualquer link e CPF/CNPJ válido para testar formulários. Tudo roda no seu navegador — nada é enviado para nenhum servidor.</p>
+    <p>Senha forte, QR Code para qualquer link e consulta de IP, em um só lugar. Tudo roda no seu navegador — nada é enviado para nenhum servidor.</p>
     <div class="hero-tags">
       <span>100% gratuito</span>
       <span>processado localmente</span>
@@ -395,11 +413,6 @@
       <h3>Gerador de QR Code</h3>
       <p>Transforme qualquer link ou texto em um QR Code para baixar em PNG.</p>
     </a>
-    <a class="index-card" href="#cpf">
-      <div class="tag">Desenvolvimento</div>
-      <h3>CPF/CNPJ para teste</h3>
-      <p>Números com dígito verificador válido, prontos para testar sistemas — não pertencem a pessoas reais.</p>
-    </a>
     <a class="index-card" href="#ip">
       <div class="tag">Segurança</div>
       <h3>Consultar IP</h3>
@@ -414,6 +427,11 @@
       <div class="tag">Segurança</div>
       <h3>Link é golpe?</h3>
       <p>Cole um link suspeito e veja sinais de phishing antes de clicar.</p>
+    </a>
+    <a class="index-card" href="#exemplos">
+      <div class="tag">Educação</div>
+      <h3>Exemplos reais de golpe</h3>
+      <p>Veja mensagens de golpe comuns no Brasil com as partes suspeitas explicadas.</p>
     </a>
   </div>
   <section class="tool" id="senha">
@@ -472,38 +490,6 @@
     <div class="seo-text">
       <p>QR Code é uma forma rápida de transformar um link, texto, número de telefone ou informação de contato em uma imagem que qualquer celular lê com a câmera. É usado em cardápios de restaurante, embalagens de produto, cartões de visita, materiais impressos e campanhas de marketing — qualquer lugar onde digitar um endereço longo seria inconveniente.</p>
       <p>Esta ferramenta gera o QR Code instantaneamente, sem necessidade de cadastro ou instalação de aplicativo. Basta colar o link ou texto desejado, ajustar o tamanho da imagem e baixar o arquivo em PNG, pronto para imprimir ou usar em qualquer material digital.</p>
-    </div>
-  </section>
-
-  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
-
-  <!-- ================= CPF/CNPJ ================= -->
-  <section class="tool" id="cpf">
-    <div class="tool-head"><span class="badge">03 — teste</span><h2>Gerador de CPF/CNPJ para teste</h2></div>
-    <div class="panel grid-2">
-      <div>
-        <label>Tipo de documento</label>
-        <div style="display:flex;gap:10px;margin-bottom:20px;">
-          <button class="copy-btn" id="btnTipoCpf" style="flex:1;border-color:var(--green);color:var(--text);">CPF</button>
-          <button class="copy-btn" id="btnTipoCnpj" style="flex:1;">CNPJ</button>
-        </div>
-        <div class="switch-row"><div class="switch on" id="sw-mask"><div class="knob"></div></div><span>Formatar com pontuação</span></div>
-        <button class="action" id="genCpfBtn">Gerar número</button>
-        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:18px;">
-          Números gerados matematicamente com dígito verificador válido para fins de teste de software. Não correspondem a pessoas ou empresas reais e não devem ser usados para fraude ou cadastro em serviços de terceiros.
-        </p>
-      </div>
-      <div>
-        <div class="ticket">
-          <div class="label" id="cpfLabel">documento gerado · cpf</div>
-          <div class="value mono" id="cpfOut">000.000.000-00</div>
-          <button class="copy-btn" id="copyCpfBtn">Copiar número</button>
-        </div>
-      </div>
-    </div>
-    <div class="seo-text">
-      <p>Ao desenvolver ou testar sistemas que validam CPF ou CNPJ — como formulários de cadastro, checkouts de e-commerce ou sistemas internos — é comum precisar de números com dígito verificador matematicamente válido, mas que não pertençam a nenhuma pessoa ou empresa real. Usar CPFs de pessoas reais em ambiente de teste é arriscado e pode violar dados sensíveis.</p>
-      <p>Esta ferramenta gera números de CPF e CNPJ seguindo o mesmo algoritmo de validação usado oficialmente, garantindo que passem nas verificações de dígito do seu sistema. Os números são criados aleatoriamente e servem exclusivamente para fins de teste de software — não devem ser usados para abrir contas, fraudar cadastros ou se passar por terceiros.</p>
     </div>
   </section>
 
@@ -619,12 +605,83 @@
 
   <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
 
+  <!-- ================= EXEMPLOS DE GOLPE ================= -->
+  <section class="tool" id="exemplos">
+    <div class="tool-head"><span class="badge">07 — educação</span><h2>Exemplos reais de golpe</h2></div>
+    <div class="panel">
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 22px;">
+        Estes são modelos baseados em golpes reais e recorrentes no Brasil. As partes destacadas em vermelho mostram os sinais que deveriam levantar suspeita. Nenhum destes exemplos é uma mensagem real — foram recriados apenas para fins educativos.
+      </p>
+
+      <div class="phish-grid">
+        <div class="phish-card">
+          <div class="phish-tag">SMS · Falso Pix recebido</div>
+          <div class="msg-bubble">
+            Você recebeu um <mark>Pix de R$ 1.350,00</mark>. Para receber, confirme seus dados em <mark>pix-recebimento.com/confirmar</mark>
+          </div>
+          <div class="why-title">Por que é golpe</div>
+          <ul class="signal-list">
+            <li><span class="signal-icon bad">!</span><span>Bancos nunca pedem para "confirmar dados" para receber um Pix — o dinheiro cai direto na conta.</span></li>
+            <li><span class="signal-icon bad">!</span><span>O link não é de nenhum banco ou instituição financeira real.</span></li>
+            <li><span class="signal-icon bad">!</span><span>Cria urgência com um valor alto para induzir o clique sem pensar.</span></li>
+          </ul>
+        </div>
+
+        <div class="phish-card">
+          <div class="phish-tag">SMS · Falsa cobrança de banco</div>
+          <div class="msg-bubble">
+            <mark>[Itaú]</mark> Identificamos uma compra suspeita de R$ 899,00. Se não reconhece, ligue urgente: <mark>0800-XXX-XXXX</mark> ou acesse <mark>itau-seguranca.net</mark>
+          </div>
+          <div class="why-title">Por que é golpe</div>
+          <ul class="signal-list">
+            <li><span class="signal-icon bad">!</span><span>Bancos não enviam SMS pedindo para ligar em número fornecido na própria mensagem.</span></li>
+            <li><span class="signal-icon bad">!</span><span>O domínio "itau-seguranca.net" usa o nome do banco, mas não é o site oficial.</span></li>
+            <li><span class="signal-icon bad">!</span><span>Usa medo ("compra suspeita") para gerar pânico e ação imediata.</span></li>
+          </ul>
+        </div>
+
+        <div class="phish-card">
+          <div class="phish-tag">WhatsApp · Falsos Correios</div>
+          <div class="msg-bubble">
+            Seu pacote está retido na alfândega. <mark>Pague a taxa de R$ 23,90</mark> para liberar a entrega: <mark>correios-entrega.shop</mark>
+          </div>
+          <div class="why-title">Por que é golpe</div>
+          <ul class="signal-list">
+            <li><span class="signal-icon bad">!</span><span>Os Correios não cobram taxas por link enviado via WhatsApp ou SMS.</span></li>
+            <li><span class="signal-icon bad">!</span><span>O domínio ".shop" não tem relação com o site oficial dos Correios.</span></li>
+            <li><span class="signal-icon bad">!</span><span>Valor baixo é proposital — parece "não valer a pena duvidar".</span></li>
+          </ul>
+        </div>
+
+        <div class="phish-card">
+          <div class="phish-tag">WhatsApp · Falso prêmio/promoção</div>
+          <div class="msg-bubble">
+            Parabéns! Você foi sorteado em uma <mark>promoção da Globo/Magalu</mark>. Clique para resgatar seu prêmio antes que expire: <mark>premiosvip-2026.com</mark>
+          </div>
+          <div class="why-title">Por que é golpe</div>
+          <ul class="signal-list">
+            <li><span class="signal-icon bad">!</span><span>Promoções legítimas não chegam por mensagem de número desconhecido pedindo clique imediato.</span></li>
+            <li><span class="signal-icon bad">!</span><span>Cria senso de urgência ("antes que expire") para evitar que a pessoa pesquise antes.</span></li>
+            <li><span class="signal-icon bad">!</span><span>O domínio não pertence a nenhuma marca mencionada na mensagem.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-text">
+      <p>Golpes por SMS e WhatsApp seguem um padrão parecido: criam urgência, mencionam uma marca conhecida (banco, Correios, programas de TV) e pedem para clicar em um link ou ligar para um número antes que algo ruim aconteça ou um benefício "expire". Reconhecer esse padrão é mais eficaz do que tentar decorar todos os golpes específicos, porque novos golpes surgem o tempo todo seguindo a mesma fórmula.</p>
+      <p>Regra prática: nenhuma instituição séria pede para confirmar dados bancários, senhas ou pagar taxas através de um link recebido por mensagem. Em caso de dúvida, contate a empresa diretamente pelo canal oficial (app, site digitado manualmente, ou telefone que você mesmo procurou) — nunca pelo link ou número fornecido na mensagem suspeita.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
 </main>
 
 <footer>
   <div class="wrap">
     <span>© <span id="year"></span> utilix.seg.br — ferramentas gratuitas, sem coleta de dados.</span>
-    <span>Senha, QR Code e CPF/CNPJ de teste em um só lugar.</span>
+    <span>Senha, QR Code, IP e ferramentas de segurança digital em um só lugar.</span>
   </div>
 </footer>
 
@@ -750,84 +807,6 @@ document.getElementById('downloadQrBtn').addEventListener('click', ()=>{
   document.body.removeChild(a);
 });
 
-/* ===================== GERADOR DE CPF/CNPJ (teste) ===================== */
-let tipoDoc = 'cpf';
-document.getElementById('btnTipoCpf').addEventListener('click', ()=>{
-  tipoDoc = 'cpf';
-  document.getElementById('btnTipoCpf').style.borderColor = 'var(--green)';
-  document.getElementById('btnTipoCpf').style.color = 'var(--text)';
-  document.getElementById('btnTipoCnpj').style.borderColor = 'var(--line)';
-  document.getElementById('btnTipoCnpj').style.color = 'var(--muted)';
-});
-document.getElementById('btnTipoCnpj').addEventListener('click', ()=>{
-  tipoDoc = 'cnpj';
-  document.getElementById('btnTipoCnpj').style.borderColor = 'var(--green)';
-  document.getElementById('btnTipoCnpj').style.color = 'var(--text)';
-  document.getElementById('btnTipoCpf').style.borderColor = 'var(--line)';
-  document.getElementById('btnTipoCpf').style.color = 'var(--muted)';
-});
-
-function randDigit(){ return Math.floor(Math.random()*10); }
-
-function generateCpf(){
-  let n = Array.from({length:9}, randDigit);
-  let d1 = calcCpfDigit(n);
-  n.push(d1);
-  let d2 = calcCpfDigit(n);
-  n.push(d2);
-  return n.join('');
-}
-function calcCpfDigit(nums){
-  let sum = 0, weight = nums.length + 1;
-  for(let i=0;i<nums.length;i++){ sum += nums[i]*weight; weight--; }
-  let r = sum % 11;
-  return r < 2 ? 0 : 11 - r;
-}
-function maskCpf(s){ return s.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"); }
-
-function generateCnpj(){
-  let n = Array.from({length:8}, randDigit);
-  n.push(0,0,0,1); // filial 0001
-  let d1 = calcCnpjDigit(n);
-  n.push(d1);
-  let d2 = calcCnpjDigit(n);
-  n.push(d2);
-  return n.join('');
-}
-function calcCnpjDigit(nums){
-  // Pesos corretos: 12 dígitos (1º DV) usa [5,4,3,2,9,8,7,6,5,4,3,2]
-  // 13 dígitos (2º DV, já incluindo o 1º DV) usa [6,5,4,3,2,9,8,7,6,5,4,3,2]
-  const weights12 = [5,4,3,2,9,8,7,6,5,4,3,2];
-  const weights13 = [6,5,4,3,2,9,8,7,6,5,4,3,2];
-  const w = nums.length === 13 ? weights13 : weights12;
-  let sum = 0;
-  for(let i=0;i<nums.length;i++){ sum += nums[i]*w[i]; }
-  let r = sum % 11;
-  return r < 2 ? 0 : 11 - r;
-}
-function maskCnpj(s){ return s.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5"); }
-
-function generateDoc(){
-  const useMask = document.getElementById('sw-mask').classList.contains('on');
-  let raw, masked, label;
-  if(tipoDoc === 'cpf'){
-    raw = generateCpf();
-    masked = maskCpf(raw);
-    label = "documento gerado · cpf";
-  } else {
-    raw = generateCnpj();
-    masked = maskCnpj(raw);
-    label = "documento gerado · cnpj";
-  }
-  document.getElementById('cpfLabel').textContent = label;
-  document.getElementById('cpfOut').textContent = useMask ? masked : raw;
-}
-document.getElementById('genCpfBtn').addEventListener('click', generateDoc);
-document.getElementById('copyCpfBtn').addEventListener('click', ()=>{
-  navigator.clipboard.writeText(document.getElementById('cpfOut').textContent);
-  flashCopied('copyCpfBtn');
-});
-generateDoc();
 
 /* ===================== MEU IP ===================== */
 function classifyConnection(orgName){
