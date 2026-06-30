@@ -11,9 +11,10 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://utilix.seg.br/">
 <meta property="og:locale" content="pt_BR">
-<meta name="robots" content="index, follow"><link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://ipwho.is https://ipapi.co https://api.pwnedpasswords.com; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   :root{
     --bg: #15181b;
@@ -370,41 +371,6 @@
     border-radius:3px;padding:0 3px;font-weight:600;
   }
   .phish-card .why-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
-
-  /* ===== layout com sidebar de blog ===== */
-  .page-shell{
-    max-width:1320px;margin:0 auto;padding:0 24px;
-    display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:40px;align-items:start;
-  }
-  .side-rail{
-    position:sticky;top:90px;
-    display:flex;flex-direction:column;gap:14px;
-    padding-top:64px;
-  }
-  .side-rail .rail-title{
-    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
-    text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;
-  }
-  .side-rail .rail-post{
-    display:block;background:var(--panel);border:1px solid var(--line);
-    border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--text);
-    transition:border-color .15s ease;
-  }
-  .side-rail .rail-post:hover{border-color:var(--teal);}
-  .side-rail .rail-post .rail-tag{
-    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);
-    text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;
-  }
-  .side-rail .rail-post h4{margin:0;font-size:13px;line-height:1.4;color:var(--text);font-weight:600;}
-  .side-rail .rail-all{
-    text-align:center;font-size:12px;color:var(--muted);text-decoration:none;
-    padding:8px;border-top:1px solid var(--line);margin-top:4px;
-  }
-  .side-rail .rail-all:hover{color:var(--text);}
-  @media (max-width:1180px){
-    .page-shell{grid-template-columns:1fr;}
-    .side-rail{display:none;}
-  }
 </style>
 </head>
 <body>
@@ -419,12 +385,10 @@
       <a href="#ip">Meu IP</a>
       <a href="#link">Link suspeito</a>
       <a href="#exemplos">Exemplos de golpe</a>
-      <a href="blog/index.html">Blog</a>
     </nav>
   </div>
 </header>
 
-<div class="page-shell">
 <main class="wrap">
 
   <section class="hero">
@@ -534,7 +498,7 @@
 
   <!-- ================= IP ================= -->
   <section class="tool" id="ip">
-    <div class="tool-head"><span class="badge">04 — segurança</span><h2>Qual é o meu IP?</h2></div>
+    <div class="tool-head"><span class="badge">03 — segurança</span><h2>Qual é o meu IP?</h2></div>
     <div class="panel">
       <div class="ip-hero">
         <div class="k">seu endereço ip público</div>
@@ -551,7 +515,7 @@
       <button class="copy-btn" id="copyIpBtn" style="width:100%;margin-top:4px;">Copiar meu IP</button>
     </div>
 
-    <div class="tool-head" style="margin-top:46px;"><span class="badge">04 — segurança</span><h2>Consultar IP de terceiros</h2></div>
+    <div class="tool-head" style="margin-top:46px;"><span class="badge">03 — segurança</span><h2>Consultar IP de terceiros</h2></div>
     <div class="panel grid-2">
       <div>
         <label for="ipLookupInput">Endereço IP</label>
@@ -580,7 +544,7 @@
 
   <!-- ================= FORÇA DE SENHA ================= -->
   <section class="tool" id="forca">
-    <div class="tool-head"><span class="badge">05 — segurança</span><h2>Sua senha é segura?</h2></div>
+    <div class="tool-head"><span class="badge">04 — segurança</span><h2>Sua senha é segura?</h2></div>
     <div class="panel grid-2">
       <div>
         <label for="pwCheckInput">Digite uma senha que você usa</label>
@@ -614,7 +578,7 @@
 
   <!-- ================= VERIFICADOR DE LINK ================= -->
   <section class="tool" id="link">
-    <div class="tool-head"><span class="badge">06 — segurança</span><h2>Esse link é golpe?</h2></div>
+    <div class="tool-head"><span class="badge">05 — segurança</span><h2>Esse link é golpe?</h2></div>
     <div class="panel grid-2">
       <div>
         <label for="linkCheckInput">Cole o link suspeito</label>
@@ -644,7 +608,7 @@
 
   <!-- ================= EXEMPLOS DE GOLPE ================= -->
   <section class="tool" id="exemplos">
-    <div class="tool-head"><span class="badge">07 — educação</span><h2>Exemplos reais de golpe</h2></div>
+    <div class="tool-head"><span class="badge">06 — educação</span><h2>Exemplos reais de golpe</h2></div>
     <div class="panel">
       <p style="color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 22px;">
         Estes são modelos baseados em golpes reais e recorrentes no Brasil. As partes destacadas em vermelho mostram os sinais que deveriam levantar suspeita. Nenhum destes exemplos é uma mensagem real — foram recriados apenas para fins educativos.
@@ -713,56 +677,7 @@
 
   <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
 
-  <div class="wrap" style="padding-bottom:60px;">
-    <a href="blog/index.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:26px 28px;text-decoration:none;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">blog de segurança</div>
-      <h3 style="margin:0 0 8px;color:var(--text);font-size:20px;">Quer entender melhor os golpes mais comuns no Brasil?</h3>
-      <p style="margin:0;color:var(--muted);font-size:14px;">Leia nossos artigos sobre Pix falso, phishing, VPN e mais — explicados de forma simples →</p>
-    </a>
-  </div>
-
 </main>
-
-<aside class="side-rail">
-  <div class="rail-title">do blog</div>
-
-  <a class="rail-post" href="blog/recebi-pix-nao-pedi-e-golpe.html">
-    <div class="rail-tag">Pix</div>
-    <h4>Recebi um Pix que não pedi: é golpe?</h4>
-  </a>
-  <a class="rail-post" href="blog/golpe-codigo-whatsapp.html">
-    <div class="rail-tag">WhatsApp</div>
-    <h4>Golpe do código do WhatsApp: como se proteger</h4>
-  </a>
-  <a class="rail-post" href="blog/golpe-falso-suporte-bancario.html">
-    <div class="rail-tag">Engenharia social</div>
-    <h4>Golpe do falso suporte técnico/bancário</h4>
-  </a>
-  <a class="rail-post" href="blog/senha-forte-que-voce-lembra.html">
-    <div class="rail-tag">Senhas</div>
-    <h4>Como criar uma senha forte que você lembra</h4>
-  </a>
-  <a class="rail-post" href="blog/minha-senha-vazou-o-que-fazer.html">
-    <div class="rail-tag">Vazamento</div>
-    <h4>Minha senha vazou? O que fazer</h4>
-  </a>
-  <a class="rail-post" href="blog/como-identificar-phishing.html">
-    <div class="rail-tag">Phishing</div>
-    <h4>Como saber se um link é phishing</h4>
-  </a>
-  <a class="rail-post" href="blog/o-que-e-vpn-vale-a-pena.html">
-    <div class="rail-tag">Privacidade</div>
-    <h4>O que é VPN e vale a pena usar?</h4>
-  </a>
-  <a class="rail-post" href="blog/wifi-publico-e-seguro.html">
-    <div class="rail-tag">Redes públicas</div>
-    <h4>Wi-Fi público é seguro?</h4>
-  </a>
-
-  <a class="rail-all" href="blog/index.html">Ver todos os posts →</a>
-</aside>
-
-</div>
 
 <footer>
   <div class="wrap">
@@ -978,6 +893,29 @@ async function lookupIp(){
   out.style.whiteSpace = 'normal';
   out.textContent = "Consultando...";
 
+  // Constrói o resultado via DOM (não innerHTML) para nunca interpretar
+  // como HTML/script nenhum dado vindo da API externa — evita XSS caso
+  // algum campo (cidade, provedor etc.) venha com conteúdo malicioso.
+  function renderLookupResult(rows, connType){
+    out.textContent = "";
+    out.style.whiteSpace = "pre-line";
+    rows.forEach(([label, value])=>{
+      out.appendChild(document.createTextNode(label + ": " + value + "\n"));
+    });
+    out.appendChild(document.createTextNode("Tipo: "));
+    const badge = document.createElement('span');
+    badge.className = "conn-badge " + connType.cls;
+    badge.textContent = connType.cls === 'hosting'
+      ? "Hosting / Datacenter"
+      : (connType.cls === 'residential' ? "Residencial / Comercial" : "—");
+    out.appendChild(badge);
+    if(connType.cls === 'hosting'){
+      out.appendChild(document.createTextNode(" — provavelmente servidor, VPN ou proxy, não conexão residencial"));
+    } else if(connType.cls === 'residential'){
+      out.appendChild(document.createTextNode(" — provedor de internet comum (ISP)"));
+    }
+  }
+
   try{
     const res = await fetchWithTimeout('https://ipwho.is/' + input, 6000);
     const data = await res.json();
@@ -986,14 +924,13 @@ async function lookupIp(){
       return;
     }
     const org = (data.connection && (data.connection.isp || data.connection.org)) || '—';
-    out.innerHTML =
-      "IP: " + (data.ip || input) + "\n" +
-      "Cidade: " + (data.city || "—") + "\n" +
-      "Região: " + (data.region || "—") + "\n" +
-      "País: " + (data.country || "—") + "\n" +
-      "Provedor: " + org + "\n" +
-      "Tipo: " + classifyConnection(org).label;
-    out.style.whiteSpace = "pre-line";
+    renderLookupResult([
+      ["IP", data.ip || input],
+      ["Cidade", data.city || "—"],
+      ["Região", data.region || "—"],
+      ["País", data.country || "—"],
+      ["Provedor", org]
+    ], classifyConnection(org));
   } catch(err1){
     try{
       const res2 = await fetchWithTimeout('https://ipapi.co/' + input + '/json/', 6000);
@@ -1002,14 +939,13 @@ async function lookupIp(){
         out.textContent = "IP não encontrado ou inválido.";
         return;
       }
-      out.innerHTML =
-        "IP: " + (data2.ip || input) + "\n" +
-        "Cidade: " + (data2.city || "—") + "\n" +
-        "Região: " + (data2.region || "—") + "\n" +
-        "País: " + (data2.country_name || "—") + "\n" +
-        "Provedor: " + (data2.org || "—") + "\n" +
-        "Tipo: " + classifyConnection(data2.org).label;
-      out.style.whiteSpace = "pre-line";
+      renderLookupResult([
+        ["IP", data2.ip || input],
+        ["Cidade", data2.city || "—"],
+        ["Região", data2.region || "—"],
+        ["País", data2.country_name || "—"],
+        ["Provedor", data2.org || "—"]
+      ], classifyConnection(data2.org));
     } catch(err2){
       out.textContent = "Não foi possível consultar este IP agora. Tente novamente em instantes.";
     }
