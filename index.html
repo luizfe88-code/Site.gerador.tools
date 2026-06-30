@@ -381,7 +381,14 @@
     position:sticky;top:90px;
     display:flex;flex-direction:column;gap:14px;
     align-self:start;
+    max-height:calc(100vh - 110px);
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:var(--line) transparent;
   }
+  .side-rail::-webkit-scrollbar{width:4px;}
+  .side-rail::-webkit-scrollbar-track{background:transparent;}
+  .side-rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px;}
   .side-rail .rail-title{
     font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
     text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;
