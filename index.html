@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gerador.tools — Senha, QR Code e CPF/CNPJ de teste</title>
-<meta name="description" content="Ferramentas gratuitas e instantâneas: gerador de senha segura, gerador de QR Code e gerador de CPF/CNPJ válido para testes de sistema.">
+<meta name="description" content="Ferramentas gratuitas e instantâneas: gerador de senha segura, gerador de QR Code, gerador de CPF/CNPJ válido para testes e consulta de IP público.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -142,6 +142,7 @@
   #senha .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
   #qrcode .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
   #cpf .badge{background:rgba(124,197,118,0.12);color:var(--green);}
+  #ip .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
   .tool-head h2{margin:0;font-size:26px;}
 
   .panel{
@@ -271,6 +272,18 @@
   }
   .seo-text p{margin:0 0 14px;}
   .seo-text p:last-child{margin-bottom:0;}
+
+  .ip-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px;}
+  .ip-stat{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+  .ip-stat .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .ip-stat .v{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--text);margin-top:5px;word-break:break-word;}
+  .ip-hero{
+    background:var(--panel-2);border:1px dashed var(--line);border-radius:10px;
+    padding:24px;text-align:center;margin-bottom:18px;
+  }
+  .ip-hero .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+  .ip-hero .v{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--orange);margin-top:8px;}
+  @media (max-width:760px){.ip-stats{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -282,6 +295,7 @@
       <a href="#senha">Senha</a>
       <a href="#qrcode">QR Code</a>
       <a href="#cpf">CPF/CNPJ teste</a>
+      <a href="#ip">Meu IP</a>
     </nav>
   </div>
 </header>
@@ -296,6 +310,7 @@
       <span>100% gratuito</span>
       <span>processado localmente</span>
       <span>zero cadastro</span>
+      <span>foco em segurança</span>
     </div>
   </section>
 
@@ -315,9 +330,12 @@
       <h3>CPF/CNPJ para teste</h3>
       <p>Números com dígito verificador válido, prontos para testar sistemas — não pertencem a pessoas reais.</p>
     </a>
+    <a class="index-card" href="#ip">
+      <div class="tag">Segurança</div>
+      <h3>Consultar IP</h3>
+      <p>Veja seu IP público, localização e provedor — ou consulte o IP de qualquer endereço.</p>
+    </a>
   </div>
-
-  <!-- ================= SENHA ================= -->
   <section class="tool" id="senha">
     <div class="tool-head"><span class="badge">01 — senha</span><h2>Gerador de senha segura</h2></div>
     <div class="panel grid-2">
@@ -406,6 +424,49 @@
     <div class="seo-text">
       <p>Ao desenvolver ou testar sistemas que validam CPF ou CNPJ — como formulários de cadastro, checkouts de e-commerce ou sistemas internos — é comum precisar de números com dígito verificador matematicamente válido, mas que não pertençam a nenhuma pessoa ou empresa real. Usar CPFs de pessoas reais em ambiente de teste é arriscado e pode violar dados sensíveis.</p>
       <p>Esta ferramenta gera números de CPF e CNPJ seguindo o mesmo algoritmo de validação usado oficialmente, garantindo que passem nas verificações de dígito do seu sistema. Os números são criados aleatoriamente e servem exclusivamente para fins de teste de software — não devem ser usados para abrir contas, fraudar cadastros ou se passar por terceiros.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= IP ================= -->
+  <section class="tool" id="ip">
+    <div class="tool-head"><span class="badge">04 — segurança</span><h2>Qual é o meu IP?</h2></div>
+    <div class="panel">
+      <div class="ip-hero">
+        <div class="k">seu endereço ip público</div>
+        <div class="v mono" id="myIpValue">consultando...</div>
+      </div>
+      <div class="ip-stats">
+        <div class="ip-stat"><div class="k">localização aproximada</div><div class="v" id="myIpCity">—</div></div>
+        <div class="ip-stat"><div class="k">região / estado</div><div class="v" id="myIpRegion">—</div></div>
+        <div class="ip-stat"><div class="k">país</div><div class="v" id="myIpCountry">—</div></div>
+        <div class="ip-stat"><div class="k">provedor (isp)</div><div class="v" id="myIpIsp">—</div></div>
+      </div>
+      <button class="copy-btn" id="copyIpBtn" style="width:100%;margin-top:16px;">Copiar meu IP</button>
+    </div>
+
+    <div class="tool-head" style="margin-top:46px;"><span class="badge">04 — segurança</span><h2>Consultar IP de terceiros</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label for="ipLookupInput">Endereço IP</label>
+        <input type="text" id="ipLookupInput" placeholder="Ex: 8.8.8.8">
+        <button class="action" id="lookupIpBtn">Consultar IP</button>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:16px;">
+          Útil para identificar a origem aproximada de um acesso suspeito, verificar se um IP pertence a um servidor conhecido, ou investigar tentativas de invasão registradas em logs.
+        </p>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">resultado da consulta</div>
+          <div class="value mono" id="lookupOut" style="font-size:14px;">Digite um IP e clique em consultar</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-text">
+      <p>Todo dispositivo conectado à internet recebe um endereço IP, um identificador numérico que revela informações como o provedor de internet usado e a localização aproximada da conexão — geralmente a cidade ou região, nunca o endereço exato. Saber seu próprio IP é útil para configurar redes, diagnosticar problemas de conexão, liberar acesso em sistemas restritos ou simplesmente verificar se uma VPN está funcionando corretamente.</p>
+      <p>Consultar o IP de terceiros é uma prática comum em segurança da informação: administradores de sistema usam essa informação para investigar acessos suspeitos em logs de servidor, identificar a origem aproximada de tentativas de login indevidas, ou confirmar se um endereço pertence a um serviço legítimo (como um servidor de DNS público) ou a uma rede desconhecida. Esta ferramenta não armazena nenhum dado consultado — todas as buscas são feitas em tempo real e não ficam salvas.</p>
     </div>
   </section>
 
@@ -587,8 +648,11 @@ function generateCnpj(){
   return n.join('');
 }
 function calcCnpjDigit(nums){
-  const weights1 = [5,4,3,2,9,8,7,6,5,4,3,2];
-  const w = weights1.slice(weights1.length - nums.length);
+  // Pesos corretos: 12 dígitos (1º DV) usa [5,4,3,2,9,8,7,6,5,4,3,2]
+  // 13 dígitos (2º DV, já incluindo o 1º DV) usa [6,5,4,3,2,9,8,7,6,5,4,3,2]
+  const weights12 = [5,4,3,2,9,8,7,6,5,4,3,2];
+  const weights13 = [6,5,4,3,2,9,8,7,6,5,4,3,2];
+  const w = nums.length === 13 ? weights13 : weights12;
   let sum = 0;
   for(let i=0;i<nums.length;i++){ sum += nums[i]*w[i]; }
   let r = sum % 11;
@@ -617,6 +681,63 @@ document.getElementById('copyCpfBtn').addEventListener('click', ()=>{
   flashCopied('copyCpfBtn');
 });
 generateDoc();
+
+/* ===================== MEU IP ===================== */
+async function loadMyIp(){
+  try{
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    document.getElementById('myIpValue').textContent = data.ip || '—';
+    document.getElementById('myIpCity').textContent = data.city || '—';
+    document.getElementById('myIpRegion').textContent = data.region || '—';
+    document.getElementById('myIpCountry').textContent = data.country_name || '—';
+    document.getElementById('myIpIsp').textContent = data.org || '—';
+  } catch(err){
+    document.getElementById('myIpValue').textContent = 'não foi possível consultar';
+  }
+}
+loadMyIp();
+
+document.getElementById('copyIpBtn').addEventListener('click', ()=>{
+  const ip = document.getElementById('myIpValue').textContent;
+  navigator.clipboard.writeText(ip);
+  flashCopied('copyIpBtn');
+});
+
+/* ===================== CONSULTAR IP DE TERCEIROS ===================== */
+async function lookupIp(){
+  const input = document.getElementById('ipLookupInput').value.trim();
+  const out = document.getElementById('lookupOut');
+  const ipPattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+
+  if(!ipPattern.test(input)){
+    out.textContent = "Digite um IP válido, ex: 8.8.8.8";
+    return;
+  }
+
+  out.textContent = "Consultando...";
+  try{
+    const res = await fetch('https://ipapi.co/' + input + '/json/');
+    const data = await res.json();
+    if(data.error){
+      out.textContent = "IP não encontrado ou inválido.";
+      return;
+    }
+    out.innerHTML =
+      "IP: " + (data.ip || input) + "\n" +
+      "Cidade: " + (data.city || "—") + "\n" +
+      "Região: " + (data.region || "—") + "\n" +
+      "País: " + (data.country_name || "—") + "\n" +
+      "Provedor: " + (data.org || "—");
+    out.style.whiteSpace = "pre-line";
+  } catch(err){
+    out.textContent = "Não foi possível consultar este IP agora. Tente novamente em instantes.";
+  }
+}
+document.getElementById('lookupIpBtn').addEventListener('click', lookupIp);
+document.getElementById('ipLookupInput').addEventListener('keypress', (e)=>{
+  if(e.key === 'Enter') lookupIp();
+});
 </script>
 
 </body>
