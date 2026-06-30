@@ -683,17 +683,48 @@ document.getElementById('copyCpfBtn').addEventListener('click', ()=>{
 generateDoc();
 
 /* ===================== MEU IP ===================== */
+function fetchWithTimeout(url, ms){
+  const controller = new AbortController();
+  const timer = setTimeout(()=> controller.abort(), ms);
+  return fetch(url, { signal: controller.signal }).finally(()=> clearTimeout(timer));
+}
+
 async function loadMyIp(){
+  const elValue = document.getElementById('myIpValue');
+  const elCity = document.getElementById('myIpCity');
+  const elRegion = document.getElementById('myIpRegion');
+  const elCountry = document.getElementById('myIpCountry');
+  const elIsp = document.getElementById('myIpIsp');
+
+  // Tenta a API primária (ipwho.is); se falhar, tenta a alternativa (ipapi.co)
   try{
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetchWithTimeout('https://ipwho.is/', 6000);
     const data = await res.json();
-    document.getElementById('myIpValue').textContent = data.ip || '—';
-    document.getElementById('myIpCity').textContent = data.city || '—';
-    document.getElementById('myIpRegion').textContent = data.region || '—';
-    document.getElementById('myIpCountry').textContent = data.country_name || '—';
-    document.getElementById('myIpIsp').textContent = data.org || '—';
-  } catch(err){
-    document.getElementById('myIpValue').textContent = 'não foi possível consultar';
+    if(data && data.success !== false){
+      elValue.textContent = data.ip || '—';
+      elCity.textContent = data.city || '—';
+      elRegion.textContent = data.region || '—';
+      elCountry.textContent = data.country || '—';
+      elIsp.textContent = (data.connection && (data.connection.isp || data.connection.org)) || '—';
+      return;
+    }
+    throw new Error('primary API returned no data');
+  } catch(err1){
+    try{
+      const res2 = await fetchWithTimeout('https://ipapi.co/json/', 6000);
+      const data2 = await res2.json();
+      elValue.textContent = data2.ip || '—';
+      elCity.textContent = data2.city || '—';
+      elRegion.textContent = data2.region || '—';
+      elCountry.textContent = data2.country_name || '—';
+      elIsp.textContent = data2.org || '—';
+    } catch(err2){
+      elValue.textContent = 'não foi possível consultar';
+      elCity.textContent = '—';
+      elRegion.textContent = '—';
+      elCountry.textContent = '—';
+      elIsp.textContent = '—';
+    }
   }
 }
 loadMyIp();
@@ -711,15 +742,18 @@ async function lookupIp(){
   const ipPattern = /^(\d{1,3}\.){3}\d{1,3}$/;
 
   if(!ipPattern.test(input)){
+    out.style.whiteSpace = 'normal';
     out.textContent = "Digite um IP válido, ex: 8.8.8.8";
     return;
   }
 
+  out.style.whiteSpace = 'normal';
   out.textContent = "Consultando...";
+
   try{
-    const res = await fetch('https://ipapi.co/' + input + '/json/');
+    const res = await fetchWithTimeout('https://ipwho.is/' + input, 6000);
     const data = await res.json();
-    if(data.error){
+    if(!data || data.success === false){
       out.textContent = "IP não encontrado ou inválido.";
       return;
     }
@@ -727,11 +761,27 @@ async function lookupIp(){
       "IP: " + (data.ip || input) + "\n" +
       "Cidade: " + (data.city || "—") + "\n" +
       "Região: " + (data.region || "—") + "\n" +
-      "País: " + (data.country_name || "—") + "\n" +
-      "Provedor: " + (data.org || "—");
+      "País: " + (data.country || "—") + "\n" +
+      "Provedor: " + ((data.connection && (data.connection.isp || data.connection.org)) || "—");
     out.style.whiteSpace = "pre-line";
-  } catch(err){
-    out.textContent = "Não foi possível consultar este IP agora. Tente novamente em instantes.";
+  } catch(err1){
+    try{
+      const res2 = await fetchWithTimeout('https://ipapi.co/' + input + '/json/', 6000);
+      const data2 = await res2.json();
+      if(data2.error){
+        out.textContent = "IP não encontrado ou inválido.";
+        return;
+      }
+      out.innerHTML =
+        "IP: " + (data2.ip || input) + "\n" +
+        "Cidade: " + (data2.city || "—") + "\n" +
+        "Região: " + (data2.region || "—") + "\n" +
+        "País: " + (data2.country_name || "—") + "\n" +
+        "Provedor: " + (data2.org || "—");
+      out.style.whiteSpace = "pre-line";
+    } catch(err2){
+      out.textContent = "Não foi possível consultar este IP agora. Tente novamente em instantes.";
+    }
   }
 }
 document.getElementById('lookupIpBtn').addEventListener('click', lookupIp);
