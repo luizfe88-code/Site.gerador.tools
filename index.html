@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerador.tools — Senha, QR Code e CPF/CNPJ de teste</title>
-<meta name="description" content="Ferramentas gratuitas e instantâneas: gerador de senha segura, gerador de QR Code, gerador de CPF/CNPJ válido para testes e consulta de IP público.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Utilix — Senha, QR Code, CPF/CNPJ e consulta de IP grátis</title>
+<meta name="description" content="Ferramentas gratuitas e instantâneas de segurança e produtividade: gerador de senha segura, gerador de QR Code, gerador de CPF/CNPJ para teste e consulta de IP público.">
+<link rel="canonical" href="https://utilix.seg.br/">
+<meta property="og:title" content="Utilix — ferramentas gratuitas de segurança e produtividade">
+<meta property="og:description" content="Gerador de senha, QR Code, CPF/CNPJ de teste e consulta de IP — tudo grátis, sem cadastro, direto no navegador.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://utilix.seg.br/">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -143,6 +149,8 @@
   #qrcode .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
   #cpf .badge{background:rgba(124,197,118,0.12);color:var(--green);}
   #ip .badge{background:rgba(255,106,53,0.12);color:var(--orange);}
+  #forca .badge{background:rgba(226,87,76,0.12);color:#e2574c;}
+  #link .badge{background:rgba(63,186,194,0.12);color:var(--teal);}
   .tool-head h2{margin:0;font-size:26px;}
 
   .panel{
@@ -305,18 +313,59 @@
   .conn-badge.residential{background:rgba(124,197,118,0.14);color:var(--green);}
   .conn-badge.hosting{background:rgba(255,106,53,0.14);color:var(--orange);}
   .conn-badge.unknown{background:rgba(139,144,151,0.14);color:var(--muted);}
+
+  /* ===== verificador de força de senha ===== */
+  .crack-time{
+    text-align:center;
+    padding:22px;
+  }
+  .crack-time .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+  .crack-time .v{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;margin-top:8px;}
+  .signal-list{list-style:none;margin:16px 0 0;padding:0;}
+  .signal-list li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:13px;color:var(--text);
+    padding:8px 0;border-top:1px solid var(--line);
+  }
+  .signal-list li:first-child{border-top:none;}
+  .signal-icon{
+    flex-shrink:0;width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;margin-top:1px;
+  }
+  .signal-icon.ok{background:rgba(124,197,118,0.16);color:var(--green);}
+  .signal-icon.warn{background:rgba(255,106,53,0.16);color:var(--orange);}
+  .signal-icon.bad{background:rgba(226,87,76,0.16);color:#e2574c;}
+  .toggle-pw{
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    font-size:12px;padding:9px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;
+  }
+  .pw-input-row{display:flex;gap:8px;}
+  .pw-input-row input{flex:1;}
+
+  /* ===== verificador de link ===== */
+  .risk-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;
+    padding:8px 14px;border-radius:8px;margin-bottom:16px;
+  }
+  .risk-badge.low{background:rgba(124,197,118,0.14);color:var(--green);}
+  .risk-badge.medium{background:rgba(255,106,53,0.14);color:var(--orange);}
+  .risk-badge.high{background:rgba(226,87,76,0.14);color:#e2574c;}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap top-row">
-    <div class="brand"><span class="dot"></span>gerador.tools</div>
+    <div class="brand"><span class="dot"></span>Utilix</div>
     <nav class="tools-nav">
       <a href="#senha">Senha</a>
+      <a href="#forca">Força de senha</a>
       <a href="#qrcode">QR Code</a>
       <a href="#cpf">CPF/CNPJ teste</a>
       <a href="#ip">Meu IP</a>
+      <a href="#link">Link suspeito</a>
     </nav>
   </div>
 </header>
@@ -355,6 +404,16 @@
       <div class="tag">Segurança</div>
       <h3>Consultar IP</h3>
       <p>Veja seu IP público, localização e provedor — ou consulte o IP de qualquer endereço.</p>
+    </a>
+    <a class="index-card" href="#forca">
+      <div class="tag">Segurança</div>
+      <h3>Força da minha senha</h3>
+      <p>Veja o tempo estimado pra quebrar sua senha e se ela já apareceu em algum vazamento.</p>
+    </a>
+    <a class="index-card" href="#link">
+      <div class="tag">Segurança</div>
+      <h3>Link é golpe?</h3>
+      <p>Cole um link suspeito e veja sinais de phishing antes de clicar.</p>
     </a>
   </div>
   <section class="tool" id="senha">
@@ -398,7 +457,7 @@
     <div class="panel grid-2">
       <div>
         <label for="qrInput">Link ou texto</label>
-        <input type="text" id="qrInput" placeholder="https://exemplo.com.br" value="https://gerador.tools">
+        <input type="text" id="qrInput" placeholder="https://exemplo.com.br" value="https://utilix.seg.br">
         <div class="row" style="margin-top:20px;">
           <label style="margin:0;">Tamanho: <strong id="qrSizeOut" class="mono" style="color:var(--text)">240px</strong></label>
         </div>
@@ -496,11 +555,75 @@
 
   <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
 
+  <!-- ================= FORÇA DE SENHA ================= -->
+  <section class="tool" id="forca">
+    <div class="tool-head"><span class="badge">05 — segurança</span><h2>Sua senha é segura?</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label for="pwCheckInput">Digite uma senha que você usa</label>
+        <div class="pw-input-row">
+          <input type="password" id="pwCheckInput" placeholder="Sua senha aqui">
+          <button class="toggle-pw" id="togglePwBtn">Mostrar</button>
+        </div>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px;">
+          Tudo é calculado no seu navegador. A senha não é enviada para nenhum lugar — apenas no passo de checagem de vazamento, é enviado um trecho parcial e anônimo de um hash (explicado abaixo).
+        </p>
+        <button class="action" id="checkBreachBtn" style="background:#e2574c;">Verificar se já vazou</button>
+        <div id="breachResult" style="margin-top:14px;font-size:13px;color:var(--muted);"></div>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="crack-time">
+            <div class="k">tempo estimado para quebrar</div>
+            <div class="v" id="crackTimeOut" style="color:var(--muted);">digite uma senha ao lado</div>
+          </div>
+          <ul class="signal-list" id="pwSignalList"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="seo-text">
+      <p>O tempo que um criminoso leva para descobrir uma senha por tentativa e erro depende diretamente do tamanho e da variedade de caracteres usados. Senhas curtas ou baseadas em palavras comuns podem ser quebradas em segundos por programas especializados, mesmo que pareçam complexas à primeira vista. Esta ferramenta estima esse tempo localmente, sem enviar sua senha para nenhum servidor.</p>
+      <p>A checagem de vazamento usa a base pública de vazamentos do Have I Been Pwned, consultada de forma segura: seu navegador calcula um hash da senha e envia apenas os 5 primeiros caracteres desse hash — nunca a senha em si, nem o hash completo — para verificar se ela já apareceu em algum banco de dados vazado.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= VERIFICADOR DE LINK ================= -->
+  <section class="tool" id="link">
+    <div class="tool-head"><span class="badge">06 — segurança</span><h2>Esse link é golpe?</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label for="linkCheckInput">Cole o link suspeito</label>
+        <input type="text" id="linkCheckInput" placeholder="https://exemplo.com/promocao">
+        <button class="action" id="checkLinkBtn" style="background:var(--teal);">Analisar link</button>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:16px;">
+          Análise heurística baseada em padrões comuns de phishing. Não é uma garantia de segurança nem substitui um antivírus — é um indicador educativo para ajudar a identificar sinais de alerta.
+        </p>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">resultado da análise</div>
+          <div id="linkRiskBadge"></div>
+          <ul class="signal-list" id="linkSignalList">
+            <li style="border-top:none;color:var(--muted);">Cole um link ao lado e clique em analisar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="seo-text">
+      <p>Golpes de phishing costumam usar links que imitam endereços conhecidos — trocando uma letra, adicionando um subdomínio enganoso, ou usando encurtadores para esconder o destino real. Reconhecer esses sinais antes de clicar é uma das formas mais eficazes de evitar fraudes envolvendo bancos, lojas online e redes sociais.</p>
+      <p>Esta ferramenta verifica o link em busca de sinais comuns de phishing: ausência de conexão segura (HTTPS), uso de endereço IP no lugar de um domínio, semelhança suspeita com marcas conhecidas, encurtadores de URL e outros padrões associados a golpes. O resultado é educativo — sempre desconfie de links recebidos por mensagem pedindo dados pessoais ou senhas, mesmo que pareçam seguros.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© <span id="year"></span> gerador.tools — ferramentas gratuitas, sem coleta de dados.</span>
+    <span>© <span id="year"></span> utilix.seg.br — ferramentas gratuitas, sem coleta de dados.</span>
     <span>Senha, QR Code e CPF/CNPJ de teste em um só lugar.</span>
   </div>
 </footer>
@@ -598,7 +721,7 @@ qrSizeRange.addEventListener('input', ()=> qrSizeOut.textContent = qrSizeRange.v
 
 let qrInstance = null;
 function generateQr(){
-  const text = document.getElementById('qrInput').value || "https://gerador.tools";
+  const text = document.getElementById('qrInput').value || "https://utilix.seg.br";
   const size = parseInt(qrSizeRange.value,10);
   const target = document.getElementById('qrcode-render');
   target.innerHTML = "";
@@ -830,6 +953,260 @@ async function lookupIp(){
 document.getElementById('lookupIpBtn').addEventListener('click', lookupIp);
 document.getElementById('ipLookupInput').addEventListener('keypress', (e)=>{
   if(e.key === 'Enter') lookupIp();
+});
+
+/* ===================== VERIFICADOR DE FORÇA DE SENHA ===================== */
+const pwCheckInput = document.getElementById('pwCheckInput');
+const toggleBtn = document.getElementById('togglePwBtn');
+toggleBtn.addEventListener('click', ()=>{
+  const isPw = pwCheckInput.type === 'password';
+  pwCheckInput.type = isPw ? 'text' : 'password';
+  toggleBtn.textContent = isPw ? 'Ocultar' : 'Mostrar';
+});
+
+const COMMON_PASSWORDS = ['123456','password','senha','senha123','12345678','123456789','qwerty',
+  'abc123','111111','123123','admin','letmein','welcome','iloveyou','000000','1q2w3e4r',
+  'brasil','futebol','vasco','flamengo','corinthians','palmeiras','12345','1234','master'];
+
+function analyzePassword(pw){
+  const signals = [];
+  let charsetSize = 0;
+  if(/[a-z]/.test(pw)) charsetSize += 26;
+  if(/[A-Z]/.test(pw)) charsetSize += 26;
+  if(/[0-9]/.test(pw)) charsetSize += 10;
+  if(/[^a-zA-Z0-9]/.test(pw)) charsetSize += 32;
+  if(charsetSize === 0) charsetSize = 1;
+
+  const len = pw.length;
+  const entropy = len * Math.log2(charsetSize);
+
+  const isCommon = COMMON_PASSWORDS.includes(pw.toLowerCase());
+  const isSequential = /(?:012|123|234|345|456|567|678|789|abc|bcd|cde|qwe|wer|asd)/i.test(pw);
+  const isRepeated = /(.)\1{2,}/.test(pw);
+
+  let effectiveEntropy = entropy;
+  if(isCommon) effectiveEntropy = 0;
+  else if(isSequential || isRepeated) effectiveEntropy = Math.min(entropy, 20);
+
+  // Cenário: ataque offline, ~10 bilhões de tentativas por segundo (hash rápido)
+  const guessesPerSecond = 1e10;
+  const seconds = Math.pow(2, effectiveEntropy) / 2 / guessesPerSecond;
+
+  signals.push({ ok: len >= 12, label: len >= 12 ? "Tamanho adequado (12+ caracteres)" : "Senha curta — use pelo menos 12 caracteres" });
+  signals.push({ ok: /[A-Z]/.test(pw) && /[a-z]/.test(pw), label: (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) ? "Mistura maiúsculas e minúsculas" : "Adicione letras maiúsculas e minúsculas" });
+  signals.push({ ok: /[0-9]/.test(pw), label: /[0-9]/.test(pw) ? "Contém números" : "Adicione números" });
+  signals.push({ ok: /[^a-zA-Z0-9]/.test(pw), label: /[^a-zA-Z0-9]/.test(pw) ? "Contém símbolos" : "Adicione símbolos (!@#$%)" });
+  signals.push({ ok: !isCommon, label: isCommon ? "Está entre as senhas mais usadas do mundo — extremamente fraca" : "Não é uma senha óbvia/comum" });
+  signals.push({ ok: !isSequential && !isRepeated, label: (isSequential || isRepeated) ? "Contém sequência ou repetição previsível" : "Sem sequências ou repetições óbvias" });
+
+  return { seconds, signals };
+}
+
+function formatCrackTime(seconds){
+  if(seconds < 1) return { text: "instantâneo", level: "bad" };
+  if(seconds < 60) return { text: Math.round(seconds) + " segundos", level: "bad" };
+  if(seconds < 3600) return { text: Math.round(seconds/60) + " minutos", level: "bad" };
+  if(seconds < 86400) return { text: Math.round(seconds/3600) + " horas", level: "warn" };
+  if(seconds < 31536000) return { text: Math.round(seconds/86400) + " dias", level: "warn" };
+  const years = seconds/31536000;
+  if(years < 100) return { text: Math.round(years) + " anos", level: "ok" };
+  if(years < 1e6) return { text: Math.round(years).toLocaleString('pt-BR') + " anos", level: "ok" };
+  return { text: "milhões de anos", level: "ok" };
+}
+
+function renderPasswordCheck(){
+  const pw = pwCheckInput.value;
+  const out = document.getElementById('crackTimeOut');
+  const list = document.getElementById('pwSignalList');
+
+  if(!pw){
+    out.textContent = "digite uma senha ao lado";
+    out.style.color = "var(--muted)";
+    list.innerHTML = "";
+    return;
+  }
+
+  const { seconds, signals } = analyzePassword(pw);
+  const formatted = formatCrackTime(seconds);
+  out.textContent = formatted.text;
+  out.style.color = formatted.level === 'ok' ? 'var(--green)' : (formatted.level === 'warn' ? 'var(--orange)' : '#e2574c');
+
+  list.innerHTML = signals.map(s => `
+    <li>
+      <span class="signal-icon ${s.ok ? 'ok' : 'warn'}">${s.ok ? '✓' : '!'}</span>
+      <span>${s.label}</span>
+    </li>
+  `).join('');
+}
+pwCheckInput.addEventListener('input', renderPasswordCheck);
+
+async function sha1Hex(str){
+  const enc = new TextEncoder().encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-1', enc);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+
+document.getElementById('checkBreachBtn').addEventListener('click', async ()=>{
+  const pw = pwCheckInput.value;
+  const resultEl = document.getElementById('breachResult');
+  if(!pw){
+    resultEl.textContent = "Digite uma senha primeiro.";
+    resultEl.style.color = "var(--muted)";
+    return;
+  }
+  resultEl.textContent = "Verificando...";
+  resultEl.style.color = "var(--muted)";
+
+  try{
+    const hash = await sha1Hex(pw);
+    const prefix = hash.slice(0,5);
+    const suffix = hash.slice(5);
+    const res = await fetchWithTimeout('https://api.pwnedpasswords.com/range/' + prefix, 6000);
+    const text = await res.text();
+    const lines = text.split('\n');
+    let found = null;
+    for(const line of lines){
+      const [lineSuffix, count] = line.trim().split(':');
+      if(lineSuffix === suffix){ found = parseInt(count,10); break; }
+    }
+    if(found){
+      resultEl.innerHTML = `⚠️ Esta senha apareceu em <strong style="color:#e2574c;">${found.toLocaleString('pt-BR')}</strong> vazamentos conhecidos. Troque-a o quanto antes.`;
+      resultEl.style.color = "#e2574c";
+    } else {
+      resultEl.innerHTML = `✓ Esta senha não foi encontrada em vazamentos conhecidos até o momento.`;
+      resultEl.style.color = "var(--green)";
+    }
+  } catch(err){
+    resultEl.textContent = "Não foi possível verificar agora. Tente novamente em instantes.";
+    resultEl.style.color = "var(--muted)";
+  }
+});
+
+/* ===================== VERIFICADOR DE LINK SUSPEITO ===================== */
+const KNOWN_SHORTENERS = ['bit.ly','tinyurl.com','t.co','goo.gl','is.gd','ow.ly','cutt.ly','rebrand.ly','shorturl.at'];
+const OFFICIAL_DOMAINS = {
+  google: ['google.com'], facebook: ['facebook.com'], instagram: ['instagram.com'],
+  whatsapp: ['whatsapp.com'], paypal: ['paypal.com'], amazon: ['amazon.com.br','amazon.com'],
+  mercadolivre: ['mercadolivre.com.br'], nubank: ['nubank.com.br'], itau: ['itau.com.br'],
+  bradesco: ['bradesco.com.br'], santander: ['santander.com.br'], caixa: ['caixa.gov.br'],
+  bancodobrasil: ['bb.com.br'], correios: ['correios.com.br'], netflix: ['netflix.com'],
+  apple: ['apple.com'], microsoft: ['microsoft.com']
+};
+const ALL_BRANDS = Object.keys(OFFICIAL_DOMAINS);
+
+function isOfficialDomain(host, officialList){
+  return officialList.some(d => host === d || host.endsWith('.' + d));
+}
+
+function levenshtein(a, b){
+  const m = [];
+  for(let i=0;i<=b.length;i++) m[i] = [i];
+  for(let j=0;j<=a.length;j++) m[0][j] = j;
+  for(let i=1;i<=b.length;i++){
+    for(let j=1;j<=a.length;j++){
+      if(b.charAt(i-1) === a.charAt(j-1)){ m[i][j] = m[i-1][j-1]; }
+      else { m[i][j] = Math.min(m[i-1][j-1]+1, m[i][j-1]+1, m[i-1][j]+1); }
+    }
+  }
+  return m[b.length][a.length];
+}
+
+function analyzeLink(rawUrl){
+  const signals = [];
+  let url;
+  let normalized = rawUrl.trim();
+  if(!/^https?:\/\//i.test(normalized)) normalized = 'http://' + normalized;
+
+  try{ url = new URL(normalized); }
+  catch(e){ return { error: true, signals: [{ ok:false, label:"Link inválido — verifique se foi colado corretamente" }] }; }
+
+  const host = url.hostname.toLowerCase();
+  let riskScore = 0;
+
+  const isHttps = url.protocol === 'https:';
+  signals.push({ ok: isHttps, label: isHttps ? "Usa conexão segura (HTTPS)" : "Não usa HTTPS — conexão não criptografada" });
+  if(!isHttps) riskScore += 1;
+
+  const isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(host);
+  signals.push({ ok: !isIp, label: isIp ? "Usa endereço IP em vez de um domínio — comum em golpes" : "Usa domínio normal (não é um IP)" });
+  if(isIp) riskScore += 2;
+
+  const hasAt = rawUrl.includes('@');
+  signals.push({ ok: !hasAt, label: hasAt ? "Contém '@' no link — técnica usada para esconder o destino real" : "Não usa truque de '@' no endereço" });
+  if(hasAt) riskScore += 2;
+
+  const isPunycode = host.includes('xn--');
+  signals.push({ ok: !isPunycode, label: isPunycode ? "Usa caracteres especiais disfarçados (punycode) — possível imitação visual de outro site" : "Sem caracteres disfarçados no domínio" });
+  if(isPunycode) riskScore += 2;
+
+  const isShortener = KNOWN_SHORTENERS.some(s => host === s || host.endsWith('.'+s));
+  signals.push({ ok: !isShortener, label: isShortener ? "É um link encurtado — o destino real está escondido" : "Não é um encurtador de link conhecido" });
+  if(isShortener) riskScore += 1;
+
+  const subdomainCount = host.split('.').length - 2;
+  const tooManySubdomains = subdomainCount >= 3;
+  signals.push({ ok: !tooManySubdomains, label: tooManySubdomains ? "Tem muitos subdomínios — pode ser usado para disfarçar o domínio real" : "Estrutura de domínio normal" });
+  if(tooManySubdomains) riskScore += 1;
+
+  let lookalike = null;
+  let isOfficial = false;
+  for(const brand of ALL_BRANDS){
+    if(isOfficialDomain(host, OFFICIAL_DOMAINS[brand])){ isOfficial = true; break; }
+  }
+
+  if(!isOfficial){
+    const mainPart = host.replace(/^www\./,'').split('.')[0];
+    for(const brand of ALL_BRANDS){
+      // Marca mencionada dentro de um domínio que não é o oficial = sinal forte de phishing
+      if(host.includes(brand)){ lookalike = brand; break; }
+      // Nome parecido (erro de digitação proposital) mesmo sem conter a marca exata
+      const dist = levenshtein(mainPart, brand);
+      if(dist > 0 && dist <= 2 && Math.abs(mainPart.length - brand.length) <= 2){
+        lookalike = brand;
+        break;
+      }
+    }
+  }
+  signals.push({ ok: !lookalike, label: lookalike ? `Domínio usa ou imita o nome "${lookalike}", mas não é o domínio oficial — sinal forte de phishing` : "Não se parece com nenhuma marca conhecida imitada" });
+  if(lookalike) riskScore += 3;
+
+  let level = 'low';
+  if(riskScore >= 4) level = 'high';
+  else if(riskScore >= 1) level = 'medium';
+
+  return { error: false, signals, level, host };
+}
+
+document.getElementById('checkLinkBtn').addEventListener('click', ()=>{
+  const input = document.getElementById('linkCheckInput').value;
+  const badgeEl = document.getElementById('linkRiskBadge');
+  const list = document.getElementById('linkSignalList');
+
+  if(!input.trim()){
+    badgeEl.innerHTML = "";
+    list.innerHTML = '<li style="border-top:none;color:var(--muted);">Cole um link ao lado e clique em analisar</li>';
+    return;
+  }
+
+  const result = analyzeLink(input);
+
+  if(result.error){
+    badgeEl.innerHTML = "";
+    list.innerHTML = result.signals.map(s => `<li style="border-top:none;color:#e2574c;">${s.label}</li>`).join('');
+    return;
+  }
+
+  const levelLabels = { low: "Baixo risco aparente", medium: "Sinais de atenção", high: "Vários sinais de alerta" };
+  badgeEl.innerHTML = `<div class="risk-badge ${result.level}">${levelLabels[result.level]}</div>`;
+  list.innerHTML = result.signals.map(s => `
+    <li>
+      <span class="signal-icon ${s.ok ? 'ok' : (result.level === 'high' ? 'bad' : 'warn')}">${s.ok ? '✓' : '!'}</span>
+      <span>${s.label}</span>
+    </li>
+  `).join('');
+});
+document.getElementById('linkCheckInput').addEventListener('keypress', (e)=>{
+  if(e.key === 'Enter') document.getElementById('checkLinkBtn').click();
 });
 </script>
 
