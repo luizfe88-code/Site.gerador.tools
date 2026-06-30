@@ -370,6 +370,41 @@
     border-radius:3px;padding:0 3px;font-weight:600;
   }
   .phish-card .why-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+
+  /* ===== layout com sidebar de blog ===== */
+  .page-shell{
+    max-width:1320px;margin:0 auto;padding:0 24px;
+    display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:40px;align-items:start;
+  }
+  .side-rail{
+    position:sticky;top:90px;
+    display:flex;flex-direction:column;gap:14px;
+    padding-top:64px;
+  }
+  .side-rail .rail-title{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;
+  }
+  .side-rail .rail-post{
+    display:block;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--text);
+    transition:border-color .15s ease;
+  }
+  .side-rail .rail-post:hover{border-color:var(--teal);}
+  .side-rail .rail-post .rail-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);
+    text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;
+  }
+  .side-rail .rail-post h4{margin:0;font-size:13px;line-height:1.4;color:var(--text);font-weight:600;}
+  .side-rail .rail-all{
+    text-align:center;font-size:12px;color:var(--muted);text-decoration:none;
+    padding:8px;border-top:1px solid var(--line);margin-top:4px;
+  }
+  .side-rail .rail-all:hover{color:var(--text);}
+  @media (max-width:1180px){
+    .page-shell{grid-template-columns:1fr;}
+    .side-rail{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -389,6 +424,7 @@
   </div>
 </header>
 
+<div class="page-shell">
 <main class="wrap">
 
   <section class="hero">
@@ -686,6 +722,47 @@
   </div>
 
 </main>
+
+<aside class="side-rail">
+  <div class="rail-title">do blog</div>
+
+  <a class="rail-post" href="blog/recebi-pix-nao-pedi-e-golpe.html">
+    <div class="rail-tag">Pix</div>
+    <h4>Recebi um Pix que não pedi: é golpe?</h4>
+  </a>
+  <a class="rail-post" href="blog/golpe-codigo-whatsapp.html">
+    <div class="rail-tag">WhatsApp</div>
+    <h4>Golpe do código do WhatsApp: como se proteger</h4>
+  </a>
+  <a class="rail-post" href="blog/golpe-falso-suporte-bancario.html">
+    <div class="rail-tag">Engenharia social</div>
+    <h4>Golpe do falso suporte técnico/bancário</h4>
+  </a>
+  <a class="rail-post" href="blog/senha-forte-que-voce-lembra.html">
+    <div class="rail-tag">Senhas</div>
+    <h4>Como criar uma senha forte que você lembra</h4>
+  </a>
+  <a class="rail-post" href="blog/minha-senha-vazou-o-que-fazer.html">
+    <div class="rail-tag">Vazamento</div>
+    <h4>Minha senha vazou? O que fazer</h4>
+  </a>
+  <a class="rail-post" href="blog/como-identificar-phishing.html">
+    <div class="rail-tag">Phishing</div>
+    <h4>Como saber se um link é phishing</h4>
+  </a>
+  <a class="rail-post" href="blog/o-que-e-vpn-vale-a-pena.html">
+    <div class="rail-tag">Privacidade</div>
+    <h4>O que é VPN e vale a pena usar?</h4>
+  </a>
+  <a class="rail-post" href="blog/wifi-publico-e-seguro.html">
+    <div class="rail-tag">Redes públicas</div>
+    <h4>Wi-Fi público é seguro?</h4>
+  </a>
+
+  <a class="rail-all" href="blog/index.html">Ver todos os posts →</a>
+</aside>
+
+</div>
 
 <footer>
   <div class="wrap">
