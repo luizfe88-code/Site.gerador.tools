@@ -54,7 +54,7 @@
     z-index:50;
   }
   .top-row{display:flex;align-items:center;justify-content:space-between;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;text-decoration:none;color:var(--text);}
   .brand .dot{width:10px;height:10px;background:var(--orange);border-radius:2px;transform:rotate(45deg);}
   nav.tools-nav{display:flex;gap:6px;}
   nav.tools-nav a{
@@ -427,7 +427,7 @@
 
 <header class="top">
   <div class="wrap top-row">
-    <div class="brand"><span class="dot"></span>Utilix</div>
+    <a class="brand" href="#"><span class="dot"></span>Utilix</a>
     <nav class="tools-nav">
       <a href="#senha">Senha</a>
       <a href="#forca">Força de senha</a>
