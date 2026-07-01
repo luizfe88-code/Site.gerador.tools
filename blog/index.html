@@ -174,71 +174,69 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// normaliza texto: minúsculo, sem acento
-function normalize(str){
-  return str.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^\w\s]/g,' ');
-}
+(function(){
+  const searchEl  = document.getElementById('searchInput');
+  const clearBtn  = document.getElementById('searchClear');
+  const searchIco = document.getElementById('searchIcon');
+  const countEl   = document.getElementById('searchCount');
+  const noResEl   = document.getElementById('noResults');
+  const noTermEl  = document.getElementById('noResultsTerm');
+  const allCards  = Array.from(document.querySelectorAll('.post-card'));
 
-const input  = document.getElementById('searchInput');
-const clear  = document.getElementById('searchClear');
-const icon   = document.getElementById('searchIcon');
-const count  = document.getElementById('searchCount');
-const noRes  = document.getElementById('noResults');
-const noTerm = document.getElementById('noResultsTerm');
-const cards  = Array.from(document.querySelectorAll('.post-card'));
-
-// indexa cada card
-const index = cards.map(card => ({
-  card,
-  text: normalize([
-    card.querySelector('h2')?.textContent || '',
-    card.querySelector('p')?.textContent  || '',
-    card.querySelector('.tag')?.textContent || '',
-    card.dataset.search || ''
-  ].join(' '))
-}));
-
-function search(){
-  const q = normalize(input.value.trim());
-
-  // limpa resultado anterior
-  noRes.style.display = 'none';
-  clear.style.display = q ? 'block' : 'none';
-  icon.style.display  = q ? 'none'  : 'block';
-
-  if(!q){
-    cards.forEach(c => c.classList.remove('hidden'));
-    count.innerHTML = '';
-    return;
+  function norm(str){
+    return str.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9\s]/g,' ');
   }
 
-  const terms = q.split(/\s+/).filter(Boolean);
-  let visible = 0;
+  const indexed = allCards.map(card => ({
+    card,
+    text: norm([
+      card.querySelector('h2') ? card.querySelector('h2').textContent : '',
+      card.querySelector('p')  ? card.querySelector('p').textContent  : '',
+      card.querySelector('.tag') ? card.querySelector('.tag').textContent : '',
+      card.getAttribute('data-search') || ''
+    ].join(' '))
+  }));
 
-  index.forEach(({card, text}) => {
-    const match = terms.every(t => text.includes(t));
-    card.classList.toggle('hidden', !match);
-    if(match) visible++;
+  function runSearch(){
+    var q = norm(searchEl.value.trim());
+
+    noResEl.style.display  = 'none';
+    clearBtn.style.display = q ? 'block' : 'none';
+    searchIco.style.display = q ? 'none' : 'block';
+
+    if(!q){
+      allCards.forEach(function(c){ c.classList.remove('hidden'); });
+      countEl.innerHTML = '';
+      return;
+    }
+
+    var terms = q.split(/\s+/).filter(Boolean);
+    var visible = 0;
+
+    indexed.forEach(function(item){
+      var match = terms.every(function(t){ return item.text.indexOf(t) !== -1; });
+      item.card.classList.toggle('hidden', !match);
+      if(match) visible++;
+    });
+
+    if(visible === 0){
+      noResEl.style.display = 'block';
+      noTermEl.textContent = searchEl.value.trim();
+      countEl.innerHTML = '';
+    } else {
+      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + searchEl.value.trim() + '</span>"';
+    }
+  }
+
+  searchEl.addEventListener('input', runSearch);
+  clearBtn.addEventListener('click', function(){
+    searchEl.value = '';
+    runSearch();
+    searchEl.focus();
   });
-
-  if(visible === 0){
-    noRes.style.display = 'block';
-    noTerm.textContent = input.value.trim();
-    count.innerHTML = '';
-  } else {
-    count.innerHTML = `<span>${visible}</span> resultado${visible !== 1 ? 's' : ''} para "<span>${input.value.trim()}</span>"`;
-  }
-}
-
-input.addEventListener('input', search);
-
-clear.addEventListener('click', ()=>{
-  input.value = '';
-  search();
-  input.focus();
-});
+})();
 </script>
 </body>
 </html>
