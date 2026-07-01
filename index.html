@@ -118,7 +118,8 @@
 
   /* ===== tool index rail ===== */
   .index-rail{
-    display:flex;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
     gap:1px;
     margin:48px 0 0;
     border-top:1px solid var(--line);
@@ -126,7 +127,6 @@
     padding-top:0;
   }
   .index-card{
-    flex:1;
     background:var(--bg);
     border:none;
     border-radius:0;
@@ -149,6 +149,7 @@
   }
   .index-card h3{margin:8px 0 6px;font-size:15px;color:#c8c5bc;transition:color .15s;}
   .index-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;font-family:'JetBrains Mono',monospace;}
+  @media(max-width:900px){.index-rail{grid-template-columns:repeat(2,1fr);}}
 
   /* ===== tool sections ===== */
   section.tool{
@@ -180,7 +181,7 @@
     padding:28px;
   }
   .grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;}
-  @media (max-width:760px){.grid-2{grid-template-columns:1fr;} .index-rail{flex-direction:column;}}
+  @media (max-width:760px){.grid-2{grid-template-columns:1fr;}}
 
   /* controls */
   label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;}
@@ -558,7 +559,6 @@
       <h3>Exemplos de golpe</h3>
       <p>mensagens reais com as partes suspeitas explicadas</p>
     </a>
-  </div>
     <a class="index-card" href="#pin">
       <div class="tag">07_PIN</div>
       <h3>Gerador de PIN seguro</h3>
@@ -574,7 +574,7 @@
     <div class="tool-head"><span class="badge">01 — senha</span><h2>Gerador de senha segura</h2></div>
 
     <!-- toggle de modo -->
-    <div style="display:flex;gap:8px;margin-bottom:20px;">
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
       <button id="modeAlfa" onclick="setMode('alfa')" style="flex:1;padding:10px;border-radius:6px;border:1px solid var(--orange);background:rgba(0,255,136,0.12);color:var(--orange);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;">[ ALFANUMÉRICA ]</button>
       <button id="modeFrase" onclick="setMode('frase')" style="flex:1;padding:10px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;">[ FRASE-SENHA ]</button>
     </div>
