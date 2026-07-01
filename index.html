@@ -17,15 +17,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   :root{
-    --bg: #15181b;
-    --panel: #1d2125;
-    --panel-2: #23282d;
-    --line: #32383e;
-    --text: #ece9e2;
-    --muted: #8b9097;
-    --orange: #ff6a35;
-    --teal: #3fbac2;
-    --green: #7cc576;
+    --bg: #0a0c0f;
+    --panel: #0d110d;
+    --panel-2: #070909;
+    --line: #1a2a1a;
+    --text: #e8e5dc;
+    --muted: #4a7a5a;
+    --orange: #00ff88;
+    --teal: #00e5ff;
+    --green: #00ff88;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -49,23 +49,32 @@
     border-bottom:1px solid var(--line);
     padding:18px 0;
     position:sticky;top:0;
-    background:rgba(21,24,27,0.92);
+    background:rgba(10,12,15,0.95);
     backdrop-filter:blur(6px);
     z-index:50;
   }
-  .top-row{display:flex;align-items:center;justify-content:space-between;}
+  .top-row{display:flex;align-items:center;gap:28px;}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;text-decoration:none;color:var(--text);}
   .brand .dot{width:10px;height:10px;background:var(--orange);border-radius:2px;transform:rotate(45deg);}
-  nav.tools-nav{display:flex;gap:6px;}
+  nav.tools-nav{display:flex;gap:4px;}
   nav.tools-nav a{
     color:var(--muted);
     text-decoration:none;
-    font-size:13px;
-    padding:7px 12px;
-    border-radius:6px;
-    border:1px solid transparent;
+    font-size:11px;
+    font-family:'JetBrains Mono',monospace;
+    padding:6px 11px;
+    border-radius:5px;
+    border:1px solid #1a2a1a;
+    background:#0d110d;
+    box-shadow:0 1px 0 #000, inset 0 1px 0 rgba(255,255,255,0.03);
+    transition:color .12s, border-color .12s, background .12s;
   }
-  nav.tools-nav a:hover{color:var(--text);border-color:var(--line);}
+  nav.tools-nav a:hover{
+    color:var(--orange);
+    border-color:#2a4a2a;
+    background:#101810;
+    box-shadow:0 1px 0 #000, inset 0 1px 0 rgba(0,255,136,0.06);
+  }
 
   /* ===== hero ===== */
   .hero{padding:64px 0 40px;}
@@ -77,59 +86,70 @@
     text-transform:uppercase;
     margin-bottom:14px;
   }
+  .eyebrow::before{content:'> ';opacity:0.5;}
   .hero h1{
     font-size:clamp(32px,5vw,52px);
     line-height:1.05;
     margin:0 0 18px;
     max-width:760px;
   }
+  .hero h1 .hl{color:var(--orange);}
   .hero p{
     color:var(--muted);
-    font-size:17px;
+    font-size:15px;
+    font-family:'JetBrains Mono',monospace;
     max-width:560px;
     line-height:1.6;
     margin:0 0 30px;
   }
+  .hero p::before{content:'// ';opacity:0.5;}
   .hero-tags{display:flex;gap:10px;flex-wrap:wrap;}
   .hero-tags span{
     font-family:'JetBrains Mono',monospace;
     font-size:12px;
-    color:var(--muted);
-    border:1px dashed var(--line);
+    color:var(--orange);
+    border:1px solid var(--line);
+    background:rgba(0,255,136,0.04);
     padding:6px 10px;
-    border-radius:6px;
+    border-radius:4px;
   }
+  .hero-tags span::before{content:'[ ';}
+  .hero-tags span::after{content:' ]';}
 
   /* ===== tool index rail ===== */
   .index-rail{
-    display:flex;
-    gap:12px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
     margin:48px 0 0;
     border-top:1px solid var(--line);
+    background:var(--line);
     padding-top:0;
   }
   .index-card{
-    flex:1;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:10px;
+    background:var(--bg);
+    border:none;
+    border-radius:0;
     padding:20px;
     cursor:pointer;
-    transition:border-color .15s ease, transform .15s ease;
+    transition:background .15s ease;
     text-decoration:none;
     color:var(--text);
     display:block;
   }
-  .index-card:hover{border-color:var(--orange);transform:translateY(-2px);}
+  .index-card:hover{background:rgba(0,255,136,0.04);}
+  .index-card:hover h3{color:var(--orange);}
   .index-card .tag{
     font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--orange);
+    font-size:10px;
+    color:#1a4a2a;
     text-transform:uppercase;
-    letter-spacing:.06em;
+    letter-spacing:.08em;
+    margin-bottom:8px;
   }
-  .index-card h3{margin:8px 0 6px;font-size:18px;}
-  .index-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;}
+  .index-card h3{margin:8px 0 6px;font-size:15px;color:#c8c5bc;transition:color .15s;}
+  .index-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;font-family:'JetBrains Mono',monospace;}
+  @media(max-width:900px){.index-rail{grid-template-columns:repeat(2,1fr);}}
 
   /* ===== tool sections ===== */
   section.tool{
@@ -161,7 +181,7 @@
     padding:28px;
   }
   .grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;}
-  @media (max-width:760px){.grid-2{grid-template-columns:1fr;} .index-rail{flex-direction:column;}}
+  @media (max-width:760px){.grid-2{grid-template-columns:1fr;}}
 
   /* controls */
   label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;}
@@ -191,20 +211,23 @@
   .switch-row span{font-size:14px;color:var(--text);}
 
   button.action{
-    background:var(--orange);
-    color:#1a1300;
-    border:none;
-    font-weight:600;
-    font-size:14px;
+    background:rgba(0,255,136,0.1);
+    color:var(--orange);
+    border:1px solid var(--orange);
+    font-weight:700;
+    font-size:13px;
+    font-family:'JetBrains Mono',monospace;
     padding:12px 18px;
-    border-radius:8px;
+    border-radius:6px;
     cursor:pointer;
     width:100%;
     margin-top:18px;
-    transition:filter .1s ease;
+    transition:background .1s ease;
+    letter-spacing:0.04em;
   }
-  button.action:hover{filter:brightness(1.08);}
-  #qrcode button.action{background:var(--teal);}
+  button.action:hover{background:rgba(0,255,136,0.18);}
+  #qrcode button.action{color:var(--teal);border-color:var(--teal);background:rgba(0,229,255,0.08);}
+  #qrcode button.action:hover{background:rgba(0,229,255,0.16);}
 
   /* output ticket */
   .ticket{
@@ -314,7 +337,54 @@
   .conn-badge.hosting{background:rgba(255,106,53,0.14);color:var(--orange);}
   .conn-badge.unknown{background:rgba(139,144,151,0.14);color:var(--muted);}
 
-  /* ===== verificador de força de senha ===== */
+  .sep-btn{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 12px;
+    border-radius:6px;cursor:pointer;
+  }
+  .sep-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(0,255,136,0.08);}
+
+  /* ===== gerador de PIN ===== */
+  .pin-size-row{display:flex;gap:8px;margin-bottom:20px;}
+  .pin-size-btn{
+    flex:1;padding:10px;border-radius:6px;border:1px solid var(--line);
+    background:var(--panel-2);color:var(--muted);font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:700;cursor:pointer;transition:all .12s;
+  }
+  .pin-size-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(0,255,136,0.08);}
+  .pin-display{
+    font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;
+    color:var(--orange);letter-spacing:0.3em;text-align:center;padding:24px 0;
+  }
+  .pin-warn{
+    font-size:12px;padding:8px 12px;border-radius:6px;margin-top:8px;
+    font-family:'JetBrains Mono',monospace;line-height:1.5;
+  }
+  .pin-warn.ok{background:rgba(0,255,136,0.06);color:#4a9a5a;border:1px solid rgba(0,255,136,0.15);}
+  .pin-warn.bad{background:rgba(255,107,107,0.08);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);}
+
+  /* ===== decodificador de URL ===== */
+  .url-result-block{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:8px;
+    padding:14px;margin-top:12px;
+  }
+  .url-result-label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;
+  }
+  .url-result-value{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);
+    word-break:break-all;line-height:1.6;
+  }
+  .url-part{display:inline;padding:1px 4px;border-radius:3px;margin:1px;}
+  .url-part.scheme{background:rgba(0,255,136,0.12);color:var(--orange);}
+  .url-part.host{background:rgba(0,229,255,0.12);color:var(--teal);}
+  .url-part.path{background:rgba(139,144,151,0.12);color:var(--muted);}
+  .url-part.param{background:rgba(255,107,107,0.1);color:#ff9a9a;}
+  .url-part.fragment{background:rgba(124,197,118,0.1);color:#7cc576;}
+  .url-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .url-legend span{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;}
+
   .crack-time{
     text-align:center;
     padding:22px;
@@ -385,6 +455,7 @@
     overflow-y:auto;
     scrollbar-width:thin;
     scrollbar-color:var(--line) transparent;
+    padding-top:28px;
   }
   .side-rail::-webkit-scrollbar{width:4px;}
   .side-rail::-webkit-scrollbar-track{background:transparent;}
@@ -431,8 +502,10 @@
     <nav class="tools-nav">
       <a href="#senha">Senha</a>
       <a href="#forca">Força de senha</a>
+      <a href="#pin">PIN seguro</a>
       <a href="#qrcode">QR Code</a>
       <a href="#ip">Meu IP</a>
+      <a href="#url">Decodificar URL</a>
       <a href="#link">Link suspeito</a>
       <a href="#exemplos">Exemplos de golpe</a>
       <a href="blog/index.html">Blog</a>
@@ -444,9 +517,9 @@
 <main class="wrap">
 
   <section class="hero">
-    <div class="eyebrow">caixa de ferramentas — sem cadastro, sem instalação</div>
-    <h1>Três geradores que resolvem na hora.</h1>
-    <p>Senha forte, QR Code para qualquer link e consulta de IP, em um só lugar. Tudo roda no seu navegador — nada é enviado para nenhum servidor.</p>
+    <div class="eyebrow">ferramentas de segurança digital — sem cadastro, sem instalação</div>
+    <h1>Proteja-se online.<br><span class="hl">Grátis. Agora.</span></h1>
+    <p>tudo roda no seu navegador — nada é enviado para nenhum servidor</p>
     <div class="hero-tags">
       <span>100% gratuito</span>
       <span>processado localmente</span>
@@ -457,51 +530,67 @@
 
   <div class="index-rail">
     <a class="index-card" href="#senha">
-      <div class="tag">Segurança</div>
+      <div class="tag">01_SENHA</div>
       <h3>Gerador de senha</h3>
-      <p>Crie senhas aleatórias e fortes com controle de tamanho e tipos de caractere.</p>
+      <p>senhas aleatórias e fortes com controle de tamanho e caracteres</p>
     </a>
     <a class="index-card" href="#qrcode">
-      <div class="tag">Compartilhamento</div>
+      <div class="tag">02_QRCODE</div>
       <h3>Gerador de QR Code</h3>
-      <p>Transforme qualquer link ou texto em um QR Code para baixar em PNG.</p>
+      <p>transforme qualquer link ou texto em QR Code para download PNG</p>
     </a>
     <a class="index-card" href="#ip">
-      <div class="tag">Segurança</div>
+      <div class="tag">03_IP</div>
       <h3>Consultar IP</h3>
-      <p>Veja seu IP público, localização e provedor — ou consulte o IP de qualquer endereço.</p>
+      <p>veja seu IP público, localização e provedor em segundos</p>
     </a>
     <a class="index-card" href="#forca">
-      <div class="tag">Segurança</div>
+      <div class="tag">04_FORÇA</div>
       <h3>Força da minha senha</h3>
-      <p>Veja o tempo estimado pra quebrar sua senha e se ela já apareceu em algum vazamento.</p>
+      <p>tempo estimado de quebra + checagem real de vazamento</p>
     </a>
     <a class="index-card" href="#link">
-      <div class="tag">Segurança</div>
+      <div class="tag">05_LINK</div>
       <h3>Link é golpe?</h3>
-      <p>Cole um link suspeito e veja sinais de phishing antes de clicar.</p>
+      <p>análise heurística de phishing antes de clicar</p>
     </a>
     <a class="index-card" href="#exemplos">
-      <div class="tag">Educação</div>
-      <h3>Exemplos reais de golpe</h3>
-      <p>Veja mensagens de golpe comuns no Brasil com as partes suspeitas explicadas.</p>
+      <div class="tag">06_EDU</div>
+      <h3>Exemplos de golpe</h3>
+      <p>mensagens reais com as partes suspeitas explicadas</p>
+    </a>
+    <a class="index-card" href="#pin">
+      <div class="tag">07_PIN</div>
+      <h3>Gerador de PIN seguro</h3>
+      <p>PINs numéricos criptograficamente seguros com análise de padrões fracos</p>
+    </a>
+    <a class="index-card" href="#url">
+      <div class="tag">08_URL</div>
+      <h3>Decodificar URL</h3>
+      <p>Revele o endereço real por trás de URLs codificadas ou ofuscadas</p>
     </a>
   </div>
   <section class="tool" id="senha">
     <div class="tool-head"><span class="badge">01 — senha</span><h2>Gerador de senha segura</h2></div>
-    <div class="panel grid-2">
+
+    <!-- toggle de modo -->
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button id="modeAlfa" onclick="setMode('alfa')" style="flex:1;padding:10px;border-radius:6px;border:1px solid var(--orange);background:rgba(0,255,136,0.12);color:var(--orange);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;">[ ALFANUMÉRICA ]</button>
+      <button id="modeFrase" onclick="setMode('frase')" style="flex:1;padding:10px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;">[ FRASE-SENHA ]</button>
+    </div>
+
+    <!-- painel alfanumérico -->
+    <div id="panelAlfa" class="panel grid-2">
       <div>
         <div class="row">
           <label style="margin:0;">Tamanho: <strong id="lenOut" class="mono" style="color:var(--text)">16</strong></label>
         </div>
         <input type="range" id="lenRange" min="6" max="48" value="16" style="width:100%;margin-bottom:20px;">
-
         <div class="switch-row"><div class="switch on" id="sw-upper" data-target="upper"><div class="knob"></div></div><span>Letras maiúsculas (A–Z)</span></div>
         <div class="switch-row"><div class="switch on" id="sw-lower" data-target="lower"><div class="knob"></div></div><span>Letras minúsculas (a–z)</span></div>
         <div class="switch-row"><div class="switch on" id="sw-num" data-target="num"><div class="knob"></div></div><span>Números (0–9)</span></div>
         <div class="switch-row"><div class="switch on" id="sw-sym" data-target="sym"><div class="knob"></div></div><span>Símbolos (!@#$%)</span></div>
-        <div class="switch-row"><div class="switch" id="sw-amb" data-target="amb"><div class="knob"></div></div><span>Excluir caracteres ambíguos (l, 1, O, 0)</span></div>
-
+        <div class="switch-row"><div class="switch" id="sw-amb" data-target="amb"><div class="knob"></div></div><span>Excluir ambíguos (l, 1, O, 0)</span></div>
         <button class="action" id="genSenhaBtn">Gerar nova senha</button>
       </div>
       <div>
@@ -514,9 +603,40 @@
         </div>
       </div>
     </div>
+
+    <!-- painel frase-senha -->
+    <div id="panelFrase" class="panel grid-2" style="display:none;">
+      <div>
+        <div class="row">
+          <label style="margin:0;">Número de palavras: <strong id="wordCountOut" class="mono" style="color:var(--text)">4</strong></label>
+        </div>
+        <input type="range" id="wordCountRange" min="3" max="7" value="4" style="width:100%;margin-bottom:20px;">
+        <label style="margin-bottom:8px;">Separador</label>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+          <button class="sep-btn active" data-sep="-">hífen  —</button>
+          <button class="sep-btn" data-sep=".">ponto  .</button>
+          <button class="sep-btn" data-sep="_">underline  _</button>
+          <button class="sep-btn" data-sep=" ">espaço</button>
+        </div>
+        <div class="switch-row"><div class="switch on" id="sw-frase-num"><div class="knob"></div></div><span>Incluir número aleatório</span></div>
+        <div class="switch-row"><div class="switch" id="sw-frase-upper"><div class="knob"></div></div><span>Capitalizar primeira letra</span></div>
+        <button class="action" id="genFraseBtn">Gerar frase-senha</button>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">frase-senha gerada</div>
+          <div class="value mono" id="fraseOut" style="font-size:15px;word-break:break-word;">••••••••••••</div>
+          <div class="strength-bar"><div class="strength-fill" id="strengthFraseFill" style="width:85%;background:#00ff88;"></div></div>
+          <div class="strength-label" id="strengthFraseLabel">força: —</div>
+          <button class="copy-btn" id="copyFraseBtn">Copiar frase-senha</button>
+        </div>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:12px;">Frase-senhas são mais longas e fáceis de lembrar. "cadeira-7-nuvem-girassol" tem mais entropia que "P@ss123".</p>
+      </div>
+    </div>
+
     <div class="seo-text">
-      <p>Uma senha forte é a primeira barreira contra invasões de conta, vazamento de dados e roubo de identidade. O ideal é usar pelo menos 12 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos — e nunca reaproveitar a mesma senha em sites diferentes. Senhas previsíveis, como sequências numéricas, nomes ou datas de aniversário, são as primeiras tentadas em ataques de força bruta.</p>
-      <p>Este gerador de senha online cria combinações totalmente aleatórias direto no seu navegador, sem enviar nada para nenhum servidor — a senha gerada nunca sai do seu computador. Use o controle de tamanho e os interruptores para ajustar quais tipos de caractere entram na senha, conforme as exigências do site ou sistema onde ela será usada.</p>
+      <p>Uma senha forte é a primeira barreira contra invasões de conta, vazamento de dados e roubo de identidade. O ideal é usar pelo menos 12 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos — e nunca reaproveitar a mesma senha em sites diferentes.</p>
+      <p>A técnica de frase-senha (diceware) combina palavras aleatórias em português, criando senhas longas e fáceis de lembrar — mais seguras que senhas curtas com símbolos. Ambas as opções são geradas localmente no navegador, sem enviar nada para nenhum servidor.</p>
     </div>
   </section>
 
@@ -729,6 +849,73 @@
 
   <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
 
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= PIN SEGURO ================= -->
+  <section class="tool" id="pin">
+    <div class="tool-head"><span class="badge">07 — segurança</span><h2>Gerador de PIN seguro</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label>Tamanho do PIN</label>
+        <div class="pin-size-row">
+          <button class="pin-size-btn active" data-len="4">4 dígitos</button>
+          <button class="pin-size-btn" data-len="6">6 dígitos</button>
+          <button class="pin-size-btn" data-len="8">8 dígitos</button>
+        </div>
+        <div class="switch-row"><div class="switch" id="sw-pin-noSeq"><div class="knob"></div></div><span>Evitar sequências (1234, 9876)</span></div>
+        <div class="switch-row"><div class="switch" id="sw-pin-noRep"><div class="knob"></div></div><span>Evitar repetições (1111, 2222)</span></div>
+        <div class="switch-row"><div class="switch" id="sw-pin-noDate"><div class="knob"></div></div><span>Evitar datas (ddmm, aaaa)</span></div>
+        <button class="action" id="genPinBtn">Gerar PIN seguro</button>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">pin gerado</div>
+          <div class="pin-display" id="pinOut">——</div>
+          <div id="pinWarn"></div>
+          <button class="copy-btn" id="copyPinBtn" style="width:100%;margin-top:8px;">Copiar PIN</button>
+        </div>
+      </div>
+    </div>
+    <div class="seo-text">
+      <p>PINs numéricos são usados em cartões bancários, celulares, cofres e sistemas de acesso. Um PIN fraco — como 1234, 0000 ou a data de aniversário — é uma das primeiras combinações testadas por atacantes. Esta ferramenta gera PINs criptograficamente seguros com opções para evitar padrões previsíveis.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
+  <!-- ================= DECODIFICADOR DE URL ================= -->
+  <section class="tool" id="url">
+    <div class="tool-head"><span class="badge">08 — segurança</span><h2>Decodificar URL</h2></div>
+    <div class="panel grid-2">
+      <div>
+        <label for="urlInput">Cole a URL codificada ou suspeita</label>
+        <input type="text" id="urlInput" placeholder="https://exemplo.com/path%20com%20espa%C3%A7os?q=teste%40email">
+        <button class="action" id="decodeUrlBtn" style="background:rgba(0,229,255,0.1);color:var(--teal);border:1px solid var(--teal);">Decodificar URL</button>
+        <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px;">
+          URLs codificadas usam sequências como <span class="mono" style="color:var(--orange);">%20</span> (espaço) ou <span class="mono" style="color:var(--orange);">%40</span> (@) para esconder o endereço real. Golpistas usam isso para disfarçar destinos maliciosos.
+        </p>
+      </div>
+      <div>
+        <div class="ticket">
+          <div class="label">url decodificada</div>
+          <div id="urlDecoded" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);line-height:1.6;">Cole uma URL ao lado e clique em decodificar</div>
+        </div>
+        <div id="urlLegend" style="display:none;" class="url-legend">
+          <span class="url-part scheme">protocolo</span>
+          <span class="url-part host">domínio</span>
+          <span class="url-part path">caminho</span>
+          <span class="url-part param">parâmetros</span>
+          <span class="url-part fragment">fragmento</span>
+        </div>
+      </div>
+    </div>
+    <div class="seo-text">
+      <p>URLs codificadas (percent-encoding) são a forma padrão de incluir caracteres especiais em endereços web. Mas golpistas também usam essa codificação propositalmente para esconder o destino real de um link — tornando difícil identificar que <span class="mono">%68%74%74%70</span> é simplesmente "http". Esta ferramenta decodifica qualquer URL e mostra cada parte com destaque visual, facilitando a identificação de endereços suspeitos.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot wrap">[ espaço de anúncio — bloco AdSense entra aqui ]</div>
+
   <div class="wrap" style="padding-bottom:60px;">
     <a href="blog/index.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:26px 28px;text-decoration:none;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">blog de segurança</div>
@@ -742,37 +929,41 @@
 <aside class="side-rail">
   <div class="rail-title">do blog</div>
 
-  <a class="rail-post" href="blog/recebi-pix-nao-pedi-e-golpe.html">
-    <div class="rail-tag">Pix</div>
-    <h4>Recebi um Pix que não pedi: é golpe?</h4>
+  <a class="rail-post" href="blog/boletim-semanal-001.html">
+    <div class="rail-tag">Boletim #001</div>
+    <h4>O que aconteceu em segurança digital esta semana</h4>
   </a>
-  <a class="rail-post" href="blog/golpe-codigo-whatsapp.html">
-    <div class="rail-tag">WhatsApp</div>
-    <h4>Golpe do código do WhatsApp: como se proteger</h4>
-  </a>
-  <a class="rail-post" href="blog/golpe-falso-suporte-bancario.html">
-    <div class="rail-tag">Engenharia social</div>
-    <h4>Golpe do falso suporte técnico/bancário</h4>
-  </a>
-  <a class="rail-post" href="blog/senha-forte-que-voce-lembra.html">
-    <div class="rail-tag">Senhas</div>
-    <h4>Como criar uma senha forte que você lembra</h4>
-  </a>
-  <a class="rail-post" href="blog/minha-senha-vazou-o-que-fazer.html">
-    <div class="rail-tag">Vazamento</div>
-    <h4>Minha senha vazou? O que fazer</h4>
-  </a>
-  <a class="rail-post" href="blog/como-identificar-phishing.html">
-    <div class="rail-tag">Phishing</div>
-    <h4>Como saber se um link é phishing</h4>
+  <a class="rail-post" href="blog/wifi-publico-e-seguro.html">
+    <div class="rail-tag">Redes públicas</div>
+    <h4>Wi-Fi público é seguro?</h4>
   </a>
   <a class="rail-post" href="blog/o-que-e-vpn-vale-a-pena.html">
     <div class="rail-tag">Privacidade</div>
     <h4>O que é VPN e vale a pena usar?</h4>
   </a>
-  <a class="rail-post" href="blog/wifi-publico-e-seguro.html">
-    <div class="rail-tag">Redes públicas</div>
-    <h4>Wi-Fi público é seguro?</h4>
+  <a class="rail-post" href="blog/como-identificar-phishing.html">
+    <div class="rail-tag">Phishing</div>
+    <h4>Como saber se um link é phishing</h4>
+  </a>
+  <a class="rail-post" href="blog/minha-senha-vazou-o-que-fazer.html">
+    <div class="rail-tag">Vazamento</div>
+    <h4>Minha senha vazou? O que fazer</h4>
+  </a>
+  <a class="rail-post" href="blog/senha-forte-que-voce-lembra.html">
+    <div class="rail-tag">Senhas</div>
+    <h4>Como criar uma senha forte que você lembra</h4>
+  </a>
+  <a class="rail-post" href="blog/golpe-falso-suporte-bancario.html">
+    <div class="rail-tag">Engenharia social</div>
+    <h4>Golpe do falso suporte técnico/bancário</h4>
+  </a>
+  <a class="rail-post" href="blog/golpe-codigo-whatsapp.html">
+    <div class="rail-tag">WhatsApp</div>
+    <h4>Golpe do código do WhatsApp: como se proteger</h4>
+  </a>
+  <a class="rail-post" href="blog/recebi-pix-nao-pedi-e-golpe.html">
+    <div class="rail-tag">Pix</div>
+    <h4>Recebi um Pix que não pedi: é golpe?</h4>
   </a>
 
   <a class="rail-all" href="blog/index.html">Ver todos os posts →</a>
@@ -1184,7 +1375,201 @@ document.getElementById('checkBreachBtn').addEventListener('click', async ()=>{
   }
 });
 
-/* ===================== VERIFICADOR DE LINK SUSPEITO ===================== */
+/* ===================== TOGGLE MODO SENHA ===================== */
+let senhaMode = 'alfa';
+function setMode(mode){
+  senhaMode = mode;
+  document.getElementById('panelAlfa').style.display = mode === 'alfa' ? '' : 'none';
+  document.getElementById('panelFrase').style.display = mode === 'frase' ? '' : 'none';
+  const btnAlfa = document.getElementById('modeAlfa');
+  const btnFrase = document.getElementById('modeFrase');
+  if(mode === 'alfa'){
+    btnAlfa.style.borderColor = 'var(--orange)'; btnAlfa.style.color = 'var(--orange)'; btnAlfa.style.background = 'rgba(0,255,136,0.12)';
+    btnFrase.style.borderColor = 'var(--line)'; btnFrase.style.color = 'var(--muted)'; btnFrase.style.background = 'transparent';
+  } else {
+    btnFrase.style.borderColor = 'var(--orange)'; btnFrase.style.color = 'var(--orange)'; btnFrase.style.background = 'rgba(0,255,136,0.12)';
+    btnAlfa.style.borderColor = 'var(--line)'; btnAlfa.style.color = 'var(--muted)'; btnAlfa.style.background = 'transparent';
+  }
+}
+
+/* ===================== FRASE-SENHA ===================== */
+const PALAVRAS_PT = [
+  'abacaxi','ancora','arvore','azul','balde','banana','barco','biblioteca','bicicleta','borboleta',
+  'branco','cabelo','cadeira','caminho','campo','caneta','carro','casa','castelo','cavalo',
+  'chuva','cidade','coelho','coração','coruja','cristal','dados','diamante','dicionário','dragão',
+  'elefante','escada','escola','espelho','estrela','faca','farol','floresta','folha','formiga',
+  'foguete','fruta','galinha','gato','girassol','girafa','glaciar','golfo','gorila','guitarra',
+  'horizonte','ilha','jaguar','janela','jardim','joelho','laranja','leão','livro','lua',
+  'maçã','macaco','madeira','mágico','mapa','mar','mesa','montanha','morango','música',
+  'navio','neblina','nuvem','oceano','olho','onda','onça','ouro','panda','papel',
+  'parede','peixe','pedra','penas','piano','pinguim','planeta','planta','ponte','praia',
+  'prata','relógio','rio','robô','rocha','rosa','semente','serra','sol','sonho',
+  'tartaruga','tigre','teclado','tempestade','terra','trovão','tulipa','urso','vela','ventania',
+  'verde','vidro','viagem','volcano','xadrez','zebra'
+];
+
+const wordCountRange = document.getElementById('wordCountRange');
+const wordCountOut = document.getElementById('wordCountOut');
+wordCountRange.addEventListener('input', ()=> wordCountOut.textContent = wordCountRange.value);
+
+let currentSep = '-';
+document.querySelectorAll('.sep-btn').forEach(btn => {
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.sep-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSep = btn.dataset.sep;
+  });
+});
+
+document.getElementById('sw-frase-num').addEventListener('click', ()=> document.getElementById('sw-frase-num').classList.toggle('on'));
+document.getElementById('sw-frase-upper').addEventListener('click', ()=> document.getElementById('sw-frase-upper').classList.toggle('on'));
+
+function generateFrase(){
+  const count = parseInt(wordCountRange.value);
+  const addNum = document.getElementById('sw-frase-num').classList.contains('on');
+  const doUpper = document.getElementById('sw-frase-upper').classList.contains('on');
+  const arr = new Uint32Array(count);
+  crypto.getRandomValues(arr);
+  let words = Array.from(arr).map(n => {
+    let w = PALAVRAS_PT[n % PALAVRAS_PT.length];
+    return doUpper ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+  });
+  if(addNum){
+    const numArr = new Uint32Array(1);
+    crypto.getRandomValues(numArr);
+    const num = (numArr[0] % 90) + 10;
+    const pos = new Uint32Array(1);
+    crypto.getRandomValues(pos);
+    words.splice(pos[0] % (words.length + 1), 0, String(num));
+  }
+  const frase = words.join(currentSep);
+  document.getElementById('fraseOut').textContent = frase;
+  const bits = count * Math.log2(PALAVRAS_PT.length) + (addNum ? Math.log2(90) : 0);
+  const fill = document.getElementById('strengthFraseFill');
+  const label = document.getElementById('strengthFraseLabel');
+  fill.style.width = Math.min(100, (bits / 80) * 100) + '%';
+  if(bits >= 60){ fill.style.background = '#00ff88'; label.textContent = `força: excelente — ${Math.round(bits)} bits de entropia`; }
+  else if(bits >= 40){ fill.style.background = 'var(--teal)'; label.textContent = `força: boa — ${Math.round(bits)} bits de entropia`; }
+  else { fill.style.background = 'var(--orange)'; label.textContent = `força: razoável — ${Math.round(bits)} bits de entropia`; }
+}
+
+document.getElementById('genFraseBtn').addEventListener('click', generateFrase);
+document.getElementById('copyFraseBtn').addEventListener('click', ()=>{
+  navigator.clipboard.writeText(document.getElementById('fraseOut').textContent);
+  flashCopied('copyFraseBtn');
+});
+
+/* ===================== GERADOR DE PIN ===================== */
+let pinLen = 4;
+document.querySelectorAll('.pin-size-btn').forEach(btn => {
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.pin-size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    pinLen = parseInt(btn.dataset.len);
+  });
+});
+
+const WEAK_PINS = ['0000','1111','2222','3333','4444','5555','6666','7777','8888','9999',
+  '1234','2345','3456','4567','5678','6789','9876','8765','7654','6543','5432','4321',
+  '1212','2121','1122','2211','0101','1010','1230','0321','1357','2468','1379','2580',
+  '123456','654321','111111','000000','123123','112233','121212','010101'];
+
+function isWeakPin(pin, noSeq, noRep, noDate){
+  if(WEAK_PINS.includes(pin)) return 'Padrão muito comum — evite';
+  if(noSeq){
+    let seq = true, seqR = true;
+    for(let i=1;i<pin.length;i++){
+      if(parseInt(pin[i]) !== parseInt(pin[i-1])+1) seq = false;
+      if(parseInt(pin[i]) !== parseInt(pin[i-1])-1) seqR = false;
+    }
+    if(seq||seqR) return 'Sequência numérica detectada';
+  }
+  if(noRep){
+    if(new Set(pin.split('')).size === 1) return 'Todos os dígitos iguais';
+    if(pin.length === 4 && pin[0]===pin[1] && pin[2]===pin[3]) return 'Padrão repetido (AABB)';
+  }
+  if(noDate && pin.length === 4){
+    const d = parseInt(pin.slice(0,2)), m = parseInt(pin.slice(2,4));
+    if(d>=1&&d<=31&&m>=1&&m<=12) return 'Parece uma data (DDMM) — fácil de adivinhar';
+    const y1 = parseInt(pin); if(y1>=1940&&y1<=2010) return 'Parece um ano — fácil de adivinhar';
+  }
+  return null;
+}
+
+function generatePin(){
+  const noSeq = document.getElementById('sw-pin-noSeq').classList.contains('on');
+  const noRep = document.getElementById('sw-pin-noRep').classList.contains('on');
+  const noDate = document.getElementById('sw-pin-noDate').classList.contains('on');
+  let pin, attempts = 0;
+  do {
+    const arr = new Uint32Array(pinLen);
+    crypto.getRandomValues(arr);
+    pin = Array.from(arr).map(n => n % 10).join('');
+    attempts++;
+  } while(isWeakPin(pin, noSeq, noRep, noDate) && attempts < 100);
+  document.getElementById('pinOut').textContent = pin;
+  const warn = isWeakPin(pin, noSeq, noRep, noDate);
+  const warnEl = document.getElementById('pinWarn');
+  if(warn){ warnEl.className='pin-warn bad'; warnEl.textContent='⚠ ' + warn; }
+  else { warnEl.className='pin-warn ok'; warnEl.textContent='✓ PIN sem padrões fracos detectados'; }
+}
+
+document.getElementById('genPinBtn').addEventListener('click', generatePin);
+document.getElementById('copyPinBtn').addEventListener('click', ()=>{
+  const pin = document.getElementById('pinOut').textContent;
+  if(pin === '——') return;
+  navigator.clipboard.writeText(pin);
+  flashCopied('copyPinBtn');
+});
+
+/* ===================== DECODIFICADOR DE URL ===================== */
+function decodeUrl(){
+  const raw = document.getElementById('urlInput').value.trim();
+  const out = document.getElementById('urlDecoded');
+  const legend = document.getElementById('urlLegend');
+  if(!raw){ out.textContent = 'Cole uma URL ao lado e clique em decodificar'; out.style.color='var(--muted)'; legend.style.display='none'; return; }
+
+  let decoded;
+  try { decoded = decodeURIComponent(raw.replace(/\+/g,' ')); } catch(e){ decoded = raw; }
+
+  let url;
+  let normalized = decoded.trim();
+  if(!/^https?:\/\//i.test(normalized)) normalized = 'https://' + normalized;
+  try { url = new URL(normalized); } catch(e){
+    out.textContent = decoded;
+    out.style.color = 'var(--text)';
+    legend.style.display = 'none';
+    return;
+  }
+
+  function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+  const scheme = url.protocol + '//';
+  const host = url.hostname + (url.port ? ':' + url.port : '');
+  const path = url.pathname !== '/' ? url.pathname : '';
+  const params = url.search;
+  const fragment = url.hash;
+
+  let html = `<span class="url-part scheme">${esc(scheme)}</span><span class="url-part host">${esc(host)}</span>`;
+  if(path) html += `<span class="url-part path">${esc(path)}</span>`;
+  if(params) html += `<span class="url-part param">${esc(params)}</span>`;
+  if(fragment) html += `<span class="url-part fragment">${esc(fragment)}</span>`;
+
+  out.innerHTML = html;
+  out.style.color = 'var(--text)';
+  legend.style.display = 'flex';
+
+  if(raw !== decoded){
+    const diff = document.createElement('div');
+    diff.style.cssText = 'margin-top:10px;padding:8px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:6px;font-size:11px;color:var(--teal);font-family:JetBrains Mono,monospace;';
+    diff.textContent = '↓ original codificada: ' + raw.slice(0, 120) + (raw.length > 120 ? '...' : '');
+    out.parentElement.appendChild(diff);
+  }
+}
+
+document.getElementById('decodeUrlBtn').addEventListener('click', decodeUrl);
+document.getElementById('urlInput').addEventListener('keypress', e => { if(e.key==='Enter') decodeUrl(); });
+
+
 const KNOWN_SHORTENERS = ['bit.ly','tinyurl.com','t.co','goo.gl','is.gd','ow.ly','cutt.ly','rebrand.ly','shorturl.at'];
 const OFFICIAL_DOMAINS = {
   google: ['google.com'], facebook: ['facebook.com'], instagram: ['instagram.com'],
@@ -1312,5 +1697,43 @@ document.getElementById('linkCheckInput').addEventListener('keypress', (e)=>{
 });
 </script>
 
+<canvas id="matrix-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.055;"></canvas>
+<style>
+  body{position:relative;}
+  .wrap, header.top, footer{position:relative;z-index:1;}
+  .page-shell{position:relative;z-index:1;}
+</style>
+<script>
+(function(){
+  const canvas = document.getElementById('matrix-bg');
+  const ctx = canvas.getContext('2d');
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ{}[]<>/\\=+-_:;,.?!#$%&*@ABCDEFGHIJKabcdefghijk0123456789';
+  const fontSize = 13;
+  let cols, drops;
+
+  function resize(){
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols  = Math.floor(canvas.width / fontSize);
+    drops = Array(cols).fill(0).map(()=> Math.random() * -60);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    ctx.fillStyle = 'rgba(10,12,15,0.18)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = fontSize + 'px "JetBrains Mono",monospace';
+    for(let i = 0; i < cols; i++){
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillStyle = '#1a3a2a';
+      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+      if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i] += 0.35;
+    }
+  }
+  setInterval(draw, 65);
+})();
+</script>
 </body>
 </html>
