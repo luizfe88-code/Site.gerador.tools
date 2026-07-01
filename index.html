@@ -17,15 +17,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   :root{
-    --bg: #15181b;
-    --panel: #1d2125;
-    --panel-2: #23282d;
-    --line: #32383e;
-    --text: #ece9e2;
-    --muted: #8b9097;
-    --orange: #ff6a35;
-    --teal: #3fbac2;
-    --green: #7cc576;
+    --bg: #0a0c0f;
+    --panel: #0d110d;
+    --panel-2: #070909;
+    --line: #1a2a1a;
+    --text: #e8e5dc;
+    --muted: #4a7a5a;
+    --orange: #00ff88;
+    --teal: #00e5ff;
+    --green: #00ff88;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -49,23 +49,24 @@
     border-bottom:1px solid var(--line);
     padding:18px 0;
     position:sticky;top:0;
-    background:rgba(21,24,27,0.92);
+    background:rgba(10,12,15,0.95);
     backdrop-filter:blur(6px);
     z-index:50;
   }
   .top-row{display:flex;align-items:center;justify-content:space-between;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;text-decoration:none;color:var(--text);}
   .brand .dot{width:10px;height:10px;background:var(--orange);border-radius:2px;transform:rotate(45deg);}
   nav.tools-nav{display:flex;gap:6px;}
   nav.tools-nav a{
     color:var(--muted);
     text-decoration:none;
-    font-size:13px;
+    font-size:12px;
+    font-family:'JetBrains Mono',monospace;
     padding:7px 12px;
     border-radius:6px;
     border:1px solid transparent;
   }
-  nav.tools-nav a:hover{color:var(--text);border-color:var(--line);}
+  nav.tools-nav a:hover{color:var(--orange);border-color:var(--line);background:rgba(0,255,136,0.04);}
 
   /* ===== hero ===== */
   .hero{padding:64px 0 40px;}
@@ -77,59 +78,69 @@
     text-transform:uppercase;
     margin-bottom:14px;
   }
+  .eyebrow::before{content:'> ';opacity:0.5;}
   .hero h1{
     font-size:clamp(32px,5vw,52px);
     line-height:1.05;
     margin:0 0 18px;
     max-width:760px;
   }
+  .hero h1 .hl{color:var(--orange);}
   .hero p{
     color:var(--muted);
-    font-size:17px;
+    font-size:15px;
+    font-family:'JetBrains Mono',monospace;
     max-width:560px;
     line-height:1.6;
     margin:0 0 30px;
   }
+  .hero p::before{content:'// ';opacity:0.5;}
   .hero-tags{display:flex;gap:10px;flex-wrap:wrap;}
   .hero-tags span{
     font-family:'JetBrains Mono',monospace;
     font-size:12px;
-    color:var(--muted);
-    border:1px dashed var(--line);
+    color:var(--orange);
+    border:1px solid var(--line);
+    background:rgba(0,255,136,0.04);
     padding:6px 10px;
-    border-radius:6px;
+    border-radius:4px;
   }
+  .hero-tags span::before{content:'[ ';}
+  .hero-tags span::after{content:' ]';}
 
   /* ===== tool index rail ===== */
   .index-rail{
     display:flex;
-    gap:12px;
+    gap:1px;
     margin:48px 0 0;
     border-top:1px solid var(--line);
+    background:var(--line);
     padding-top:0;
   }
   .index-card{
     flex:1;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:10px;
+    background:var(--bg);
+    border:none;
+    border-radius:0;
     padding:20px;
     cursor:pointer;
-    transition:border-color .15s ease, transform .15s ease;
+    transition:background .15s ease;
     text-decoration:none;
     color:var(--text);
     display:block;
   }
-  .index-card:hover{border-color:var(--orange);transform:translateY(-2px);}
+  .index-card:hover{background:rgba(0,255,136,0.04);}
+  .index-card:hover h3{color:var(--orange);}
   .index-card .tag{
     font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--orange);
+    font-size:10px;
+    color:#1a4a2a;
     text-transform:uppercase;
-    letter-spacing:.06em;
+    letter-spacing:.08em;
+    margin-bottom:8px;
   }
-  .index-card h3{margin:8px 0 6px;font-size:18px;}
-  .index-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;}
+  .index-card h3{margin:8px 0 6px;font-size:15px;color:#c8c5bc;transition:color .15s;}
+  .index-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;font-family:'JetBrains Mono',monospace;}
 
   /* ===== tool sections ===== */
   section.tool{
@@ -191,20 +202,23 @@
   .switch-row span{font-size:14px;color:var(--text);}
 
   button.action{
-    background:var(--orange);
-    color:#1a1300;
-    border:none;
-    font-weight:600;
-    font-size:14px;
+    background:rgba(0,255,136,0.1);
+    color:var(--orange);
+    border:1px solid var(--orange);
+    font-weight:700;
+    font-size:13px;
+    font-family:'JetBrains Mono',monospace;
     padding:12px 18px;
-    border-radius:8px;
+    border-radius:6px;
     cursor:pointer;
     width:100%;
     margin-top:18px;
-    transition:filter .1s ease;
+    transition:background .1s ease;
+    letter-spacing:0.04em;
   }
-  button.action:hover{filter:brightness(1.08);}
-  #qrcode button.action{background:var(--teal);}
+  button.action:hover{background:rgba(0,255,136,0.18);}
+  #qrcode button.action{color:var(--teal);border-color:var(--teal);background:rgba(0,229,255,0.08);}
+  #qrcode button.action:hover{background:rgba(0,229,255,0.16);}
 
   /* output ticket */
   .ticket{
@@ -380,8 +394,15 @@
   .side-rail{
     position:sticky;top:90px;
     display:flex;flex-direction:column;gap:14px;
-    padding-top:64px;
+    align-self:start;
+    max-height:calc(100vh - 110px);
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:var(--line) transparent;
   }
+  .side-rail::-webkit-scrollbar{width:4px;}
+  .side-rail::-webkit-scrollbar-track{background:transparent;}
+  .side-rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px;}
   .side-rail .rail-title{
     font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
     text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;
@@ -407,12 +428,20 @@
     .side-rail{display:none;}
   }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKYD6WDC3W');
+</script>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap top-row">
-    <div class="brand"><span class="dot"></span>Utilix</div>
+    <a class="brand" href="#"><span class="dot"></span>Utilix</a>
     <nav class="tools-nav">
       <a href="#senha">Senha</a>
       <a href="#forca">Força de senha</a>
@@ -429,9 +458,9 @@
 <main class="wrap">
 
   <section class="hero">
-    <div class="eyebrow">caixa de ferramentas — sem cadastro, sem instalação</div>
-    <h1>Três geradores que resolvem na hora.</h1>
-    <p>Senha forte, QR Code para qualquer link e consulta de IP, em um só lugar. Tudo roda no seu navegador — nada é enviado para nenhum servidor.</p>
+    <div class="eyebrow">ferramentas de segurança digital — sem cadastro, sem instalação</div>
+    <h1>Proteja-se online.<br><span class="hl">Grátis. Agora.</span></h1>
+    <p>tudo roda no seu navegador — nada é enviado para nenhum servidor</p>
     <div class="hero-tags">
       <span>100% gratuito</span>
       <span>processado localmente</span>
@@ -442,34 +471,34 @@
 
   <div class="index-rail">
     <a class="index-card" href="#senha">
-      <div class="tag">Segurança</div>
+      <div class="tag">01_SENHA</div>
       <h3>Gerador de senha</h3>
-      <p>Crie senhas aleatórias e fortes com controle de tamanho e tipos de caractere.</p>
+      <p>senhas aleatórias e fortes com controle de tamanho e caracteres</p>
     </a>
     <a class="index-card" href="#qrcode">
-      <div class="tag">Compartilhamento</div>
+      <div class="tag">02_QRCODE</div>
       <h3>Gerador de QR Code</h3>
-      <p>Transforme qualquer link ou texto em um QR Code para baixar em PNG.</p>
+      <p>transforme qualquer link ou texto em QR Code para download PNG</p>
     </a>
     <a class="index-card" href="#ip">
-      <div class="tag">Segurança</div>
+      <div class="tag">03_IP</div>
       <h3>Consultar IP</h3>
-      <p>Veja seu IP público, localização e provedor — ou consulte o IP de qualquer endereço.</p>
+      <p>veja seu IP público, localização e provedor em segundos</p>
     </a>
     <a class="index-card" href="#forca">
-      <div class="tag">Segurança</div>
+      <div class="tag">04_FORÇA</div>
       <h3>Força da minha senha</h3>
-      <p>Veja o tempo estimado pra quebrar sua senha e se ela já apareceu em algum vazamento.</p>
+      <p>tempo estimado de quebra + checagem real de vazamento</p>
     </a>
     <a class="index-card" href="#link">
-      <div class="tag">Segurança</div>
+      <div class="tag">05_LINK</div>
       <h3>Link é golpe?</h3>
-      <p>Cole um link suspeito e veja sinais de phishing antes de clicar.</p>
+      <p>análise heurística de phishing antes de clicar</p>
     </a>
     <a class="index-card" href="#exemplos">
-      <div class="tag">Educação</div>
-      <h3>Exemplos reais de golpe</h3>
-      <p>Veja mensagens de golpe comuns no Brasil com as partes suspeitas explicadas.</p>
+      <div class="tag">06_EDU</div>
+      <h3>Exemplos de golpe</h3>
+      <p>mensagens reais com as partes suspeitas explicadas</p>
     </a>
   </div>
   <section class="tool" id="senha">
@@ -1297,5 +1326,43 @@ document.getElementById('linkCheckInput').addEventListener('keypress', (e)=>{
 });
 </script>
 
+<canvas id="matrix-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.055;"></canvas>
+<style>
+  body{position:relative;}
+  .wrap, header.top, footer{position:relative;z-index:1;}
+  .page-shell{position:relative;z-index:1;}
+</style>
+<script>
+(function(){
+  const canvas = document.getElementById('matrix-bg');
+  const ctx = canvas.getContext('2d');
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ{}[]<>/\\=+-_:;,.?!#$%&*@ABCDEFGHIJKabcdefghijk0123456789';
+  const fontSize = 13;
+  let cols, drops;
+
+  function resize(){
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols  = Math.floor(canvas.width / fontSize);
+    drops = Array(cols).fill(0).map(()=> Math.random() * -60);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    ctx.fillStyle = 'rgba(10,12,15,0.18)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = fontSize + 'px "JetBrains Mono",monospace';
+    for(let i = 0; i < cols; i++){
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillStyle = '#1a3a2a';
+      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+      if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i] += 0.35;
+    }
+  }
+  setInterval(draw, 65);
+})();
+</script>
 </body>
 </html>
