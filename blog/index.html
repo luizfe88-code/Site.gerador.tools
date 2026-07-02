@@ -17,49 +17,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="blog.css">
 <style>
-  .search-wrap{position:relative;margin:24px 0 8px;}
-  .search-wrap input{
-    width:100%;background:var(--panel);border:1px solid var(--line);
-    color:var(--text);padding:13px 44px 13px 16px;
-    border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;
-    outline:none;transition:border-color .15s;
-  }
-  .search-wrap input::placeholder{color:var(--muted);}
-  .search-wrap input:focus{border-color:var(--orange);}
-  .search-icon{
-    position:absolute;right:14px;top:50%;transform:translateY(-50%);
-    color:var(--muted);font-size:18px;pointer-events:none;
-  }
-  .search-clear{
-    position:absolute;right:14px;top:50%;transform:translateY(-50%);
-    background:none;border:none;color:var(--muted);font-size:22px;
-    cursor:pointer;padding:0;line-height:1;display:none;
-  }
-  .search-clear:hover{color:var(--orange);}
-  .search-count{
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    color:var(--muted);margin-bottom:16px;min-height:18px;
-  }
-  .search-count span{color:var(--orange);}
-  .post-card.hidden{display:none;}
-  .no-results{
-    text-align:center;padding:48px 24px;
-    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);
-    display:none;border:1px dashed var(--line);border-radius:10px;
-  }
-  .no-results strong{color:var(--text);}
+.search-box{position:relative;margin:24px 0 6px;}
+.search-box input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:13px 44px 13px 16px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;transition:border-color .15s;}
+.search-box input:focus{border-color:var(--orange);}
+.search-box input::placeholder{color:var(--muted);}
+.search-box .ico{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px;pointer-events:none;}
+.search-info{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);min-height:20px;margin-bottom:14px;}
+.search-info b{color:var(--orange);}
+.post-list a{transition:opacity .12s;}
+.no-result{display:none;text-align:center;padding:40px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;margin-top:8px;}
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PKYD6WDC3W');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PKYD6WDC3W');
 </script>
 </head>
 <body>
-
 <header class="top">
   <div class="top-row">
     <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
@@ -84,78 +60,64 @@
     <p>Artigos práticos sobre os golpes mais comuns no Brasil, senhas, phishing e privacidade — escritos para quem não é da área técnica.</p>
   </div>
 
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="buscar posts... ex: phishing, pix, senha" autocomplete="off" spellcheck="false">
-    <span class="search-icon" id="searchIcon">⌕</span>
-    <button class="search-clear" id="searchClear" aria-label="Limpar busca">×</button>
+  <div class="search-box">
+    <input type="text" id="q" placeholder="buscar... ex: pix, senha, phishing, vpn" autocomplete="off" onkeyup="buscar()">
+    <span class="ico">&#9906;</span>
   </div>
-  <div class="search-count" id="searchCount"></div>
+  <div class="search-info" id="info"></div>
+  <div class="no-result" id="nada">Nenhum resultado encontrado. Tente: pix, senha, whatsapp, phishing, vpn, wifi</div>
 
-  <div class="post-list" id="postList">
+  <div class="post-list" id="lista">
 
-    <div class="no-results" id="noResults">
-      Nenhum resultado para "<strong id="noResultsTerm"></strong>"<br>
-      <span style="font-size:11px;margin-top:8px;display:block;">Tente: pix, senha, whatsapp, phishing, vpn, wifi</span>
-    </div>
-
-    <a class="post-card" href="boletim-semanal-001.html" style="border-left:3px solid var(--orange);"
-       data-search="boletim semanal semana deepfake pix boleto banco central fraude noticias">
-      <div class="tag">📰 Boletim Semanal #001</div>
+    <a class="post-card" href="boletim-semanal-001.html" style="border-left:3px solid var(--orange);" data-k="boletim semanal semana deepfake pix boleto banco central fraude noticias resumo">
+      <div class="tag">Boletim Semanal #001</div>
       <h2>O que aconteceu em segurança digital esta semana — 30 jun a 6 jul</h2>
       <p>Deepfakes crescem 830%, R$ 29 bilhões perdidos em Pix e boleto, Banco Central endurece regras. O resumo da semana com fontes verificadas.</p>
     </a>
 
-    <a class="post-card" href="recebi-pix-nao-pedi-e-golpe.html"
-       data-search="pix golpe fraude confirmar dados falso recebido transferencia banco">
+    <a class="post-card" href="recebi-pix-nao-pedi-e-golpe.html" data-k="pix golpe fraude confirmar dados falso recebido transferencia banco">
       <div class="tag">Golpes via Pix</div>
       <h2>Recebi um Pix que não pedi: é golpe?</h2>
       <p>Entenda como funciona o golpe do falso Pix recebido e por que pedir para "confirmar dados" é sempre um sinal de fraude.</p>
     </a>
 
-    <a class="post-card" href="golpe-codigo-whatsapp.html"
-       data-search="whatsapp codigo verificacao clonar conta sequestro sms dois fatores">
+    <a class="post-card" href="golpe-codigo-whatsapp.html" data-k="whatsapp codigo verificacao clonar conta sequestro sms dois fatores">
       <div class="tag">Golpes no WhatsApp</div>
       <h2>Golpe do código do WhatsApp: como funciona e como se proteger</h2>
       <p>Como criminosos usam o código de verificação para clonar contas, e como ativar a verificação em duas etapas.</p>
     </a>
 
-    <a class="post-card" href="golpe-falso-suporte-bancario.html"
-       data-search="suporte bancario falso acesso remoto anydesk teamviewer ligacao banco engenharia social">
+    <a class="post-card" href="golpe-falso-suporte-bancario.html" data-k="suporte bancario falso acesso remoto anydesk teamviewer ligacao banco engenharia social">
       <div class="tag">Engenharia social</div>
       <h2>Golpe do falso suporte técnico/bancário: como identificar</h2>
       <p>Por que nunca instalar apps de acesso remoto a pedido de quem ligou para você, mesmo dizendo ser do banco.</p>
     </a>
 
-    <a class="post-card" href="senha-forte-que-voce-lembra.html"
-       data-search="senha forte lembrar frase diceware segura criar tamanho caracteres">
+    <a class="post-card" href="senha-forte-que-voce-lembra.html" data-k="senha forte lembrar frase diceware segura criar tamanho caracteres">
       <div class="tag">Senhas</div>
       <h2>Como criar uma senha forte que você consegue lembrar</h2>
       <p>A técnica de frase-senha e por que o tamanho importa mais do que a complexidade visual.</p>
     </a>
 
-    <a class="post-card" href="minha-senha-vazou-o-que-fazer.html"
-       data-search="senha vazou vazamento dados descobrir o que fazer hibp have i been pwned">
+    <a class="post-card" href="minha-senha-vazou-o-que-fazer.html" data-k="senha vazou vazamento dados descobrir o que fazer hibp have i been pwned">
       <div class="tag">Vazamento de dados</div>
       <h2>Minha senha vazou? Como descobrir e o que fazer</h2>
       <p>Como verificar com segurança se uma senha já apareceu em algum vazamento, sem expor a senha real.</p>
     </a>
 
-    <a class="post-card" href="como-identificar-phishing.html"
-       data-search="phishing link golpe identificar dominio https encurtador suspeito">
+    <a class="post-card" href="como-identificar-phishing.html" data-k="phishing link golpe identificar dominio https encurtador suspeito clicar">
       <div class="tag">Phishing</div>
       <h2>Como saber se um link é phishing antes de clicar</h2>
       <p>Os sinais que continuam funcionando para identificar um link malicioso, mesmo com golpes feitos por IA.</p>
     </a>
 
-    <a class="post-card" href="o-que-e-vpn-vale-a-pena.html"
-       data-search="vpn vale a pena privacidade rede virtual ip anonimato tunelamento">
+    <a class="post-card" href="o-que-e-vpn-vale-a-pena.html" data-k="vpn vale pena privacidade rede virtual ip anonimato tunelamento">
       <div class="tag">Privacidade</div>
       <h2>O que é VPN e vale a pena usar?</h2>
       <p>O que uma VPN realmente protege, e o que ela não substitui.</p>
     </a>
 
-    <a class="post-card" href="wifi-publico-e-seguro.html"
-       data-search="wifi publico seguro rede aberta aeroporto cafe evil twin man in the middle">
+    <a class="post-card" href="wifi-publico-e-seguro.html" data-k="wifi publico seguro rede aberta aeroporto cafe evil twin man middle">
       <div class="tag">Redes públicas</div>
       <h2>Wi-Fi público é seguro? O que evitar fazer em redes abertas</h2>
       <p>Cuidados ao usar redes abertas em aeroportos, cafés e shoppings, e como identificar uma rede falsa.</p>
@@ -166,397 +128,55 @@
 
 <footer>
   <div class="wrap-wide">
-    <span>&copy; <span id="year"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
+    <span>&copy; <span id="ano"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
     <span><a href="../index.html">Voltar para as ferramentas</a></span>
   </div>
 </footer>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('ano').textContent = new Date().getFullYear();
 
-(function(){
-  const searchEl  = document.getElementById('searchInput');
-  const clearBtn  = document.getElementById('searchClear');
-  const searchIco = document.getElementById('searchIcon');
-  const countEl   = document.getElementById('searchCount');
-  const noResEl   = document.getElementById('noResults');
-  const noTermEl  = document.getElementById('noResultsTerm');
-  const allCards  = Array.from(document.querySelectorAll('.post-card'));
-<<<<<<< HEAD
-  console.log('[Utilix Search] cards:', allCards.length);
-=======
-<<<<<<< HEAD
-  console.log('[Utilix Search] cards:', allCards.length);
-=======
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
->>>>>>> 7f78f2742baf18d24f7a67ac4e8c350c47f1663b
+function norm(s) {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ');
+}
 
-  function norm(str){
-    return str.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z0-9\s]/g,' ');
-  }
+function buscar() {
+  var val = document.getElementById('q').value;
+  var q = norm(val).trim();
+  var cards = document.querySelectorAll('#lista .post-card');
+  var info = document.getElementById('info');
+  var nada = document.getElementById('nada');
+  var vis = 0;
 
-  const indexed = allCards.map(card => ({
-    card,
-    text: norm([
-      card.querySelector('h2') ? card.querySelector('h2').textContent : '',
-      card.querySelector('p')  ? card.querySelector('p').textContent  : '',
-      card.querySelector('.tag') ? card.querySelector('.tag').textContent : '',
-      card.getAttribute('data-search') || ''
-    ].join(' '))
-  }));
-
-  function runSearch(){
-<<<<<<< HEAD
-    var raw = searchEl.value.trim();
-    var q = norm(raw);
-=======
-<<<<<<< HEAD
-    var raw = searchEl.value.trim();
-    var q = norm(raw);
-
-    noResEl.style.display   = 'none';
-    clearBtn.style.display  = raw ? 'block' : 'none';
-    searchIco.style.display = raw ? 'none'  : 'block';
-
-    if(!q){
-      allCards.forEach(function(c){ c.style.display = ''; });
-=======
-    var q = norm(searchEl.value.trim());
->>>>>>> 7f78f2742baf18d24f7a67ac4e8c350c47f1663b
-
-    noResEl.style.display   = 'none';
-    clearBtn.style.display  = raw ? 'block' : 'none';
-    searchIco.style.display = raw ? 'none'  : 'block';
-
-    if(!q){
-<<<<<<< HEAD
-      allCards.forEach(function(c){ c.style.display = ''; });
-=======
-      allCards.forEach(function(c){ c.classList.remove('hidden'); });
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
->>>>>>> 7f78f2742baf18d24f7a67ac4e8c350c47f1663b
-      countEl.innerHTML = '';
+  cards.forEach(function(card) {
+    if (!q) {
+      card.style.display = '';
+      vis++;
       return;
     }
-
-    var terms = q.split(/\s+/).filter(Boolean);
-    var visible = 0;
-
-    indexed.forEach(function(item){
-      var match = terms.every(function(t){ return item.text.indexOf(t) !== -1; });
-<<<<<<< HEAD
-      item.card.style.display = match ? '' : 'none';
-=======
-<<<<<<< HEAD
-      item.card.style.display = match ? '' : 'none';
-=======
-      item.card.classList.toggle('hidden', !match);
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
->>>>>>> 7f78f2742baf18d24f7a67ac4e8c350c47f1663b
-      if(match) visible++;
-    });
-
-    if(visible === 0){
-      noResEl.style.display = 'block';
-<<<<<<< HEAD
-      noTermEl.textContent = raw;
-      countEl.innerHTML = '';
-    } else {
-      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + raw + '</span>"';
-=======
-<<<<<<< HEAD
-      noTermEl.textContent = raw;
-      countEl.innerHTML = '';
-    } else {
-      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + raw + '</span>"';
-=======
-      noTermEl.textContent = searchEl.value.trim();
-      countEl.innerHTML = '';
-    } else {
-      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + searchEl.value.trim() + '</span>"';
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
-    }
-  }
-
-  searchEl.addEventListener('input', runSearch);
-  clearBtn.addEventListener('click', function(){
-    searchEl.value = '';
-    runSearch();
-    searchEl.focus();
+    var texto = norm(
+      (card.querySelector('h2') ? card.querySelector('h2').textContent : '') + ' ' +
+      (card.querySelector('p')  ? card.querySelector('p').textContent  : '') + ' ' +
+      (card.querySelector('.tag') ? card.querySelector('.tag').textContent : '') + ' ' +
+      (card.getAttribute('data-k') || '')
+    );
+    var termos = q.split(' ').filter(function(t){ return t.length > 0; });
+    var match = termos.every(function(t){ return texto.indexOf(t) >= 0; });
+    card.style.display = match ? '' : 'none';
+    if (match) vis++;
   });
-})();
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog de segurança digital | Utilix</title>
-<meta name="description" content="Artigos práticos sobre segurança digital para o dia a dia: golpes comuns no Brasil, senhas, phishing, VPN e como se proteger online.">
-<link rel="canonical" href="https://utilix.seg.br/blog/index.html">
-<meta property="og:title" content="Blog de segurança digital | Utilix">
-<meta property="og:description" content="Artigos práticos sobre golpes comuns, senhas, phishing e privacidade digital.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://utilix.seg.br/blog/index.html">
-<meta property="og:locale" content="pt_BR">
-<meta name="robots" content="index, follow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="blog.css">
-<style>
-  .search-wrap{position:relative;margin:24px 0 8px;}
-  .search-wrap input{
-    width:100%;background:var(--panel);border:1px solid var(--line);
-    color:var(--text);padding:13px 44px 13px 16px;
-    border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;
-    outline:none;transition:border-color .15s;
+
+  if (!q) {
+    info.innerHTML = '';
+    nada.style.display = 'none';
+  } else if (vis === 0) {
+    info.innerHTML = '';
+    nada.style.display = 'block';
+  } else {
+    info.innerHTML = '<b>' + vis + '</b> resultado' + (vis > 1 ? 's' : '') + ' para <b>' + val + '</b>';
+    nada.style.display = 'none';
   }
-  .search-wrap input::placeholder{color:var(--muted);}
-  .search-wrap input:focus{border-color:var(--orange);}
-  .search-icon{
-    position:absolute;right:14px;top:50%;transform:translateY(-50%);
-    color:var(--muted);font-size:18px;pointer-events:none;
-  }
-  .search-clear{
-    position:absolute;right:14px;top:50%;transform:translateY(-50%);
-    background:none;border:none;color:var(--muted);font-size:22px;
-    cursor:pointer;padding:0;line-height:1;display:none;
-  }
-  .search-clear:hover{color:var(--orange);}
-  .search-count{
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    color:var(--muted);margin-bottom:16px;min-height:18px;
-  }
-  .search-count span{color:var(--orange);}
-  .post-card.hidden{display:none;}
-  .no-results{
-    text-align:center;padding:48px 24px;
-    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);
-    display:none;border:1px dashed var(--line);border-radius:10px;
-  }
-  .no-results strong{color:var(--text);}
-</style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PKYD6WDC3W');
-</script>
-</head>
-<body>
-
-<header class="top">
-  <div class="top-row">
-    <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
-    <nav class="tools-nav">
-      <a href="../index.html#senha">Senha</a>
-      <a href="../index.html#forca">Força de senha</a>
-      <a href="../index.html#pin">PIN seguro</a>
-      <a href="../index.html#qrcode">QR Code</a>
-      <a href="../index.html#ip">Meu IP</a>
-      <a href="../index.html#url">Decodificar URL</a>
-      <a href="../index.html#link">Link suspeito</a>
-      <a href="../index.html#exemplos">Exemplos de golpe</a>
-      <a href="index.html" class="active">Blog</a>
-    </nav>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="blog-hero">
-    <div class="eyebrow">blog de segurança digital</div>
-    <h1>Aprenda a se proteger online</h1>
-    <p>Artigos práticos sobre os golpes mais comuns no Brasil, senhas, phishing e privacidade — escritos para quem não é da área técnica.</p>
-  </div>
-
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="buscar posts... ex: phishing, pix, senha" autocomplete="off" spellcheck="false">
-    <span class="search-icon" id="searchIcon">⌕</span>
-    <button class="search-clear" id="searchClear" aria-label="Limpar busca">×</button>
-  </div>
-  <div class="search-count" id="searchCount"></div>
-
-  <div class="post-list" id="postList">
-
-    <div class="no-results" id="noResults">
-      Nenhum resultado para "<strong id="noResultsTerm"></strong>"<br>
-      <span style="font-size:11px;margin-top:8px;display:block;">Tente: pix, senha, whatsapp, phishing, vpn, wifi</span>
-    </div>
-
-    <a class="post-card" href="boletim-semanal-001.html" style="border-left:3px solid var(--orange);"
-       data-search="boletim semanal semana deepfake pix boleto banco central fraude noticias">
-      <div class="tag">📰 Boletim Semanal #001</div>
-      <h2>O que aconteceu em segurança digital esta semana — 30 jun a 6 jul</h2>
-      <p>Deepfakes crescem 830%, R$ 29 bilhões perdidos em Pix e boleto, Banco Central endurece regras. O resumo da semana com fontes verificadas.</p>
-    </a>
-
-    <a class="post-card" href="recebi-pix-nao-pedi-e-golpe.html"
-       data-search="pix golpe fraude confirmar dados falso recebido transferencia banco">
-      <div class="tag">Golpes via Pix</div>
-      <h2>Recebi um Pix que não pedi: é golpe?</h2>
-      <p>Entenda como funciona o golpe do falso Pix recebido e por que pedir para "confirmar dados" é sempre um sinal de fraude.</p>
-    </a>
-
-    <a class="post-card" href="golpe-codigo-whatsapp.html"
-       data-search="whatsapp codigo verificacao clonar conta sequestro sms dois fatores">
-      <div class="tag">Golpes no WhatsApp</div>
-      <h2>Golpe do código do WhatsApp: como funciona e como se proteger</h2>
-      <p>Como criminosos usam o código de verificação para clonar contas, e como ativar a verificação em duas etapas.</p>
-    </a>
-
-    <a class="post-card" href="golpe-falso-suporte-bancario.html"
-       data-search="suporte bancario falso acesso remoto anydesk teamviewer ligacao banco engenharia social">
-      <div class="tag">Engenharia social</div>
-      <h2>Golpe do falso suporte técnico/bancário: como identificar</h2>
-      <p>Por que nunca instalar apps de acesso remoto a pedido de quem ligou para você, mesmo dizendo ser do banco.</p>
-    </a>
-
-    <a class="post-card" href="senha-forte-que-voce-lembra.html"
-       data-search="senha forte lembrar frase diceware segura criar tamanho caracteres">
-      <div class="tag">Senhas</div>
-      <h2>Como criar uma senha forte que você consegue lembrar</h2>
-      <p>A técnica de frase-senha e por que o tamanho importa mais do que a complexidade visual.</p>
-    </a>
-
-    <a class="post-card" href="minha-senha-vazou-o-que-fazer.html"
-       data-search="senha vazou vazamento dados descobrir o que fazer hibp have i been pwned">
-      <div class="tag">Vazamento de dados</div>
-      <h2>Minha senha vazou? Como descobrir e o que fazer</h2>
-      <p>Como verificar com segurança se uma senha já apareceu em algum vazamento, sem expor a senha real.</p>
-    </a>
-
-    <a class="post-card" href="como-identificar-phishing.html"
-       data-search="phishing link golpe identificar dominio https encurtador suspeito">
-      <div class="tag">Phishing</div>
-      <h2>Como saber se um link é phishing antes de clicar</h2>
-      <p>Os sinais que continuam funcionando para identificar um link malicioso, mesmo com golpes feitos por IA.</p>
-    </a>
-
-    <a class="post-card" href="o-que-e-vpn-vale-a-pena.html"
-       data-search="vpn vale a pena privacidade rede virtual ip anonimato tunelamento">
-      <div class="tag">Privacidade</div>
-      <h2>O que é VPN e vale a pena usar?</h2>
-      <p>O que uma VPN realmente protege, e o que ela não substitui.</p>
-    </a>
-
-    <a class="post-card" href="wifi-publico-e-seguro.html"
-       data-search="wifi publico seguro rede aberta aeroporto cafe evil twin man in the middle">
-      <div class="tag">Redes públicas</div>
-      <h2>Wi-Fi público é seguro? O que evitar fazer em redes abertas</h2>
-      <p>Cuidados ao usar redes abertas em aeroportos, cafés e shoppings, e como identificar uma rede falsa.</p>
-    </a>
-
-  </div>
-</main>
-
-<footer>
-  <div class="wrap-wide">
-    <span>&copy; <span id="year"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
-    <span><a href="../index.html">Voltar para as ferramentas</a></span>
-  </div>
-</footer>
-
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-(function(){
-  const searchEl  = document.getElementById('searchInput');
-  const clearBtn  = document.getElementById('searchClear');
-  const searchIco = document.getElementById('searchIcon');
-  const countEl   = document.getElementById('searchCount');
-  const noResEl   = document.getElementById('noResults');
-  const noTermEl  = document.getElementById('noResultsTerm');
-  const allCards  = Array.from(document.querySelectorAll('.post-card'));
-<<<<<<< HEAD
-  console.log('[Utilix Search] cards:', allCards.length);
-=======
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
-
-  function norm(str){
-    return str.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z0-9\s]/g,' ');
-  }
-
-  const indexed = allCards.map(card => ({
-    card,
-    text: norm([
-      card.querySelector('h2') ? card.querySelector('h2').textContent : '',
-      card.querySelector('p')  ? card.querySelector('p').textContent  : '',
-      card.querySelector('.tag') ? card.querySelector('.tag').textContent : '',
-      card.getAttribute('data-search') || ''
-    ].join(' '))
-  }));
-
-  function runSearch(){
-<<<<<<< HEAD
-    var raw = searchEl.value.trim();
-    var q = norm(raw);
-
-    noResEl.style.display   = 'none';
-    clearBtn.style.display  = raw ? 'block' : 'none';
-    searchIco.style.display = raw ? 'none'  : 'block';
-
-    if(!q){
-      allCards.forEach(function(c){ c.style.display = ''; });
-=======
-    var q = norm(searchEl.value.trim());
-
-    noResEl.style.display  = 'none';
-    clearBtn.style.display = q ? 'block' : 'none';
-    searchIco.style.display = q ? 'none' : 'block';
-
-    if(!q){
-      allCards.forEach(function(c){ c.classList.remove('hidden'); });
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
-      countEl.innerHTML = '';
-      return;
-    }
-
-    var terms = q.split(/\s+/).filter(Boolean);
-    var visible = 0;
-
-    indexed.forEach(function(item){
-      var match = terms.every(function(t){ return item.text.indexOf(t) !== -1; });
-<<<<<<< HEAD
-      item.card.style.display = match ? '' : 'none';
-=======
-      item.card.classList.toggle('hidden', !match);
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
-      if(match) visible++;
-    });
-
-    if(visible === 0){
-      noResEl.style.display = 'block';
-<<<<<<< HEAD
-      noTermEl.textContent = raw;
-      countEl.innerHTML = '';
-    } else {
-      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + raw + '</span>"';
-=======
-      noTermEl.textContent = searchEl.value.trim();
-      countEl.innerHTML = '';
-    } else {
-      countEl.innerHTML = '<span>' + visible + '</span> resultado' + (visible !== 1 ? 's' : '') + ' para "<span>' + searchEl.value.trim() + '</span>"';
->>>>>>> 54e33b85f9d58f81212acbc4db754c385ce08bd7
->>>>>>> 7f78f2742baf18d24f7a67ac4e8c350c47f1663b
-    }
-  }
-
-  searchEl.addEventListener('input', runSearch);
-  clearBtn.addEventListener('click', function(){
-    searchEl.value = '';
-    runSearch();
-    searchEl.focus();
-  });
-})();
+}
 </script>
 </body>
 </html>
