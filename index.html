@@ -486,6 +486,107 @@
     .page-shell{grid-template-columns:1fr;}
     .side-rail{display:none;}
   }
+
+  /* ===== MOBILE (até 600px) ===== */
+  @media (max-width:600px){
+
+    /* nav — esconde links, mantém só brand + blog */
+    nav.tools-nav{ display:none; }
+
+    /* menu hamburguer simplificado */
+    .mobile-nav-toggle{
+      display:flex;align-items:center;gap:6px;
+      font-family:'JetBrains Mono',monospace;font-size:12px;
+      color:var(--muted);background:var(--panel);
+      border:1px solid var(--line);padding:6px 12px;
+      border-radius:5px;cursor:pointer;
+    }
+    .mobile-nav-toggle:hover{color:var(--orange);border-color:var(--orange);}
+    .mobile-menu{
+      display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+      background:rgba(10,12,15,0.97);z-index:100;
+      flex-direction:column;align-items:center;justify-content:center;gap:12px;
+      padding:24px;
+    }
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{
+      font-family:'JetBrains Mono',monospace;font-size:15px;
+      color:var(--muted);text-decoration:none;
+      border:1px solid var(--line);padding:12px 24px;
+      border-radius:6px;width:100%;text-align:center;
+    }
+    .mobile-menu a:hover,.mobile-menu a.active{color:var(--orange);border-color:var(--orange);}
+    .mobile-menu .close-menu{
+      position:absolute;top:20px;right:20px;
+      font-size:24px;color:var(--muted);background:none;border:none;cursor:pointer;
+    }
+
+    /* hero */
+    .hero{padding:36px 0 24px;}
+    .hero h1{font-size:clamp(26px,8vw,36px);}
+    .hero p{font-size:13px;}
+    .hero-tags{gap:6px;}
+    .hero-tags span{font-size:11px;padding:4px 8px;}
+
+    /* index rail — 2 colunas no mobile */
+    .index-rail{grid-template-columns:repeat(2,1fr);}
+    .index-card{padding:14px;}
+    .index-card h3{font-size:13px;}
+    .index-card p{display:none;}
+
+    /* panels */
+    .panel{padding:18px;}
+    .grid-2{grid-template-columns:1fr;}
+
+    /* toggle senha */
+    #modeAlfa,#modeFrase{font-size:11px;padding:8px;}
+
+    /* gerador de senha */
+    .switch-row span{font-size:13px;}
+
+    /* IP stats */
+    .ip-stats{grid-template-columns:1fr;}
+    .ip-hero .v{font-size:22px;}
+
+    /* força de senha */
+    .pw-input-row{flex-direction:column;}
+    .toggle-pw{width:100%;}
+
+    /* PIN */
+    .pin-size-row{gap:6px;}
+    .pin-size-btn{font-size:12px;padding:8px;}
+    .pin-display{font-size:28px;}
+
+    /* verificador de link */
+    .risk-badge{font-size:12px;}
+
+    /* exemplos de golpe */
+    .phish-grid{grid-template-columns:1fr;}
+
+    /* seções */
+    section.tool{padding:48px 0 20px;}
+    .tool-head h2{font-size:20px;}
+
+    /* ad slots */
+    .ad-slot{margin:28px 0;padding:14px;}
+
+    /* blog CTA */
+    .wrap[style*="padding-bottom"]{padding-bottom:40px!important;}
+
+    /* geral */
+    .wrap{padding:0 16px;}
+    .page-shell{padding:0 16px;}
+  }
+
+  /* ===== TABLET (601px — 900px) ===== */
+  @media (min-width:601px) and (max-width:900px){
+    nav.tools-nav{gap:2px;}
+    nav.tools-nav a{font-size:10px;padding:5px 7px;}
+    .hero h1{font-size:clamp(28px,5vw,40px);}
+    .index-rail{grid-template-columns:repeat(3,1fr);}
+    .grid-2{grid-template-columns:1fr;}
+    .ip-stats{grid-template-columns:1fr 1fr;}
+  }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
@@ -512,8 +613,24 @@
       <a href="#exemplos">Exemplos de golpe</a>
       <a href="blog/index.html">Blog</a>
     </nav>
+    <button class="mobile-nav-toggle" onclick="document.getElementById('mobileMenu').classList.add('open')">
+      ☰ Menu
+    </button>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" onclick="document.getElementById('mobileMenu').classList.remove('open')">×</button>
+  <a href="#senha" onclick="document.getElementById('mobileMenu').classList.remove('open')">Senha</a>
+  <a href="#forca" onclick="document.getElementById('mobileMenu').classList.remove('open')">Força de senha</a>
+  <a href="#pin" onclick="document.getElementById('mobileMenu').classList.remove('open')">PIN seguro</a>
+  <a href="#qrcode" onclick="document.getElementById('mobileMenu').classList.remove('open')">QR Code</a>
+  <a href="#ip" onclick="document.getElementById('mobileMenu').classList.remove('open')">Meu IP</a>
+  <a href="#url" onclick="document.getElementById('mobileMenu').classList.remove('open')">Decodificar URL</a>
+  <a href="#link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Link suspeito</a>
+  <a href="#exemplos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Exemplos de golpe</a>
+  <a href="blog/index.html">Blog</a>
+</div>
 
 <div class="page-shell">
 <main class="wrap">
