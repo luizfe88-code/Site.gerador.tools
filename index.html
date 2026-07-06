@@ -487,13 +487,16 @@
     .side-rail{display:none;}
   }
 
+  /* mobile toggle — oculto por padrão, aparece só em mobile via media query */
+  .mobile-nav-toggle{display:none;}
+  .mobile-menu{display:none;}
+  .mobile-menu.open{display:flex;}
+
   /* ===== MOBILE (até 600px) ===== */
   @media (max-width:600px){
 
-    /* nav — esconde links, mantém só brand + blog */
     nav.tools-nav{ display:none; }
 
-    /* menu hamburguer simplificado */
     .mobile-nav-toggle{
       display:flex;align-items:center;gap:6px;
       font-family:'JetBrains Mono',monospace;font-size:12px;
@@ -502,8 +505,9 @@
       border-radius:5px;cursor:pointer;
     }
     .mobile-nav-toggle:hover{color:var(--orange);border-color:var(--orange);}
+
     .mobile-menu{
-      display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+      position:fixed;top:0;left:0;right:0;bottom:0;
       background:rgba(10,12,15,0.97);z-index:100;
       flex-direction:column;align-items:center;justify-content:center;gap:12px;
       padding:24px;
