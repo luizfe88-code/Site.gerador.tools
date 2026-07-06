@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Página principal -->
   <url><loc>https://utilix.seg.br/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-
-  <!-- Blog -->
   <url><loc>https://utilix.seg.br/blog/index.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://utilix.seg.br/blog/boletim-semanal-001.html</loc><changefreq>never</changefreq><priority>0.8</priority></url>
+  <url><loc>https://utilix.seg.br/blog/boletim-semanal-002.html</loc><changefreq>never</changefreq><priority>0.8</priority></url>
+  <url><loc>https://utilix.seg.br/blog/boletim-semanal-001.html</loc><changefreq>never</changefreq><priority>0.7</priority></url>
   <url><loc>https://utilix.seg.br/blog/recebi-pix-nao-pedi-e-golpe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://utilix.seg.br/blog/golpe-codigo-whatsapp.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://utilix.seg.br/blog/golpe-falso-suporte-bancario.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -15,5 +12,4 @@
   <url><loc>https://utilix.seg.br/blog/como-identificar-phishing.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://utilix.seg.br/blog/o-que-e-vpn-vale-a-pena.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://utilix.seg.br/blog/wifi-publico-e-seguro.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
 </urlset>
