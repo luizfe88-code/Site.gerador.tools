@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caí em um golpe: o que fazer agora? Guia completo 2026 | Utilix</title>
+<meta name="description" content="Guia completo e atualizado: o que fazer nas primeiras horas após cair em um golpe digital. B.O., MED do Banco Central, provas, Procon e quando acionar a Justiça — com referências oficiais.">
+<link rel="canonical" href="https://utilix.seg.br/blog/o-que-fazer-se-caiu-em-golpe.html">
+<meta property="og:title" content="Caí em um golpe: o que fazer agora? Guia completo 2026">
+<meta property="og:description" content="Passo a passo após cair em um golpe digital: B.O., MED do Banco Central, provas, Procon e quando ir à Justiça. Guia com referências oficiais.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://utilix.seg.br/blog/o-que-fazer-se-caiu-em-golpe.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<style>
+.step-box{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:22px 24px;margin:14px 0;
+  display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;
+}
+.step-num{
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;
+  color:var(--orange);flex-shrink:0;
+}
+.step-num.urgente{background:rgba(255,107,107,0.1);border-color:rgba(255,107,107,0.3);color:#ff6b6b;}
+.step-content h3{margin:0 0 8px;font-size:16px;color:var(--text);}
+.step-content p{margin:0 0 8px;font-size:14px;color:#b0ada6;line-height:1.65;}
+.step-content p:last-child{margin:0;}
+.step-content strong{color:var(--text);}
+.step-content a{color:var(--teal);}
+@media(max-width:600px){.step-box{grid-template-columns:1fr;}.step-num{width:36px;height:36px;font-size:14px;}}
+
+.alert-box{
+  background:rgba(255,107,107,0.06);border:1px solid rgba(255,107,107,0.2);
+  border-left:3px solid #ff6b6b;border-radius:10px;padding:18px 20px;margin:24px 0;
+}
+.alert-box .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#ff6b6b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.alert-box p{margin:0;font-size:14px;color:#d0ada6;line-height:1.65;}
+.alert-box strong{color:var(--text);}
+
+.info-box{
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);
+  border-radius:10px;padding:18px 20px;margin:24px 0;
+}
+.info-box .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.info-box p{margin:0 0 10px;font-size:14px;color:#b0ada6;line-height:1.65;}
+.info-box p:last-child{margin:0;}
+.info-box ul{margin:8px 0 0;padding-left:18px;color:#b0ada6;font-size:14px;line-height:1.8;}
+
+.canais-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0;}
+@media(max-width:600px){.canais-grid{grid-template-columns:1fr;}}
+.canal-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.canal-card .nome{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.canal-card p{margin:0;font-size:13px;color:#b0ada6;line-height:1.5;}
+.canal-card a{color:var(--teal);font-size:12px;}
+
+.provas-list{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0;}
+.provas-list .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.provas-list ul{margin:0;padding-left:18px;color:#b0ada6;font-size:14px;line-height:2;}
+.provas-list li strong{color:var(--text);}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PKYD6WDC3W');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8827172734474346"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
+    <nav class="tools-nav">
+      <a href="../index.html#senha">Senha</a>
+      <a href="../index.html#forca">Força de senha</a>
+      <a href="../index.html#pin">PIN seguro</a>
+      <a href="../index.html#qrcode">QR Code</a>
+      <a href="../index.html#ip">Meu IP</a>
+      <a href="../index.html#url">Decodificar URL</a>
+      <a href="../index.html#link">Link suspeito</a>
+      <a href="../index.html#exemplos">Exemplos de golpe</a>
+      <a href="index.html" class="active">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="article-head">
+    <a class="back-link" href="index.html">Voltar para o blog</a>
+    <div class="eyebrow">Comportamento · Guia prático</div>
+    <h1>Caí em um golpe: o que fazer agora?</h1>
+    <div class="article-meta">Utilix · Segurança digital · Atualizado em julho de 2026</div>
+  </div>
+
+  <article class="prose">
+
+    <p class="lede" style="font-size:18px;color:#c8c5bc;line-height:1.65;margin-bottom:24px;">Cair em um golpe digital não é sinal de ingenuidade — é o resultado de técnicas sofisticadas de manipulação psicológica aplicadas por criminosos organizados. Segundo o Fórum Brasileiro de Segurança Pública, os golpes digitais atingiram 26,3 milhões de brasileiros nos últimos 12 meses e se tornaram o crime mais frequente vivido pela população. O que separa quem consegue limitar o prejuízo de quem perde tudo é uma coisa: velocidade de reação e método.</p>
+
+    <div class="alert-box">
+      <div class="label">⚠ Se o golpe acabou de acontecer</div>
+      <p>Não leia este artigo na ordem. Vá direto para o <strong>Passo 1</strong> (avisar o banco) e depois o <strong>Passo 2</strong> (preservar provas). Cada minuto conta — quanto mais rápido o banco for acionado, maior a chance de bloquear o dinheiro antes que o golpista o mova.</p>
+    </div>
+
+    <h2>Por que isso não é culpa sua</h2>
+
+    <p>Antes de qualquer passo prático, é importante desconstruir um mito. Existe a crença popular de que "só cai em golpe quem é desatento" ou "quem não entende de tecnologia". A realidade é outra.</p>
+
+    <p>Os golpistas de 2026 são organizados como empresas, com scripts testados, rotação de perfis, dados reais das vítimas obtidos em vazamentos e uso de inteligência artificial para clonar vozes e criar documentos convincentes. A engenharia social — a ciência de manipular comportamentos humanos — explora não a ignorância, mas emoções universais: medo, urgência, confiança e afeto. Pesquisas em psicologia comportamental mostram que qualquer pessoa, sob pressão suficiente e com as informações certas sendo apresentadas, pode tomar decisões que não tomaria com calma.</p>
+
+    <p>Reconhecer isso não é absolver o crime — é o primeiro passo para agir com clareza em vez de vergonha.</p>
+
+    <h2>As primeiras horas são decisivas</h2>
+
+    <p>A janela de tempo para reversão de dano é curta. Golpistas são treinados para mover valores rapidamente entre contas — muitas vezes em questão de minutos — para dificultar o rastreamento. O Mecanismo Especial de Devolução do Pix (MED), principal ferramenta de recuperação disponível no Brasil, funciona em cascata: quanto mais cedo acionado, maior a probabilidade de encontrar saldo disponível para bloqueio.</p>
+
+    <p>A seguir, o protocolo completo em ordem de prioridade.</p>
+
+    <h2>Passo a passo: o que fazer</h2>
+
+    <div class="step-box">
+      <div class="step-num urgente">1</div>
+      <div class="step-content">
+        <h3>Avise o banco imediatamente — pelo canal oficial</h3>
+        <p>Este é o passo mais urgente. Abra o <strong>aplicativo oficial do seu banco</strong> (não o que foi aberto por um link) e relate o ocorrido. Peça o bloqueio de transações, a contestação das movimentações fraudulentas e, se houve Pix, solicite expressamente o acionamento do <strong>MED (Mecanismo Especial de Devolução)</strong>.</p>
+        <p>Anote obrigatoriamente: <strong>número do protocolo, data, horário e nome do atendente</strong>. Esses dados são prova de que você notificou a instituição — e a data do aviso é juridicamente relevante.</p>
+        <p><strong>Não ligue para números recebidos por SMS ou WhatsApp.</strong> Use apenas o número no verso do cartão ou no site oficial que você já conhecia antes do golpe.</p>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num urgente">2</div>
+      <div class="step-content">
+        <h3>Preserve as provas — não apague nada</h3>
+        <p>Antes de bloquear contas ou apagar conversas, faça prints e backups de tudo. Uma prova apagada não pode ser recuperada. O que preservar:</p>
+        <div class="provas-list" style="margin:12px 0 0;">
+          <div class="label">// checklist de provas</div>
+          <ul>
+            <li><strong>Prints das conversas</strong> (WhatsApp, SMS, e-mail, redes sociais)</li>
+            <li><strong>Comprovantes de Pix</strong>, TED, transferência ou boleto pago</li>
+            <li><strong>Dados do destinatário</strong> (nome, CPF/CNPJ, banco, chave Pix)</li>
+            <li><strong>Links suspeitos</strong> recebidos (copie a URL, não clique novamente)</li>
+            <li><strong>Registros de chamadas</strong> com o golpista (número, horário, duração)</li>
+            <li><strong>E-mails</strong> recebidos, incluindo cabeçalho completo se possível</li>
+            <li><strong>Extratos bancários</strong> mostrando as transações</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Troque todas as senhas comprometidas</h3>
+        <p>Se o golpe envolveu acesso a contas, dispositivos ou links clicados, trate todas as credenciais relacionadas como comprometidas. Altere as senhas do banco, do e-mail vinculado ao banco e de qualquer aplicativo financeiro. Ative a verificação em duas etapas em todos esses serviços imediatamente após.</p>
+        <p>Prioridade máxima para o <strong>e-mail principal</strong> — ele é usado para redefinir senhas de todos os outros serviços e, se comprometido, dá acesso em cadeia a tudo mais.</p>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Registre o Boletim de Ocorrência</h3>
+        <p>O B.O. não garante a devolução do dinheiro por si só, mas é um documento essencial para o MED, para reclamações no Procon e Banco Central, e para uma eventual ação judicial. Sem ele, sua posição fica muito mais frágil em qualquer instância.</p>
+        <p>No Brasil, é possível registrar o B.O. de forma <strong>online, sem sair de casa</strong>, pela delegacia eletrônica da Polícia Civil do seu estado. O processo é simples: descreva o ocorrido com datas, valores, dados do golpista e anexe as provas que você coletou. Você receberá um protocolo por e-mail.</p>
+        <p><strong>Estados com delegacia virtual:</strong> SP (delegaciaeletronica.ssp.sp.gov.br), RJ (www.delegaciaonline.rj.gov.br), MG, RS, PR, BA e a maioria dos estados oferecem o serviço. Busque por "delegacia virtual + seu estado".</p>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Registre reclamação nos canais oficiais</h3>
+        <p>Se o banco não resolver ou demorar para responder, você tem canais adicionais de pressão com respaldo legal:</p>
+        <div class="canais-grid" style="margin-top:12px;">
+          <div class="canal-card">
+            <div class="nome">Consumidor.gov.br</div>
+            <p>Plataforma federal de reclamações. Bancos e fintechs têm obrigação de responder. Resolução média de 7 dias.</p>
+            <a href="https://www.consumidor.gov.br" target="_blank" rel="noopener">consumidor.gov.br →</a>
+          </div>
+          <div class="canal-card">
+            <div class="nome">Banco Central (Registrato)</div>
+            <p>Para reclamar contra bancos e instituições de pagamento. O BC tem poder regulatório sobre todas as instituições financeiras.</p>
+            <a href="https://www.bcb.gov.br/meubc/reclamacoes" target="_blank" rel="noopener">bcb.gov.br →</a>
+          </div>
+          <div class="canal-card">
+            <div class="nome">Procon do seu estado</div>
+            <p>Órgão de defesa do consumidor com poder de aplicar multas. Presencial ou online, dependendo do estado.</p>
+          </div>
+          <div class="canal-card">
+            <div class="nome">Meu BC (app Banco Central)</div>
+            <p>Permite verificar todas as contas bancárias abertas em seu nome e iniciar contestações diretamente.</p>
+            <a href="https://www.bcb.gov.br/meubc" target="_blank" rel="noopener">bcb.gov.br/meubc →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h3>Monitore seu CPF e suas contas nos dias seguintes</h3>
+        <p>Golpes frequentemente têm desdobramentos — o criminoso pode usar seus dados para abrir contas em seu nome, contratar empréstimos ou realizar outras fraudes. Nas semanas seguintes ao golpe, monitore:</p>
+        <p><strong>CPF:</strong> use a Receita Federal (receitafederal.gov.br) para ativar a proteção do CPF contra abertura indesejada de empresas. O Serasa e o SPC também permitem monitorar negativações.</p>
+        <p><strong>Contas bancárias:</strong> acesse o <strong>Registrato</strong> (registrato.bcb.gov.br) com login gov.br para ver todas as contas e chaves Pix abertas em seu nome — se houver algo que você não reconhece, conteste imediatamente.</p>
+        <p><strong>Gov.br:</strong> verifique na sua conta gov.br se há dispositivos ou acessos não reconhecidos e revogue-os imediatamente.</p>
+      </div>
+    </div>
+
+    <h2>Entendendo o MED: o mecanismo de devolução do Pix</h2>
+
+    <p>O Mecanismo Especial de Devolução (MED) é a principal ferramenta criada pelo Banco Central para casos de fraude via Pix. Desde fevereiro de 2026, opera na versão 2.0, com melhorias significativas.</p>
+
+    <div class="info-box">
+      <div class="label">// como o MED 2.0 funciona</div>
+      <p><strong>Prazo:</strong> você tem até <strong>80 dias</strong> após a transação para solicitar o MED pelo aplicativo do seu banco. Não espere — aja o quanto antes.</p>
+      <p><strong>Rastreamento ampliado:</strong> o MED 2.0 rastreia o dinheiro mesmo que o golpista transfira para múltiplas contas em cadeia, não se limitando à conta que recebeu o valor inicialmente.</p>
+      <p><strong>Bloqueio preventivo:</strong> quando acionado, o banco do golpista bloqueia o saldo disponível enquanto a análise ocorre. As duas instituições têm até 7 dias para avaliar e, se a fraude for confirmada, o dinheiro é devolvido integralmente.</p>
+      <p><strong>Autoatendimento:</strong> a contestação é feita pelo app do banco, sem necessidade de falar com atendente. Localize a transação, selecione "Reportar golpe" ou "Contestar Pix" e anexe o B.O.</p>
+      <p><strong>Limitação importante:</strong> se o saldo já foi movimentado ou sacado, a recuperação é mais difícil — mas não impossível, especialmente com o rastreamento em cadeia do MED 2.0.</p>
+    </div>
+
+    <p>O MED <strong>não se aplica</strong> em casos de desacordos comerciais (comprei algo e não recebi), transferência a terceiro de boa-fé ou Pix enviado por erro sem fraude envolvida. Para esses casos, o caminho é a contestação direta com o destinatário ou vias judiciais.</p>
+
+    <h2>Quando o banco pode ser responsabilizado</h2>
+
+    <p>A responsabilidade do banco não é automática, mas existe e tem sido reconhecida crescentemente pelos tribunais brasileiros. O Superior Tribunal de Justiça (STJ) firmou precedentes em 2025 reconhecendo a responsabilidade de instituições financeiras no golpe do falso suporte bancário quando há <strong>falha na detecção de transações suspeitas</strong> incompatíveis com o perfil do cliente.</p>
+
+    <p>Segundo o advogado Gutemberg Amorim, especialista em fraudes bancárias, os elementos que sustentam uma ação contra o banco incluem: transação fora do perfil habitual do cliente, ausência de alertas de segurança, abertura negligente de contas usadas na fraude e falha nos mecanismos antifraude exigidos pelo Banco Central. A negativa do banco não encerra a discussão — ela precisa ser analisada tecnicamente por um advogado com experiência em direito bancário e proteção de dados.</p>
+
+    <h2>Organize a linha do tempo do golpe</h2>
+
+    <p>Para qualquer contestação administrativa ou judicial, a documentação cronológica do golpe é fundamental. Monte um documento (pode ser simples, no celular mesmo) com:</p>
+
+    <ul>
+      <li>Data e hora do primeiro contato do golpista</li>
+      <li>Canal usado (WhatsApp, telefone, e-mail, site)</li>
+      <li>Narrativa usada pelo golpista</li>
+      <li>Data, hora e valor de cada transação realizada</li>
+      <li>Dados do destinatário (nome, banco, chave)</li>
+      <li>Quando você percebeu o golpe</li>
+      <li>Cada contato com o banco: data, protocolo, resposta</li>
+      <li>Cada reclamação feita: órgão, protocolo, data</li>
+    </ul>
+
+    <p>Essa linha do tempo transforma um relato emocional em um caso documentado e verificável — o que faz toda a diferença em uma análise jurídica ou regulatória.</p>
+
+    <h2>Proteja outras pessoas</h2>
+
+    <p>Golpistas frequentemente usam a conta ou o WhatsApp da vítima para continuar o golpe com outros contatos. Se houve invasão de conta, <strong>avise imediatamente</strong> seus contatos mais próximos por outro canal (ligação) que seu número pode estar sendo usado para solicitar dinheiro. Não espere recuperar o acesso para avisar — cada minuto que seus contatos ficam sem saber é uma oportunidade para o golpista.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">Antes de clicar no próximo link suspeito</div>
+      <p>Use o verificador de links do Utilix para analisar qualquer URL antes de clicar — ele identifica sinais de phishing, domínios suspeitos e encurtadores usados para esconder destinos maliciosos.</p>
+      <a href="../index.html#link">Verificar link suspeito →</a>
+    </div>
+
+    <h2>Referências e fontes</h2>
+
+    <ul>
+      <li>Banco Central do Brasil. <em>Mecanismo Especial de Devolução (MED).</em> <a href="https://www.bcb.gov.br/meubc" target="_blank" rel="noopener">bcb.gov.br/meubc</a></li>
+      <li>Fórum Brasileiro de Segurança Pública & Datafolha. <em>Medo do crime e eleições 2026: os gatilhos da insegurança.</em> Maio de 2026.</li>
+      <li>Senado Federal — Senado Verifica. <em>Pix: fui vítima de golpe. Como recuperar meu dinheiro?</em> Abril de 2026. <a href="https://www12.senado.leg.br/verifica" target="_blank" rel="noopener">senado.leg.br/verifica</a></li>
+      <li>Amorim, G. <em>Principais golpes bancários em 2026 e o que fazer nas primeiras 48 horas.</em> Junho de 2026. <a href="https://gutembergamorim.com.br" target="_blank" rel="noopener">gutembergamorim.com.br</a></li>
+      <li>Serasa. <em>O que fazer em caso de fraude? Veja como recuperar o dinheiro.</em> Julho de 2026. <a href="https://www.serasa.com.br/premium/blog/o-que-fazer-em-caso-de-fraude/" target="_blank" rel="noopener">serasa.com.br</a></li>
+      <li>Agência Brasil. <em>Conheça serviços de órgãos federais para se proteger de golpes.</em> Março de 2026. <a href="https://agenciabrasil.ebc.com.br" target="_blank" rel="noopener">agenciabrasil.ebc.com.br</a></li>
+      <li>Tribuna do Planalto. <em>Um terço dos golpes digitais no Brasil envolve Pix.</em> Junho de 2026.</li>
+      <li>Superior Tribunal de Justiça (STJ). <em>Jurisprudência sobre responsabilidade bancária em fraudes digitais.</em> 2025. <a href="https://www.stj.jus.br" target="_blank" rel="noopener">stj.jus.br</a></li>
+    </ul>
+
+    <div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;">
+      Este artigo tem caráter informativo e educativo. Não substitui a orientação de um advogado diante do caso concreto. As informações baseiam-se em normas do Banco Central, no Código de Defesa do Consumidor e na jurisprudência vigente em 2026.
+    </div>
+
+    <div class="related" style="border-top:1px solid var(--line);margin-top:40px;padding-top:24px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;">leia também</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <a href="como-identificar-phishing.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--line)'">Phishing — Como saber se um link é golpe antes de clicar</a>
+        <a href="golpe-falso-suporte-bancario.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--line)'">Engenharia social — Golpe do falso suporte bancário</a>
+        <a href="recebi-pix-nao-pedi-e-golpe.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--line)'">Pix — Recebi um Pix que não pedi: é golpe?</a>
+        <a href="golpe-codigo-whatsapp.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--line)'">WhatsApp — Golpe do código de verificação</a>
+      </div>
+    </div>
+
+  </article>
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <span>&copy; <span id="ano"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
+    <span>
+      <a href="../index.html">Ferramentas</a> &middot;
+      <a href="index.html">Blog</a> &middot;
+      <a href="../politica-de-privacidade.html">Privacidade</a>
+    </span>
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
