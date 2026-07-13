@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletim de Segurança #003 — Semana de 7 a 13 jul de 2026 | Utilix</title>
+<meta name="description" content="Boletim semanal: 4.300 sites falsos exploram a Copa 2026, site da FIFA foi clonado 5 vezes, Paraná registra pico de golpes digitais e 83% do phishing já usa IA.">
+<link rel="canonical" href="https://utilix.seg.br/blog/boletim-semanal-003.html">
+<meta property="og:title" content="Boletim de Segurança #003 — Semana de 7 a 13 jul de 2026">
+<meta property="og:description" content="4.300 sites falsos exploram a Copa 2026, site da FIFA clonado, pico de golpes no Paraná e 83% do phishing já usa IA. O resumo semanal do Utilix.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://utilix.seg.br/blog/boletim-semanal-003.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<style>
+.boletim-header{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;padding:22px 26px;margin:24px 0 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.boletim-header .edicao{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.boletim-header .periodo{font-size:15px;font-weight:600;color:var(--text);}
+.boletim-header .badge-novo{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,255,136,0.1);color:var(--orange);border:1px solid rgba(0,255,136,0.25);padding:5px 12px;border-radius:20px;}
+.numero-destaque{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;}
+.numero-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px;text-align:center;}
+.numero-card .valor{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:6px;}
+.numero-card .label{font-size:12px;color:var(--muted);line-height:1.4;}
+@media(max-width:600px){.numero-destaque{grid-template-columns:1fr;}.boletim-header{flex-direction:column;}}
+.noticia{border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px;transition:border-color .15s;}
+.noticia:hover{border-color:var(--orange);}
+.noticia-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.noticia-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+.noticia-tag.teal{color:var(--teal);background:rgba(0,229,255,0.08);border-color:rgba(0,229,255,0.2);}
+.noticia-tag.red{color:#ff6b6b;background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2);}
+.noticia h3{margin:0;font-size:17px;color:var(--text);line-height:1.3;flex:1;}
+.noticia p{margin:0 0 14px;font-size:14px;color:#b0ada6;line-height:1.7;}
+.noticia p:last-child{margin-bottom:0;}
+.noticia .fonte{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:4px 10px;border-radius:5px;transition:color .12s,border-color .12s;}
+.noticia .fonte::before{content:'↗ ';}
+.noticia .fonte:hover{color:var(--orange);border-color:var(--orange);}
+.dica-rapida{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:32px 0;}
+.dica-rapida .titulo{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+.dica-rapida ul{margin:0;padding-left:18px;color:#b0ada6;font-size:14px;line-height:1.8;}
+.dica-rapida li{margin-bottom:4px;}
+.dica-rapida strong{color:var(--text);}
+.rodape-boletim{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.rodape-boletim a{color:var(--muted);text-decoration:none;}
+.rodape-boletim a:hover{color:var(--orange);}
+.proxima-edicao{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:12px;}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PKYD6WDC3W');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8827172734474346" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
+    <nav class="tools-nav">
+      <a href="../index.html#senha">Senha</a>
+      <a href="../index.html#forca">Força de senha</a>
+      <a href="../index.html#pin">PIN seguro</a>
+      <a href="../index.html#qrcode">QR Code</a>
+      <a href="../index.html#ip">Meu IP</a>
+      <a href="../index.html#url">Decodificar URL</a>
+      <a href="../index.html#link">Link suspeito</a>
+      <a href="../index.html#exemplos">Exemplos de golpe</a>
+      <a href="index.html" class="active">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="article-head">
+    <a class="back-link" href="index.html">Voltar para o blog</a>
+    <div class="eyebrow">Boletim Semanal de Segurança</div>
+    <h1>O que aconteceu em segurança digital esta semana</h1>
+    <div class="article-meta">Utilix &middot; Publicado toda segunda-feira</div>
+  </div>
+
+  <div class="boletim-header">
+    <div>
+      <div class="edicao">Edição #003</div>
+      <div class="periodo">7 a 13 de julho de 2026</div>
+    </div>
+    <span class="badge-novo">● nova edição</span>
+  </div>
+
+  <div class="numero-destaque">
+    <div class="numero-card">
+      <div class="valor">4.300</div>
+      <div class="label">sites falsos criados para explorar a Copa do Mundo 2026</div>
+    </div>
+    <div class="numero-card">
+      <div class="valor">83%</div>
+      <div class="label">das campanhas de phishing já utilizam inteligência artificial</div>
+    </div>
+    <div class="numero-card">
+      <div class="valor">3/seg</div>
+      <div class="label">tentativas de golpe financeiro por segundo no Brasil em 2026</div>
+    </div>
+  </div>
+
+  <!-- NOTÍCIA 1 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Copa 2026: mais de 4.300 sites falsos e o site da FIFA clonado 5 vezes em português</h3>
+      <span class="noticia-tag red">Copa do Mundo</span>
+    </div>
+    <p>A Copa do Mundo de 2026, sediada na América do Norte, tornou-se o maior evento de golpes digitais já registrado no Brasil. Levantamento da Fortinet identificou mais de 4.300 domínios fraudulentos criados com referências ao torneio entre janeiro e julho — <strong>1.140 deles classificados como suspeitos</strong> e ativos. Paralelamente, a empresa de cibersegurança ESET identificou pelo menos 5 páginas clonadas do site oficial da FIFA com versões em português, oferecendo ingressos para jogos já esgotados com preços reduzidos artificialmente. Um dos indícios mais concretos de fraude: o site oficial da FIFA não oferece o idioma português — os sites falsos sim.</p>
+    <p>Os golpes mais ativos incluem venda de ingressos falsos (principalmente via Telegram), lojas com produtos falsificados, transmissões piratas que instalam malware, aplicativos falsos de acompanhamento dos jogos e phishing personalizado explorando o nome de patrocinadores e companhias aéreas. <strong>A regra de ouro: o único canal oficial de ingressos é fifa.com, sem "br" ou variações no endereço.</strong></p>
+    <a class="fonte" href="https://www.cnnbrasil.com.br/nacional/brasil/crimes-digitais-aumentam-durante-copa-do-mundo-mil-sites-fraudulentos/" target="_blank" rel="noopener noreferrer">CNN Brasil — Crimes digitais aumentam durante a Copa; mil sites fraudulentos</a>
+  </div>
+
+  <!-- NOTÍCIA 2 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>83% do phishing já usa IA: ataques mais convincentes, mais rápidos e mais personalizados</h3>
+      <span class="noticia-tag red">IA e Phishing</span>
+    </div>
+    <p>Um levantamento da Kaseya divulgado em 2026 revela que <strong>83% das campanhas de phishing já utilizam recursos de inteligência artificial</strong> para personalizar mensagens e aumentar a taxa de cliques. Mensagens produzidas por IA alcançam taxas de interação significativamente superiores às dos modelos tradicionais — o que na prática significa que o phishing de 2026 não tem mais os erros gramaticais e o tom genérico que antes serviam de alerta.</p>
+    <p>No contexto da Copa, a IA está sendo usada para monitorar o comportamento dos torcedores em redes sociais meses antes do evento e construir mensagens hiper-personalizadas com referências a jogadores favoritos, cidades-sede e preferências identificadas publicamente. "A Copa de 2026 será provavelmente o maior laboratório já visto para o uso de inteligência artificial em golpes digitais", afirma Rodolfo Almeida, COO da ViperX. O sinal de alerta muda: se antes era o texto cheio de erros, agora é a urgência e o canal não oficial.</p>
+    <a class="fonte" href="https://ipnews.com.br/4-300-sites-falsos-ja-exploram-a-copa-de-2026-especialistas-alertam-para-a-ameaca-agora-de-ia/" target="_blank" rel="noopener noreferrer">IPNews — 4.300 sites falsos exploram a Copa; especialistas alertam para IA</a>
+  </div>
+
+  <!-- NOTÍCIA 3 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Paraná no alerta: clonagem de portais governamentais e golpe do CPF bloqueado em alta</h3>
+      <span class="noticia-tag teal">Regional</span>
+    </div>
+    <p>O Departamento de Repressão aos Crimes Cibernéticos (DRCC) da Polícia Civil do Paraná registrou aumento expressivo de golpes entre junho e julho de 2026, com foco em dois vetores principais. O primeiro é a clonagem de portais governamentais — a Prefeitura de Londrina emitiu alerta sobre o site falso <em>prefeituradelondrina.org</em> (o oficial é <em>londrina.pr.gov.br</em>), usado para cobrar taxas falsas de impostos e serviços. O segundo é o golpe do agendamento da CNH e Carteira de Identidade Nacional: criminosos cobram taxas indevidas por serviços que são gratuitos nos canais oficiais.</p>
+    <p>O padrão é consistente com o observado nacionalmente: <strong>anúncios patrocinados no Google colocando páginas falsas no topo dos resultados de busca</strong>, acima dos sites oficiais. Antes de qualquer pagamento de taxa ou serviço público online, confirme a URL: sites do governo federal terminam em .gov.br, municipais em .gov.br ou no domínio oficial do município.</p>
+    <a class="fonte" href="https://www.bonde.com.br/bondenews/confira-as-principais-ameacas-digitais-de-junho-no-parana" target="_blank" rel="noopener noreferrer">Portal Bonde — Principais ameaças digitais de junho no Paraná</a>
+  </div>
+
+  <!-- NOTÍCIA 4 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>QR Code falso em locais físicos: o golpe que cresce durante grandes eventos</h3>
+      <span class="noticia-tag">QR Code</span>
+    </div>
+    <p>Com o aumento de torcedores circulando em bares, aeroportos e espaços públicos durante a Copa, especialistas alertam para o crescimento do <strong>QRLjacking</strong> — a substituição de QR Codes legítimos por versões falsas coladas sobre os originais em cardápios, totens e cartazes. Ao escanear, o usuário é direcionado para uma página que imita o sistema de pagamento ou de acesso ao serviço, mas captura dados bancários ou instala malware.</p>
+    <p>O detalhe que entrega o golpe: após escanear um QR Code legítimo, o endereço que aparece no navegador deve ser o do estabelecimento ou serviço que você conhece. Endereços com caracteres aleatórios, encurtadores de URL ou domínios desconhecidos são sinal de alerta. Nunca insira senha ou dados de pagamento em uma página acessada via QR Code sem antes verificar o endereço completo na barra do navegador.</p>
+    <a class="fonte" href="https://www.braining.com.br/2026/06/26/8-golpes-digitais-que-ameacam-torcedores-durante-a-copa-do-mundo/" target="_blank" rel="noopener noreferrer">BRaining — 8 golpes digitais que ameaçam torcedores durante a Copa</a>
+  </div>
+
+  <!-- DICA DA SEMANA -->
+  <div class="dica-rapida">
+    <div class="titulo">// dica da semana — como verificar um link antes de clicar durante a Copa</div>
+    <ul>
+      <li><strong>Ingressos:</strong> o único canal oficial é <em>fifa.com</em>. O site da FIFA para ingressos não está disponível em português — se você ver português no site de ingressos, é golpe.</li>
+      <li><strong>Produtos e camisas:</strong> compre apenas em lojas com reputação verificável (Reclame Aqui, avaliações no Google). Desconfie de preços 40%+ abaixo do mercado.</li>
+      <li><strong>QR Codes em locais físicos:</strong> antes de pagar, confirme a URL que apareceu no navegador. Se não reconhecer o endereço, não insira dados.</li>
+      <li><strong>Links recebidos por WhatsApp ou SMS:</strong> antes de clicar, cole o link no verificador de links do Utilix. É gratuito e não requer cadastro.</li>
+      <li><strong>Wi-Fi público nos bares e aeroportos:</strong> evite acessar banco ou fazer compras. Use seus dados móveis ou VPN quando necessário.</li>
+      <li><strong>Sites governamentais:</strong> sempre acesse digitando o endereço manualmente, nunca por link recebido ou anúncio no Google.</li>
+    </ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-label">Recebeu um link suspeito da Copa?</div>
+    <p>Cole o endereço na ferramenta do Utilix e veja uma análise automática: domínio recente, encurtador, typosquatting e outros sinais de phishing — em segundos, sem cadastro.</p>
+    <a href="../index.html#link">Verificar link agora →</a>
+  </div>
+
+  <!-- RODAPÉ DO BOLETIM -->
+  <div class="rodape-boletim">
+    <p>Este boletim é publicado toda segunda-feira com base em notícias e dados verificados de fontes públicas. Os links de referência levam diretamente às fontes originais. Nenhuma informação é patrocinada ou tem relação comercial com as fontes citadas.</p>
+    <div class="proxima-edicao">
+      <span>Próxima edição: <strong style="color:var(--text);">segunda-feira, 20 de julho de 2026</strong></span>
+      <a href="index.html">Ver todos os posts →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <span>&copy; <span id="ano"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
+    <span>
+      <a href="../index.html">Ferramentas</a> &middot;
+      <a href="index.html">Blog</a> &middot;
+      <a href="../politica-de-privacidade.html">Privacidade</a>
+    </span>
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
