@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quishing: o golpe do QR Code falso e como se proteger | Utilix</title>
+<meta name="description" content="O quishing (phishing por QR Code) cresceu 146% em 2026. Entenda como o golpe funciona, por que os filtros de segurança não o detectam e como verificar um QR Code antes de escanear.">
+<link rel="canonical" href="https://utilix.seg.br/blog/quishing-golpe-qr-code.html">
+<meta property="og:title" content="Quishing: o golpe do QR Code falso e como se proteger">
+<meta property="og:description" content="O golpe do QR Code cresceu 146% em 2026 e passa por todos os filtros de segurança. Entenda a mecânica e aprenda a verificar antes de escanear.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://utilix.seg.br/blog/quishing-golpe-qr-code.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<style>
+.lede{font-size:18px;color:#c8c5bc;line-height:1.65;margin-bottom:24px;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;}
+.stat-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px;text-align:center;}
+.stat-card .v{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:6px;}
+.stat-card .l{font-size:12px;color:var(--muted);line-height:1.4;}
+@media(max-width:600px){.stat-grid{grid-template-columns:1fr;}}
+
+.alert-box{background:rgba(255,107,107,0.06);border:1px solid rgba(255,107,107,0.2);border-left:3px solid #ff6b6b;border-radius:10px;padding:18px 20px;margin:24px 0;}
+.alert-box .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#ff6b6b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.alert-box p{margin:0;font-size:14px;color:#d0ada6;line-height:1.65;}
+.alert-box strong{color:var(--text);}
+
+.info-box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:18px 20px;margin:24px 0;}
+.info-box .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.info-box p{margin:0 0 10px;font-size:14px;color:#b0ada6;line-height:1.65;}
+.info-box p:last-child{margin:0;}
+
+.tipo-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:12px 0;}
+.tipo-card .tipo-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.06em;display:inline-block;margin-bottom:10px;}
+.tipo-card h3{margin:0 0 8px;font-size:16px;color:var(--text);}
+.tipo-card p{margin:0 0 8px;font-size:14px;color:#b0ada6;line-height:1.65;}
+.tipo-card p:last-child{margin:0;}
+.tipo-card strong{color:var(--text);}
+
+.check-list{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0;}
+.check-list .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.check-list ul{margin:0;padding-left:18px;color:#b0ada6;font-size:14px;line-height:1.9;}
+.check-list li strong{color:var(--text);}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PKYD6WDC3W');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8827172734474346" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
+    <nav class="tools-nav">
+      <a href="../index.html#senha">Senha</a>
+      <a href="../index.html#forca">Força de senha</a>
+      <a href="../index.html#pin">PIN seguro</a>
+      <a href="../index.html#qrcode">QR Code</a>
+      <a href="../index.html#ip">Meu IP</a>
+      <a href="../index.html#url">Decodificar URL</a>
+      <a href="../index.html#link">Link suspeito</a>
+      <a href="../index.html#exemplos">Exemplos de golpe</a>
+      <a href="index.html" class="active">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="article-head">
+    <a class="back-link" href="index.html">Voltar para o blog</a>
+    <div class="eyebrow">Golpes &middot; Análise técnica</div>
+    <h1>Quishing: o golpe do QR Code que passa por todos os filtros</h1>
+    <div class="article-meta">Utilix &middot; Segurança digital &middot; Julho de 2026</div>
+  </div>
+
+  <article class="prose">
+
+    <p class="lede">Um QR Code é uma imagem. Essa frase simples explica por que o quishing — phishing embutido em QR Code — se tornou uma das ameaças que mais crescem no mundo. Filtros de e-mail leem texto, não pixels. Seus olhos leem endereços, não quadradinhos pretos. E é exatamente nesse ponto cego, entre o que a máquina consegue analisar e o que o ser humano consegue conferir, que o golpe acontece.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="v">12%</div>
+        <div class="l">de todos os ataques de phishing usaram QR Code em 2025 — eram 0,8% em 2021</div>
+      </div>
+      <div class="stat-card">
+        <div class="v">+146%</div>
+        <div class="l">de aumento nos ataques de quishing no primeiro semestre de 2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="v">73%</div>
+        <div class="l">das pessoas escaneiam QR Codes sem verificar o destino antes</div>
+      </div>
+    </div>
+
+    <h2>O que é quishing, exatamente</h2>
+
+    <p>Quishing é a junção de <em>QR Code</em> e <em>phishing</em>. A lógica do golpe é idêntica à do phishing tradicional: induzir a vítima a acessar uma página falsa e entregar credenciais, dados bancários ou autorizar um pagamento. O que muda é o mecanismo de entrega — em vez de um link clicável em texto, o endereço malicioso vai codificado dentro de uma imagem.</p>
+
+    <p>Essa mudança aparentemente trivial tem três consequências que fazem do quishing um vetor desproporcionalmente eficaz.</p>
+
+    <p><strong>Primeiro: a máquina não vê.</strong> Filtros de segurança de e-mail (os chamados <em>Secure Email Gateways</em>) foram construídos para analisar URLs em texto — comparar contra listas de domínios maliciosos, checar reputação, detectar typosquatting. Um QR Code é opaco para essa análise. Para detectá-lo, o filtro precisaria identificar a imagem, decodificá-la e analisar a URL resultante em tempo real — algo que a maioria das soluções tradicionais simplesmente não faz.</p>
+
+    <p><strong>Segundo: o olho humano não lê.</strong> Um link em texto pode ser inspecionado antes do clique — dá para passar o mouse por cima, ler o domínio, desconfiar do endereço. Um QR Code não oferece essa possibilidade. Você não tem como saber para onde ele aponta antes de escanear.</p>
+
+    <p><strong>Terceiro: o ataque migra de dispositivo.</strong> O e-mail chega no computador corporativo, protegido por firewall e antivírus da empresa. Mas o QR Code é escaneado no celular pessoal — fora do perímetro monitorado. Cerca de 68% dos ataques de quishing têm como alvo dispositivos móveis, e isso não é acidente: é design.</p>
+
+    <div class="info-box">
+      <div class="label">// o dado que resume o problema</div>
+      <p>A telemetria da Unit 42 (Palo Alto Networks) detecta em média <strong>mais de 11 mil QR Codes maliciosos por dia</strong>. A Mimecast identificou mais de 716 mil QR Codes maliciosos únicos em um único trimestre de 2025. Não é uma ameaça emergente — é uma indústria em operação.</p>
+    </div>
+
+    <h2>As quatro formas do golpe no Brasil</h2>
+
+    <div class="tipo-card">
+      <span class="tipo-tag">01 — Adesivo sobreposto</span>
+      <h3>O QR Code colado por cima do original</h3>
+      <p>É a variante mais comum e mais simples. O criminoso imprime um adesivo com seu próprio QR Code e o cola sobre o código legítimo — no cardápio do restaurante, no totem de pagamento do estacionamento, no parquímetro, no cartaz do evento, na maquininha do posto de gasolina.</p>
+      <p>O que torna esse golpe eficaz não é a sofisticação técnica. É o <strong>contexto de confiança</strong>: você não está confiando no adesivo, está confiando no ambiente. Um QR Code na mesa de um restaurante conhecido carrega a credibilidade do restaurante — mesmo que tenha sido colado ali cinco minutos antes por um estranho.</p>
+      <p><strong>Como identificar:</strong> passe o dedo sobre o código. Se for um adesivo aplicado por cima de outro impresso, você vai sentir a borda. Códigos legítimos costumam ser impressos diretamente no material, não colados.</p>
+    </div>
+
+    <div class="tipo-card">
+      <span class="tipo-tag">02 — Pix falso</span>
+      <h3>O QR Code de pagamento adulterado</h3>
+      <p>No Brasil, o vetor mais grave é o pagamento. Um QR Code de Pix carrega os dados do destinatário codificados na imagem. Trocar o código por outro significa redirecionar o dinheiro para uma conta laranja — e o pagamento é irreversível em segundos.</p>
+      <p>A boa notícia é que existe uma janela de verificação: <strong>antes de confirmar qualquer Pix por QR Code, o app do banco mostra o nome do recebedor.</strong> Esse é o momento decisivo. Se você vai pagar a conta do restaurante "Cantina do João" e o nome que aparece é de uma pessoa física desconhecida ou de uma empresa que você nunca ouviu falar, pare. A pressa de fechar a conta é exatamente o que o golpe explora.</p>
+    </div>
+
+    <div class="tipo-card">
+      <span class="tipo-tag">03 — E-mail corporativo</span>
+      <h3>O QR Code que substitui o link no phishing por e-mail</h3>
+      <p>Aqui o quishing é usado deliberadamente para burlar os filtros. O e-mail chega dizendo que sua autenticação de dois fatores expirou, que há uma fatura pendente ou que um documento aguarda assinatura — e contém apenas uma imagem com QR Code, sem nenhum link clicável.</p>
+      <p>Existe uma evolução ainda mais sofisticada: o <strong>QR Code dinâmico</strong>. O criminoso usa o mesmo tipo de código que empresas legítimas usam para atualizar links sem reimprimir material. Quando o e-mail chega, o QR Code aponta para uma página inofensiva — o filtro de segurança analisa, não encontra nada e libera a mensagem. Depois que o e-mail já passou por todas as barreiras, o criminoso "vira a chave" no servidor e redireciona aquele mesmo código para a página de phishing.</p>
+      <p><strong>Sinal de alerta definitivo:</strong> nenhuma empresa séria pede que você escaneie um QR Code para "revalidar sua senha" ou "reativar seu acesso". Se a mensagem desencoraja você a confirmar por outro canal, é golpe — isolar a vítima do processo de verificação é técnica clássica de engenharia social.</p>
+    </div>
+
+    <div class="tipo-card">
+      <span class="tipo-tag">04 — Documento oficial falso</span>
+      <h3>Multas, taxas e notificações governamentais</h3>
+      <p>Criminosos enviam imagens de notificações com aparência oficial — multa de trânsito, intimação, taxa de regularização — contendo um QR Code em vez de um link suspeito. A vítima escaneia, chega a uma página que imita o portal do órgão e é conduzida a preencher nome, CPF, endereço e dados de cartão.</p>
+      <p><strong>A regra que resolve:</strong> órgãos públicos brasileiros usam domínios terminados em <span class="mono">.gov.br</span>. Se a página aberta pelo QR Code tem endereço terminado em <span class="mono">.com</span>, <span class="mono">.org</span>, <span class="mono">.life</span> ou qualquer outra coisa, é fraude. Multas e taxas legítimas devem ser consultadas digitando o endereço do Detran ou do órgão manualmente no navegador.</p>
+    </div>
+
+    <h2>Por que "escanear não infecta" é uma meia-verdade perigosa</h2>
+
+    <p>Existe uma crença tranquilizadora de que apenas apontar a câmera para um QR Code não faz mal — que o risco só começa se você digitar alguma coisa. Isso é parcialmente correto e perigosamente incompleto.</p>
+
+    <p>É verdade que, em 2026, o simples ato de escanear dificilmente instala malware sozinho: os sistemas operacionais móveis têm proteções de <em>sandboxing</em> que isolam o navegador. Mas o QR Code não precisa instalar nada para funcionar. Ele precisa apenas <strong>te levar até a página falsa</strong> — e a partir daí o golpe é o phishing de sempre, com todas as suas técnicas de persuasão.</p>
+
+    <p>Além disso, um QR Code pode conter muito mais do que uma URL. Ele pode carregar credenciais de rede Wi-Fi (conectando seu celular a uma rede controlada pelo criminoso), um contato para inserir na sua agenda (preparando um golpe telefônico futuro), ou um comando para abrir o app de e-mail ou o discador com dados pré-preenchidos.</p>
+
+    <div class="alert-box">
+      <div class="label">⚠ O cadeado não é garantia</div>
+      <p>Muita gente aprendeu que "site com cadeado é seguro". Isso nunca foi verdade e hoje é menos ainda. <strong>Sites de phishing usam HTTPS normalmente</strong> — obter um certificado é gratuito e automático. O cadeado significa apenas que a conexão está criptografada, não que o site do outro lado seja legítimo. O que importa é o <strong>domínio</strong>, não o cadeado.</p>
+    </div>
+
+    <h2>Como verificar um QR Code antes de cair</h2>
+
+    <p>A defesa contra quishing não é parar de usar QR Codes — é introduzir dois segundos de atrito entre o escaneamento e a ação.</p>
+
+    <div class="check-list">
+      <div class="label">// protocolo de verificação</div>
+      <ul>
+        <li><strong>Leia o banner antes de tocar.</strong> Tanto o iOS quanto o Android mostram o endereço de destino em uma notificação após o escaneamento — antes de abrir. Leia esse endereço. Não toque automaticamente.</li>
+        <li><strong>Confira o domínio, não o caminho.</strong> Em <span class="mono">banco-seguranca.pagamentos.xyz.com</span>, o domínio real é <span class="mono">xyz.com</span> — tudo o que vem antes é subdomínio e pode ser qualquer coisa que o criminoso quiser.</li>
+        <li><strong>Desconfie de encurtadores.</strong> Se o QR Code leva a um endereço encurtado (bit.ly, cutt.ly e similares), o destino real está escondido. Um estabelecimento legítimo não tem motivo para esconder o próprio endereço.</li>
+        <li><strong>No Pix, confirme o nome do recebedor.</strong> Sempre. Todo pagamento por QR Code mostra o nome antes da confirmação. Se não bate com quem você está pagando, cancele.</li>
+        <li><strong>Toque no código físico.</strong> Adesivo colado por cima tem borda perceptível ao tato.</li>
+        <li><strong>Nunca escaneie QR Code de e-mail que pede senha.</strong> Nenhuma empresa faz isso. Acesse o serviço digitando o endereço no navegador.</li>
+        <li><strong>Na dúvida, digite o endereço manualmente.</strong> O QR Code é conveniência, não obrigação. Perder 20 segundos digitando é mais barato que perder a conta bancária.</li>
+      </ul>
+    </div>
+
+    <div class="cta-box">
+      <div class="cta-label">Escaneou um QR Code e não reconheceu o endereço?</div>
+      <p>Copie a URL que apareceu e cole no verificador de links do Utilix. Ele analisa domínio, subdomínios suspeitos, encurtadores, uso de HTTPS e imitação de marcas conhecidas — sem cadastro e sem enviar nada para servidor nenhum.</p>
+      <a href="../index.html#link">Analisar link suspeito →</a>
+    </div>
+
+    <h2>Se você já escaneou e forneceu dados</h2>
+
+    <p>A velocidade importa mais do que a vergonha. Credenciais capturadas às 10h costumam ser usadas às 10h30.</p>
+
+    <p>Se você inseriu senha, troque imediatamente essa senha e todas as outras iguais ou parecidas, começando pelo e-mail principal. Se inseriu dados de cartão, ligue para o banco pelo número no verso do cartão e peça o bloqueio. Se fez um Pix, acione o banco pelo aplicativo oficial e solicite o <strong>MED (Mecanismo Especial de Devolução)</strong> — o prazo é de até 80 dias, mas a chance de recuperação cai drasticamente a cada hora.</p>
+
+    <p>O protocolo completo, incluindo boletim de ocorrência e canais oficiais de reclamação, está detalhado no nosso guia sobre <a href="o-que-fazer-se-caiu-em-golpe.html">o que fazer se você caiu em um golpe</a>.</p>
+
+    <h2>Referências e fontes</h2>
+
+    <ul>
+      <li>Keepnet Labs. <em>QR Code Phishing Statistics &amp; Quishing Trends.</em> 2026. <a href="https://keepnetlabs.com/blog/qr-code-phishing-trends-in-depth-analysis-of-rising-quishing-statistics" target="_blank" rel="noopener">keepnetlabs.com</a></li>
+      <li>Palo Alto Networks Unit 42. <em>Phishing on the Edge of the Web and Mobile Using QR Codes.</em> 2026.</li>
+      <li>EC-Council University. <em>What Is Quishing? QR Code Phishing Explained (2026 Guide).</em> <a href="https://www.eccu.edu/blog/what-is-quishing-qr-code-phishing-2026/" target="_blank" rel="noopener">eccu.edu</a></li>
+      <li>Microsoft. Dados de aumento de 146% em ataques de quishing entre janeiro e março de 2026.</li>
+      <li>NordVPN / CNBC. <em>Pesquisa sobre verificação de destino em escaneamento de QR Codes.</em> 2025.</li>
+      <li>Starti. <em>Golpe do QR Code: como identificar e evitar o Quishing.</em> Fevereiro de 2026. <a href="https://blog.starti.com.br/golpe-do-qr-code-falso/" target="_blank" rel="noopener">blog.starti.com.br</a></li>
+      <li>OBlock. <em>Quishing: o que é o phishing por QR Code e como funciona.</em> Maio de 2026. <a href="https://www.oblock.com.br/quishing-phishing-qr-code/" target="_blank" rel="noopener">oblock.com.br</a></li>
+      <li>TI Safe. <em>Golpe do QR Code: você conhece o quishing?</em> <a href="https://tisafe.com/golpe-do-qr-code-voce-conhece-o-quishing/" target="_blank" rel="noopener">tisafe.com</a></li>
+      <li>Banco Central do Brasil. <em>Mecanismo Especial de Devolução (MED).</em> <a href="https://www.bcb.gov.br/meubc" target="_blank" rel="noopener">bcb.gov.br</a></li>
+    </ul>
+
+    <div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;">
+      Este artigo tem caráter informativo e educativo. As estatísticas citadas referem-se a levantamentos publicados pelas fontes listadas e podem variar conforme metodologia e período de coleta.
+    </div>
+
+    <div class="related" style="border-top:1px solid var(--line);margin-top:40px;padding-top:24px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;">leia também</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <a href="como-identificar-phishing.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;">Phishing — Como saber se um link é golpe antes de clicar</a>
+        <a href="o-que-fazer-se-caiu-em-golpe.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;">Guia — Caí em um golpe: o que fazer agora?</a>
+        <a href="recebi-pix-nao-pedi-e-golpe.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;">Pix — Recebi um Pix que não pedi: é golpe?</a>
+        <a href="boletim-semanal-003.html" style="display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-decoration:none;color:var(--text);font-size:13px;font-weight:600;">Boletim #003 — 4.300 sites falsos exploram a Copa 2026</a>
+      </div>
+    </div>
+
+  </article>
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <span>&copy; <span id="ano"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
+    <span>
+      <a href="../index.html">Ferramentas</a> &middot;
+      <a href="index.html">Blog</a> &middot;
+      <a href="../politica-de-privacidade.html">Privacidade</a>
+    </span>
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
