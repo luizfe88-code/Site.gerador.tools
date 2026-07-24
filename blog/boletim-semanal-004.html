@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletim de Segurança #004 — Semana de 14 a 20 jul de 2026 | Utilix</title>
+<meta name="description" content="Boletim semanal: golpe do falso app INSS Reembolso com trojan BeatBanker, ressarcimento oficial começa em 24 de julho, e o alerta do Banco Central sobre como avisa vazamentos de chaves Pix.">
+<link rel="canonical" href="https://utilix.seg.br/blog/boletim-semanal-004.html">
+<meta property="og:title" content="Boletim de Segurança #004 — Semana de 14 a 20 jul de 2026">
+<meta property="og:description" content="Golpe do falso app do INSS, ressarcimento oficial começa em 24/jul e como o Banco Central realmente avisa vazamentos de chaves Pix. Resumo semanal do Utilix.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://utilix.seg.br/blog/boletim-semanal-004.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<style>
+.boletim-header{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;padding:22px 26px;margin:24px 0 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.boletim-header .edicao{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.boletim-header .periodo{font-size:15px;font-weight:600;color:var(--text);}
+.boletim-header .badge-novo{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,255,136,0.1);color:var(--orange);border:1px solid rgba(0,255,136,0.25);padding:5px 12px;border-radius:20px;}
+.numero-destaque{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;}
+.numero-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px;text-align:center;}
+.numero-card .valor{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:6px;}
+.numero-card .label{font-size:12px;color:var(--muted);line-height:1.4;}
+@media(max-width:600px){.numero-destaque{grid-template-columns:1fr;}.boletim-header{flex-direction:column;}}
+.noticia{border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px;transition:border-color .15s;}
+.noticia:hover{border-color:var(--orange);}
+.noticia-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.noticia-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+.noticia-tag.teal{color:var(--teal);background:rgba(0,229,255,0.08);border-color:rgba(0,229,255,0.2);}
+.noticia-tag.red{color:#ff6b6b;background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2);}
+.noticia h3{margin:0;font-size:17px;color:var(--text);line-height:1.3;flex:1;}
+.noticia p{margin:0 0 14px;font-size:14px;color:#b0ada6;line-height:1.7;}
+.noticia p:last-child{margin-bottom:0;}
+.noticia .fonte{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:4px 10px;border-radius:5px;transition:color .12s,border-color .12s;}
+.noticia .fonte::before{content:'↗ ';}
+.noticia .fonte:hover{color:var(--orange);border-color:var(--orange);}
+.dica-rapida{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:32px 0;}
+.dica-rapida .titulo{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+.dica-rapida ul{margin:0;padding-left:18px;color:#b0ada6;font-size:14px;line-height:1.8;}
+.dica-rapida li{margin-bottom:4px;}
+.dica-rapida strong{color:var(--text);}
+.rodape-boletim{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.rodape-boletim a{color:var(--muted);text-decoration:none;}
+.rodape-boletim a:hover{color:var(--orange);}
+.proxima-edicao{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:12px;}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKYD6WDC3W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PKYD6WDC3W');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8827172734474346" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Utilix</a>
+    <nav class="tools-nav">
+      <a href="../index.html#senha">Senha</a>
+      <a href="../index.html#forca">Força de senha</a>
+      <a href="../index.html#pin">PIN seguro</a>
+      <a href="../index.html#qrcode">QR Code</a>
+      <a href="../index.html#ip">Meu IP</a>
+      <a href="../index.html#url">Decodificar URL</a>
+      <a href="../index.html#link">Link suspeito</a>
+      <a href="../index.html#exemplos">Exemplos de golpe</a>
+      <a href="index.html" class="active">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="article-head">
+    <a class="back-link" href="index.html">Voltar para o blog</a>
+    <div class="eyebrow">Boletim Semanal de Segurança</div>
+    <h1>O que aconteceu em segurança digital esta semana</h1>
+    <div class="article-meta">Utilix &middot; Publicado toda segunda-feira</div>
+  </div>
+
+  <div class="boletim-header">
+    <div>
+      <div class="edicao">Edição #004</div>
+      <div class="periodo">14 a 20 de julho de 2026</div>
+    </div>
+    <span class="badge-novo">● nova edição</span>
+  </div>
+
+  <div class="numero-destaque">
+    <div class="numero-card">
+      <div class="valor">R$11bi</div>
+      <div class="label">projeção de perdas com golpes do Pix até 2028 (relatório Scamscope)</div>
+    </div>
+    <div class="numero-card">
+      <div class="valor">1 a cada 2,3s</div>
+      <div class="label">tentativas de fraude no Brasil no 1º semestre de 2025 (Serasa Experian)</div>
+    </div>
+    <div class="numero-card">
+      <div class="valor">9 milhões</div>
+      <div class="label">aposentados tiveram descontos indevidos investigados pela Operação Sem Desconto</div>
+    </div>
+  </div>
+
+  <!-- NOTÍCIA 1 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Falso app "INSS Reembolso" espalha trojan bancário que assume o controle do celular</h3>
+      <span class="noticia-tag red">Golpe ativo</span>
+    </div>
+    <p>O INSS mantém alerta máximo sobre um aplicativo falso chamado <strong>"INSS Reembolso"</strong>, que promete devolver descontos associativos supostamente cobrados de forma irregular. Identificado por pesquisadores da Kaspersky, o app esconde o malware <strong>BeatBanker</strong> — um trojan bancário que, uma vez instalado, espiona os aplicativos de banco da vítima, captura senhas digitadas e permite que criminosos controlem o aparelho remotamente, executando transações sem o conhecimento do dono.</p>
+    <p>O golpe explora justamente a repercussão do ressarcimento real dos descontos indevidos, criando uma isca perfeita. A distribuição acontece por um site que imita a loja oficial de aplicativos do Android. <strong>A regra que protege: o INSS não tem intermediários nem aplicativos externos para reembolsos. O único canal oficial é o app Meu INSS, baixado direto da Google Play ou App Store, ou a Central 135.</strong></p>
+    <a class="fonte" href="https://www.techtudo.com.br/guia/2026/06/golpe-com-app-falso-do-inss-promete-reembolso-saiba-como-se-proteger-edapps.ghtml" target="_blank" rel="noopener noreferrer">TechTudo — Golpe com app falso do INSS promete reembolso</a>
+  </div>
+
+  <!-- NOTÍCIA 2 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Ressarcimento oficial dos descontos do INSS começa em 24 de julho — e golpistas já se aproveitam</h3>
+      <span class="noticia-tag teal">Serviço oficial</span>
+    </div>
+    <p>O governo federal iniciou o pagamento do ressarcimento aos aposentados lesados pela Operação Sem Desconto, com lotes a cada 15 dias visando reparar cerca de 1,5 milhão de pessoas no início. Ao todo, pelo menos 9 milhões de aposentados e pensionistas tiveram descontos indevidos entre 2020 e 2025, e R$ 2,8 bilhões em bens já foram bloqueados judicialmente para garantir o pagamento.</p>
+    <p>O problema: sempre que há um ressarcimento oficial legítimo, criminosos criam versões falsas do processo. A contestação de descontos e o recebimento do ressarcimento são feitos <strong>exclusivamente pelo app Meu INSS, pela Central 135 ou em uma agência dos Correios</strong> — nunca por link recebido em SMS, WhatsApp ou redes sociais. Quem oferece "adiantar" ou "liberar" o ressarcimento mediante taxa ou dados bancários é golpista.</p>
+    <a class="fonte" href="https://fdr.com.br/2026/07/14/golpes-no-inss-fazem-novas-vitimas-conheca-5-fraudes-e-evite-prejuizos/" target="_blank" rel="noopener noreferrer">FDR — Golpes no INSS fazem novas vítimas; conheça as fraudes</a>
+  </div>
+
+  <!-- NOTÍCIA 3 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Como o Banco Central REALMENTE avisa quando sua chave Pix é exposta</h3>
+      <span class="noticia-tag">Pix</span>
+    </div>
+    <p>Os vazamentos de dados cadastrais de chaves Pix continuam acontecendo — em 2026 já foram registrados mais de 20 incidentes envolvendo instituições como Pefisa (28.203 chaves) e Agibank (5.290 chaves). Em todos os casos, o Banco Central esclarece que foram expostos apenas <strong>dados cadastrais</strong> (nome, CPF com máscara, agência, tipo de conta) — nunca senhas, saldos ou extratos, que são protegidos por sigilo bancário e não permitem movimentação de dinheiro.</p>
+    <p>O ponto crítico é como o BC comunica: quem tem dados expostos <strong>é avisado exclusivamente pelo aplicativo ou internet banking da própria instituição</strong>. O Banco Central pediu expressamente que os cidadãos <strong>desconsiderem</strong> qualquer aviso de vazamento que chegue por ligação, SMS, e-mail ou aplicativos de mensagem — esses são golpes que exploram o medo do vazamento para roubar ainda mais dados.</p>
+    <a class="fonte" href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-02/bc-registra-primeiro-incidente-com-chaves-pix-em-2026" target="_blank" rel="noopener noreferrer">Agência Brasil — BC registra incidente com chaves Pix em 2026</a>
+  </div>
+
+  <!-- NOTÍCIA 4 -->
+  <div class="noticia">
+    <div class="noticia-top">
+      <h3>Brasil deve liderar crescimento de fraudes no Pix no mundo, aponta relatório internacional</h3>
+      <span class="noticia-tag red">Tendência</span>
+    </div>
+    <p>O relatório Scamscope, da ACI Worldwide em parceria com a GlobalData, projeta que o Brasil terá o <strong>maior crescimento em fraudes de pagamentos em tempo real do mundo</strong>. As perdas com o golpe do Pix podem chegar a R$ 11 bilhões até 2028 — um aumento de quase 40% em relação a 2023. O estudo analisou os seis maiores mercados de pagamento instantâneo: Brasil, EUA, Reino Unido, Índia, Austrália e Emirados Árabes.</p>
+    <p>Um dado revela o custo além do dinheiro: <strong>uma em cada quatro vítimas de golpe afirma que vai trocar de banco</strong>. Isso pressiona as instituições a investir em prevenção — mas, enquanto a tecnologia antifraude não alcança os criminosos, a defesa mais eficaz continua sendo a informação. Desconfiar de urgência, confirmar por canais oficiais e nunca ceder à pressão de decidir "agora" são as barreiras que funcionam hoje.</p>
+    <a class="fonte" href="https://www.businesswire.com/news/home/20241119020998/pt" target="_blank" rel="noopener noreferrer">Business Wire — Relatório Scamscope sobre fraudes no Pix</a>
+  </div>
+
+  <!-- DICA DA SEMANA -->
+  <div class="dica-rapida">
+    <div class="titulo">// dica da semana — como proteger um aposentado dos golpes do INSS</div>
+    <ul>
+      <li><strong>O INSS nunca cobra taxa</strong> para liberar benefício, ressarcimento ou revisão. Qualquer cobrança para "adiantar" ou "liberar" dinheiro é golpe.</li>
+      <li><strong>Só existe um app oficial: Meu INSS.</strong> Baixe apenas da Google Play ou App Store. Não existe "INSS Reembolso", "INSS Digital Pro" ou variações.</li>
+      <li><strong>Bloqueie empréstimos no CPF.</strong> Pelo Meu INSS ou pela Central 135, é possível bloquear a contratação de novos empréstimos consignados — uma barreira contra o golpe do consignado não autorizado.</li>
+      <li><strong>Desconfie de qualquer ligação</strong> que peça para "confirmar dados bancários" ou instalar apps de "suporte". O INSS não liga pedindo isso.</li>
+      <li><strong>Denuncie pelo 135</strong> ou pelo portal oficial. Ligações e SMS suspeitos devem ser reportados.</li>
+      <li><strong>Antes de clicar em qualquer link recebido,</strong> cole o endereço no verificador de links do Utilix — é gratuito e ajuda a identificar sites falsos que imitam o gov.br.</li>
+    </ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-label">Recebeu um link do "INSS" ou de "reembolso"?</div>
+    <p>Antes de clicar, cole o endereço no verificador de links do Utilix. Ele identifica domínios falsos que imitam sites do governo, encurtadores e outros sinais de golpe — em segundos, sem cadastro.</p>
+    <a href="../index.html#link">Verificar link agora →</a>
+  </div>
+
+  <!-- RODAPÉ DO BOLETIM -->
+  <div class="rodape-boletim">
+    <p>Este boletim é publicado toda segunda-feira com base em notícias e dados verificados de fontes públicas. Os links de referência levam diretamente às fontes originais. Nenhuma informação é patrocinada ou tem relação comercial com as fontes citadas.</p>
+    <div class="proxima-edicao">
+      <span>Próxima edição: <strong style="color:var(--text);">segunda-feira, 27 de julho de 2026</strong></span>
+      <a href="index.html">Ver todos os posts →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap-wide">
+    <span>&copy; <span id="ano"></span> Utilix &mdash; ferramentas gratuitas de segurança digital.</span>
+    <span>
+      <a href="../index.html">Ferramentas</a> &middot;
+      <a href="index.html">Blog</a> &middot;
+      <a href="../politica-de-privacidade.html">Privacidade</a>
+    </span>
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
