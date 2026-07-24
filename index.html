@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Utilix v2.1 — 02/07/2026 -->
+<!-- Utilix v2.2 — 24/07/2026 -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -778,8 +778,9 @@
     </div>
 
     <div class="seo-text">
-      <p>Uma senha forte é a primeira barreira contra invasões de conta, vazamento de dados e roubo de identidade. O ideal é usar pelo menos 12 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos — e nunca reaproveitar a mesma senha em sites diferentes.</p>
-      <p>A técnica de frase-senha (diceware) combina palavras aleatórias em português, criando senhas longas e fáceis de lembrar — mais seguras que senhas curtas com símbolos. Ambas as opções são geradas localmente no navegador, sem enviar nada para nenhum servidor.</p>
+      <p>Uma senha forte é a primeira barreira contra invasões de conta, vazamento de dados e roubo de identidade. O ideal é usar pelo menos 12 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos — e, acima de tudo, nunca reaproveitar a mesma senha em sites diferentes. A reutilização é o erro mais comum e o mais perigoso: quando uma senha vaza de um único serviço, todos os outros que usam a mesma senha ficam expostos de uma vez.</p>
+      <p>O que torna uma senha realmente difícil de quebrar é a <strong>entropia</strong> — a quantidade de imprevisibilidade que ela contém. Uma senha de 8 caracteres, mesmo com símbolos, pode ser quebrada por um computador moderno em horas. Já uma senha de 16 caracteres aleatórios levaria bilhões de anos. É por isso que o comprimento importa mais que a complexidade aparente: "P@ss1!" é fraca, enquanto uma sequência longa e aleatória é praticamente inquebrável por força bruta.</p>
+      <p>A técnica de frase-senha (também chamada de <em>diceware</em>) combina quatro ou mais palavras aleatórias em português, criando senhas longas e fáceis de lembrar — como <span class="mono">cadeira-nuvem-7-girassol</span>. Contraintuitivamente, uma frase dessas é mais segura que uma senha curta cheia de símbolos, porque o comprimento eleva a entropia a níveis que a força bruta não alcança. Ambas as opções desta ferramenta são geradas localmente no seu navegador usando o gerador criptográfico do sistema, sem enviar nada para nenhum servidor — a senha nunca sai do seu dispositivo.</p>
     </div>
   </section>
 
@@ -850,8 +851,9 @@
     </div>
 
     <div class="seo-text">
-      <p>Todo dispositivo conectado à internet recebe um endereço IP, um identificador numérico que revela informações como o provedor de internet usado e a localização aproximada da conexão — geralmente a cidade ou região, nunca o endereço exato. Saber seu próprio IP é útil para configurar redes, diagnosticar problemas de conexão, liberar acesso em sistemas restritos ou simplesmente verificar se uma VPN está funcionando corretamente.</p>
-      <p>Consultar o IP de terceiros é uma prática comum em segurança da informação: administradores de sistema usam essa informação para investigar acessos suspeitos em logs de servidor, identificar a origem aproximada de tentativas de login indevidas, ou confirmar se um endereço pertence a um serviço legítimo (como um servidor de DNS público) ou a uma rede desconhecida. Esta ferramenta não armazena nenhum dado consultado — todas as buscas são feitas em tempo real e não ficam salvas.</p>
+      <p>Todo dispositivo conectado à internet recebe um endereço IP, um identificador numérico que revela informações como o provedor de internet usado e a localização aproximada da conexão — geralmente a cidade ou região, nunca o endereço exato nem o nome da pessoa. Saber seu próprio IP é útil para configurar redes, diagnosticar problemas de conexão, liberar acesso em sistemas restritos ou simplesmente verificar se uma VPN está funcionando corretamente (quando a VPN está ativa, o IP mostrado deve ser o do servidor da VPN, não o da sua casa).</p>
+      <p>Existem dois tipos principais de endereço: o <strong>IPv4</strong>, no formato clássico de quatro números separados por pontos (como 192.168.0.1), e o <strong>IPv6</strong>, mais longo, criado porque os endereços IPv4 se esgotaram. Seu IP também pode ser <em>dinâmico</em> (muda de tempos em tempos, o padrão em conexões residenciais) ou <em>fixo</em> (contratado à parte, comum em empresas e servidores). Esta ferramenta identifica também se a conexão parece ser residencial ou de um datacenter, o que ajuda a distinguir um usuário comum de um servidor, VPN ou proxy.</p>
+      <p>Consultar o IP de terceiros é uma prática comum em segurança da informação: administradores de sistema usam essa informação para investigar acessos suspeitos em logs de servidor, identificar a origem aproximada de tentativas de login indevidas, ou confirmar se um endereço pertence a um serviço legítimo (como um servidor de DNS público) ou a uma rede desconhecida. Vale lembrar que a geolocalização por IP é sempre aproximada e nunca deve ser usada como prova definitiva de identidade ou paradeiro. Esta ferramenta não armazena nenhum dado consultado — todas as buscas são feitas em tempo real e não ficam salvas.</p>
     </div>
   </section>
 
@@ -885,7 +887,8 @@
     </div>
     <div class="seo-text">
       <p>O tempo que um criminoso leva para descobrir uma senha por tentativa e erro depende diretamente do tamanho e da variedade de caracteres usados. Senhas curtas ou baseadas em palavras comuns podem ser quebradas em segundos por programas especializados, mesmo que pareçam complexas à primeira vista. Esta ferramenta estima esse tempo localmente, sem enviar sua senha para nenhum servidor.</p>
-      <p>A checagem de vazamento usa a base pública de vazamentos do Have I Been Pwned, consultada de forma segura: seu navegador calcula um hash da senha e envia apenas os 5 primeiros caracteres desse hash — nunca a senha em si, nem o hash completo — para verificar se ela já apareceu em algum banco de dados vazado.</p>
+      <p>Se você recebeu no celular ou no navegador o aviso <strong>"esta senha apareceu em um vazamento de dados"</strong>, esta é a ferramenta certa para confirmar. A checagem de vazamento usa a base pública do Have I Been Pwned, consultada de forma segura por meio da técnica de <em>k-anonymity</em>: seu navegador calcula um hash da senha e envia apenas os 5 primeiros caracteres desse hash — nunca a senha em si, nem o hash completo — para verificar se ela já apareceu em algum banco de dados vazado. É por isso que a verificação é segura e por que você nunca deve digitar sua senha completa em sites que pedem a senha inteira "para checar se vazou".</p>
+      <p>Uma senha que aparece em um vazamento passa a ser testada automaticamente por criminosos em milhares de sites, uma técnica chamada <em>credential stuffing</em>. Se você reutiliza a mesma senha em vários serviços, o risco se multiplica. Entenda o passo a passo completo no guia <a href="blog/minha-senha-vazou-o-que-fazer.html" style="color:var(--teal);">"esta senha apareceu em um vazamento de dados": o que significa e o que fazer</a>.</p>
     </div>
   </section>
 
